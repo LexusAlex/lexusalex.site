@@ -1,0 +1,62 @@
+# Resource Hints
+resource_hints:
+  - url: https://fonts.googleapis.com
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
+  - url: https://fonts.gstatic.com
+    links:
+      - rel: preconnect
+        opts: [crossorigin]
+      - rel: dns-prefetch
+  - url: https://cdn.jsdelivr.net
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
+  - url: https://unpkg.com/
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
+
+# Web Fonts
+webfonts: https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap
+
+# Libraries
+
+bootstrap:
+  css: https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.css
+  js: https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
+
+toc:
+  css: https://unpkg.com/tocbot@4.25.0/dist/tocbot.css
+  js: https://unpkg.com/tocbot@4.25.0/dist/tocbot.min.js
+
+fontawesome:
+  css: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+
+search:
+  js: https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.2/simple-jekyll-search.min.js
+
+mermaid:
+  js: /assets/mermaidmermaid.min.js
+
+dayjs:
+  js:
+    common: /assets/dayjs/dayjs.min.js
+    locale: /assets/dayjs/ru.min.js
+    relativeTime: /assets/dayjs/relativeTime.min.js
+    localizedFormat: /assets/dayjs/localizedFormat.min.js
+
+glightbox:
+  css: /assets/glightbox/glightbox.min.css
+  js: /assets/glightbox/glightbox.min.js
+
+lazy-polyfill:
+  css: /assets/lazy-polyfill/loading-attribute-polyfill.min.css
+  js: /assets/lazy-polyfill/loading-attribute-polyfill.umd.min.js
+
+clipboard:
+  js: /assets/clipboard/clipboard.min.js
+
+mathjax:
+  js: /assets/mathjax/tex-chtml.js
