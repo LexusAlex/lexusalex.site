@@ -17,6 +17,10 @@ resource_hints:
     links:
       - rel: preconnect
       - rel: dns-prefetch
+  - url: https://cdnjs.cloudflare.com/
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
 
 # Web Fonts
 webfonts: https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap
@@ -38,25 +42,28 @@ search:
   js: https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.2/simple-jekyll-search.min.js
 
 mermaid:
-  js: /assets/mermaidmermaid.min.js
+  js: https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.8.0/mermaid.min.js
 
 dayjs:
   js:
-    common: /assets/dayjs/dayjs.min.js
-    locale: /assets/dayjs/ru.min.js
-    relativeTime: /assets/dayjs/relativeTime.min.js
-    localizedFormat: /assets/dayjs/localizedFormat.min.js
+    common: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/dayjs.min.js
+    locale: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/locale/ru.min.js
+    relativeTime: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/plugin/relativeTime.min.js
+    localizedFormat: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/plugin/localizedFormat.min.js
 
 glightbox:
-  css: /assets/glightbox/glightbox.min.css
-  js: /assets/glightbox/glightbox.min.js
+  css: https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.css
+  js: https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/js/glightbox.min.js
 
 lazy-polyfill:
-  css: /assets/lazy-polyfill/loading-attribute-polyfill.min.css
-  js: /assets/lazy-polyfill/loading-attribute-polyfill.umd.min.js
+  css: https://unpkg.com/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.css
+  js: https://unpkg.com/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.js
 
 clipboard:
-  js: /assets/clipboard/clipboard.min.js
+  js: https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js
 
 mathjax:
-  js: /assets/mathjax/tex-chtml.js
+  js: https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/core.min.js
+
+jquery:
+  js: https://code.jquery.com/jquery-3.7.1.min.js

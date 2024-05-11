@@ -14,7 +14,7 @@ tabs:
   categories: Категории
   tags: Теги
   archives: Архив
-  about: О сайте
+  about-me: О сайте
 
 # the text displayed in the search bar & search results
 search:
@@ -76,7 +76,7 @@ df:
   post:
     strftime: "%d.%m.%Y"
     dayjs: "DD.MM.YYYY"
-    
+
 # categories page
 categories:
   category_measure:
