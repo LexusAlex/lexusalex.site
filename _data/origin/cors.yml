@@ -67,3 +67,7 @@ mathjax:
 
 jquery:
   js: https://code.jquery.com/jquery-3.7.1.min.js
+
+magnific-popup:
+  css: https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css
+  js: https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js
