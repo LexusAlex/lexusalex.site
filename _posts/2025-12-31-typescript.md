@@ -64,7 +64,6 @@ let bool2:boolean = false;
 const a:number = 1 + 123;
 ````
 
-
 ## Массив
 
 - `string[]`
@@ -105,3 +104,23 @@ a.forEach( (s) => {console.log(s)})
 a.forEach( (s:string):void => {console.log(s)})
 ````
 
+
+
+## Enum
+
+Enum должен быть в коде до того как мы его используем.
+ 
+При компиляции все неиспользуемые значения `enum` будут удалены
+
+````typescript
+const enum UserRole {
+    Admin,
+    User
+}
+
+let role: UserRole;
+role = UserRole.Admin;
+````
+
+`Enum` плохо использовать когда добавляется новые значения тогда он не подходит.
+`Enum` хорошо использовать для физических явлений.
