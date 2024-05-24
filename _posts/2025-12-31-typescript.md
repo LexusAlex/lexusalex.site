@@ -8,7 +8,7 @@ categories: [Typescript]
 https://my-js.org/docs/guide/ts основы
 https://my-js.org/docs/cheatsheet/ts/ шпаргалка
 https://my-js.org/docs/cheatsheet/mastering-ts в деталях
-
+https://www.dev-notes.ru/articles/typescript/typescript-basics-primitive-and-basic-types/#primitive_types_javascript_and_typescript приминивные типы
 https://my-js.org/docs/guide/ts#%D1%82%D0%B8%D0%BF%D1%8B-%D0%BD%D0%B0-%D0%BA%D0%B0%D0%B6%D0%B4%D1%8B%D0%B9-%D0%B4%D0%B5%D0%BD%D1%8C
 
 ## Typescript
@@ -46,6 +46,58 @@ https://doka.guide/tools/static-types/#igor-kamyshev-sovetuet
 
 ## Примитивные типы
 
+### Javascript
+
+#### string
+#### number
+#### boolean
+#### null
+#### undefined
+#### symbol
+#### bigint
+
+### Typescript
+
+Typescript наследует все примитивные типы и добавляет несколько своих
+
+#### any
+
+`Any` означает любой тип, что подразумевает, что модуль проверки типов в конкретном случае будет отключен.
+
+Типы в typescript можно добавлять постепенно, каждый раз улучшая код.
+
+Выражение, означает любой тип
+
+````typescript
+let age = 12 as any
+````
+
+any снижает безопасность кода, ide не будет подсказывать варианты использования
+
+Типы any отключают реакцию модуля проверки TypeScript.
+Они могут маскировать реальные проблемы, вредить разработчику и подрывать его уверенность в системе типов.
+
+По возможности нужно избегать их применения
+
+#### enum
+
+Enum должен быть в коде до того как мы его используем.
+
+При компиляции все неиспользуемые значения `enum` будут удалены
+
+````typescript
+const enum UserRole {
+    Admin,
+    User
+}
+
+let role: UserRole;
+role = UserRole.Admin;
+````
+
+`Enum` плохо использовать когда добавляется новые значения тогда он не подходит.
+`Enum` хорошо использовать для физических явлений.
+
 - `string` - `"Строка"`
 - `number` - `6` или `0.1`
 - `boolean` - `true false`
@@ -63,31 +115,16 @@ let bool:boolean = true;
 let bool2:boolean = false;
 const a:number = 1 + 123;
 ````
+#### void
+#### array
 
-## Массив
+Типизированные массив
 
 - `string[]`
 - `number[]`
 - `Array<string>`
-
-## Any
-
-`Any` означает любой тип, что подразумевает, что модуль проверки типов в конкретном случае будет отключен.
-
-Типы в typescript можно добавлять постепенно, каждый раз улучшая код.
-
-Выражение, означает любой тип
-
-````typescript
-let age = 12 as any
-````
-
-any снижает безопасность кода, ide не будет подсказывать варианты использования
-
-Типы any отключают реакцию модуля проверки TypeScript. 
-Они могут маскировать реальные проблемы, вредить разработчику и подрывать его уверенность в системе типов. 
-
-По возможности нужно избегать их применения
+#### tuple
+#### never
 
 ## Функция
 
@@ -119,23 +156,5 @@ a.forEach( (s) => {console.log(s)})
 a.forEach( (s:string):void => {console.log(s)})
 ````
 
-## Enum
-
-Enum должен быть в коде до того как мы его используем.
- 
-При компиляции все неиспользуемые значения `enum` будут удалены
-
-````typescript
-const enum UserRole {
-    Admin,
-    User
-}
-
-let role: UserRole;
-role = UserRole.Admin;
-````
-
-`Enum` плохо использовать когда добавляется новые значения тогда он не подходит.
-`Enum` хорошо использовать для физических явлений.
 
 ## Опции ts-config
