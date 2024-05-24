@@ -6,4 +6,5 @@ const enum UserRole {
 let role: UserRole;
 role = UserRole.Admin;
 
-let age = 12 as any
+let s = Symbol("mySymbol");
+

@@ -47,14 +47,58 @@ https://doka.guide/tools/static-types/#igor-kamyshev-sovetuet
 ## Примитивные типы
 
 ### Javascript
+ 
+Вспомним какие примитивные типы есть в javascript
 
 #### string
+
+````javascript
+let s1 = "Строка";
+let s2 = 'Строка';
+let s3 = `Строка`;
+````
+
 #### number
+
+````javascript
+let n1 = 1;
+let n2 = -10;
+let n3 = 3.5;
+let n4 = Infinity;
+let n5 = NaN;
+let n6 = 10_000;
+````
+
 #### boolean
+
+````javascript
+let b = true;
+let b2 = false;
+````
+
 #### null
+
+````javascript
+let n = null;
+````
+
 #### undefined
+
+````javascript
+let u = undefined;
+````
+
 #### symbol
+
+````javascript
+let s = Symbol("mySymbol");
+````
+
 #### bigint
+
+````javascript
+let b = 1234567890123456789012345n;
+````
 
 ### Typescript
 
@@ -62,7 +106,7 @@ Typescript наследует все примитивные типы и доба
 
 #### any
 
-`Any` означает любой тип, что подразумевает, что модуль проверки типов в конкретном случае будет отключен.
+`any` означает любой тип, что подразумевает, что модуль проверки типов в конкретном случае будет отключен.
 
 Типы в typescript можно добавлять постепенно, каждый раз улучшая код.
 
@@ -98,23 +142,7 @@ role = UserRole.Admin;
 `Enum` плохо использовать когда добавляется новые значения тогда он не подходит.
 `Enum` хорошо использовать для физических явлений.
 
-- `string` - `"Строка"`
-- `number` - `6` или `0.1`
-- `boolean` - `true false`
 
-````typescript
-let num:number = 1;
-let num2:number = -1;
-let num3:number = 54654.67;
-let num4:number = NaN;
-let num5:number = Infinity;
-let str:string = "Строка";
-let str2:string = "Строка";
-let str3:string = `Строка`;
-let bool:boolean = true;
-let bool2:boolean = false;
-const a:number = 1 + 123;
-````
 #### void
 #### array
 
@@ -126,7 +154,7 @@ const a:number = 1 + 123;
 #### tuple
 #### never
 
-## Функция
+## Функции
 
 Typescript пытается автоматически определить тип возвращаемого значения функции на основе конструкции `return`
 
