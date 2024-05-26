@@ -121,7 +121,8 @@ any снижает безопасность кода, ide не будет под
 Типы any отключают реакцию модуля проверки TypeScript.
 Они могут маскировать реальные проблемы, вредить разработчику и подрывать его уверенность в системе типов.
 
-По возможности нужно избегать их применения
+По возможности нужно избегать их применения.
+
 
 #### enum
 
@@ -163,9 +164,32 @@ function test(name: string): string {
     return name;
 }
 
-// Вот такой вызов даст ошибку
+// Такой вызов вызовет ошибку
 test(234);
 ```
+
+Типы функции можно задать следующим образом
+
+````typescript
+// Обычный вариант
+function t(text: string, text2: string): string {
+  return 'string';
+}
+// Стрелочная функция
+let h = (text: string, text2: string):string => {
+  return 'string';
+}
+````
+
+> Всегда лучше явно указывать типы в параметрах функции и в возвращаемых значениях
+{: .prompt-info }
+
+## Объект
+
+
+
+
+## Определение типа на основе контекста
  
 Определение типа на основе контекста. Здесь мы не указывали типы, typescript пытается это определить сам,
 в данном случае - это массив строк.
@@ -186,3 +210,123 @@ a.forEach( (s:string):void => {console.log(s)})
 
 
 ## Опции ts-config
+
+Сам файл это настройки компилятора `ts`.
+
+На самом деле по настоящему важных опций `ts-config` не так уже и много
+
+````json
+{
+  "compilerOptions": {}
+}
+````
+
+Рассмотрим основные опции более подробно
+
+### esModuleInterop
+
+Помогает устранить противоречия между `CommonJs` и `ES`
+
+### skipLibCheck
+
+Пропускает проверку типов файлов .d.ts
+
+### target
+
+Версия js на которую вы ориентируетесь, например
+
+- es2022
+- ES2021
+- es2016
+ 
+### allowJs
+
+Позволяет импортировать js файлы
+
+### resolveJsonModule
+
+Позволяет импортировать json файлы
+
+### moduleDetection
+
+Заставляет `typescript` рассматривать все файлы как модули.
+
+### isolatedModules
+
+---
+
+### strict
+
+Включаем строгую проверку типов
+
+### noUncheckedIndexedAccess
+
+Запрещает обращаться к массиву или к объекту не проверив определен ли он
+
+
+https://www.dev-notes.ru/articles/typescript/tsconfig-cheat-sheet/
+
+### Примеры ts-config
+
+Как выглядит конфиг в nestjs
+
+````json
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "strictPropertyInitialization": false
+  }
+}
+````
+
+В next.js
+
+````json
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+
+````
+
+
+
