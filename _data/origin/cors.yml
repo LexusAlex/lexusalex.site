@@ -28,7 +28,7 @@ webfonts: https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Sour
 # Libraries
 
 bootstrap:
-  css: https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.css
+  css: https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css
   js: https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 
 toc:
