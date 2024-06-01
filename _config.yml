@@ -16,10 +16,10 @@ timezone: Europe/Moscow
 
 title: tech.lexusalex.ru # the main title
 
-tagline: Заметки и статьи # it will display as the sub-title
+tagline: Заметки и статьи о хороших инженерных практиках # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  Заметки и статьи
+  Заметки и статьи о хороших инженерных практиках
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -85,20 +85,15 @@ social_preview_image: assets/img/p.jpg
 toc: true
 
 comments:
-  active: # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
+  provider: giscus
+  active: giscus # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
   # The active options are as follows:
-  disqus:
-    shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-  # utterances settings › https://utteranc.es/
-  utterances:
-    repo: # <gh-username>/<repo>
-    issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: ramiiib/ramiii.dev # <gh-username>/<repo>
-    repo_id: R_kgDOLj_3Cw
+    repo: LexusAlex/tech.lexusalex.ru # <gh-username>/<repo>
+    repo_id: R_kgDOL55whw
     category: General
-    category_id: DIC_kwDOLj_3C84CeJ3w
+    category_id: DIC_kwDOL55wh84Cfx6o
     mapping: # optional, default to 'pathname'
     input_position: # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
