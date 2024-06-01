@@ -93,7 +93,6 @@ backend/
 - exception filters - могут вклиниваться до или после контроллера
 
 
-
 ## main.ts
 
 Главный файл запуска приложения
@@ -317,3 +316,9 @@ npm i @nestjs/mongoose mongoose
 ## Авторизация
 
 https://www.youtube.com/watch?v=W8ihgD7zvMA
+    
+
+## Примеры модулей
+
+- Auth
+- User
