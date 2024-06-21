@@ -14,7 +14,7 @@ timezone: Europe/Moscow
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: tech.lexusalex.ru # the main title
+title: lexusalex.site # the main title
 
 tagline: Заметки и статьи о хороших инженерных практиках # it will display as the sub-title
 
@@ -23,7 +23,7 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://tech.lexusalex.ru"
+url: "https://lexusalex.site"
 
 github:
   username: lexusalex # change to your github username
@@ -34,7 +34,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: tech.lexusalex.ru
+  name: lexusalex.site
   email: alexsey_89@bk.ru
   links:
     # The first element serves as the copyright owner's link
