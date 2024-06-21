@@ -10,6 +10,8 @@ tags: [javascript]
 
 https://learn.javascript.ru/prototype-inheritance
 
+https://doka.guide/js/oop/
+
 По сути любой объект связан с прототипом.
 
 `[[Prototype]]`
@@ -20,4 +22,10 @@ https://learn.javascript.ru/prototype-inheritance
 - `ES6 Classes`
 - `Object.create()`
 
+## Оператор new
 
+- Создается пустой объект
+- Вызывается функция
+- this = пустому объекту
+- объект связывается с prototype
+- объект возвращается
