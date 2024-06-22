@@ -16,10 +16,10 @@ timezone: Europe/Moscow
 
 title: lexusalex.site # the main title
 
-tagline: Заметки и статьи о хороших инженерных практиках # it will display as the sub-title
+tagline: Заметки и статьи о разработке, жизни и хороших инженерных практиках # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  Заметки и статьи о хороших инженерных практиках
+  Заметки и статьи о разработке, жизни и хороших инженерных практиках
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.

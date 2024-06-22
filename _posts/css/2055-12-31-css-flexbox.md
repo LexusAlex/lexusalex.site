@@ -1,11 +1,13 @@
 ---
-title: Flexbox
+title: Просто о Flexbox
 description: >-
-  
+   На примерах посмотрим как работать с гибкой сеткой flexbox
 author: alex
 date: 2055-06-01 18:00:00 +0300
 categories: [Css]
 tags: [flexbox]
+image:
+  path: /assets/img/posts/flexbox.png
 ---
 
 https://doka.guide/css/flexbox-guide/
@@ -59,8 +61,13 @@ _display:inline-flex_
 
 Нужна для того, чтобы понимать куда переносить элементы.
 
+Размер элементов поперечной оси всегда перпендикулярен основному размеру. 
+
+Если основной размер - ширина, то поперечный размер - высота, и наоборот.
+
 ### Когда использовать flex и когда inline-flex
-1
+
+TODO
 
 ### flex-direction
 
@@ -146,7 +153,7 @@ _flex-wrap:wrap-reverse_
 
 ### flex-flow
 
-Свойство, которое позволяет сразу задать `flex-direction` и `flex-wrap`.
+Свойство, которое позволяет сразу задать и `flex-direction` и `flex-wrap`.
 
 Сочетания:
 
@@ -160,10 +167,32 @@ _flex-wrap:wrap-reverse_
 
 Используется если точно известно параметры сетки.
 
-Работают как свойства описанные выше:
+Работают так же как и свойства описанные выше:
 
 - [flex-direction](/posts/css-flexbox/#flex-direction)
 - [flex-wrap](/posts/css-flexbox/#flex-wrap)
+
+### justify-content
+
+Выравнивание элементов внутри контейнера по основной оси. По умолчанию она идет слева направо.
+
+#### flex-start и start
+
+Элементы контейнера прижимаются к краю от которого начинается основная ось
+
+![img-description](/assets/img/posts/css/flexbox/flex-13.png){: .shadow }
+_justify-content:flex-start_
+
+> Значение по умолчанию
+{: .prompt-info }
+
+#### flex-end и end
+
+Элементы контейнера будут прижаты к краю у которого заканчивается основная ось
+
+![img-description](/assets/img/posts/css/flexbox/flex-14.png){: .shadow }
+_justify-content:flex-end_
+
 
 ## Item
 
