@@ -178,7 +178,9 @@ _flex-wrap:wrap-reverse_
 
 #### flex-start и start
 
-Элементы контейнера прижимаются к краю от которого начинается основная ось
+Элементы контейнера прижимаются к краю от которого начинается основная ось.
+
+Для `row` это левый край, а для `column` это верх
 
 ![img-description](/assets/img/posts/css/flexbox/flex-13.png){: .shadow }
 _justify-content:flex-start_
@@ -186,13 +188,129 @@ _justify-content:flex-start_
 > Значение по умолчанию
 {: .prompt-info }
 
+> flex-start и flex-end будут менять направление чтения текста на сайте в отличии от свойств left и right
+{: .prompt-info }
+
 #### flex-end и end
 
-Элементы контейнера будут прижаты к краю у которого заканчивается основная ось
+Элементы контейнера будут прижаты к краю у которого заканчивается основная ось.
+
+Для `row` это правый край, а для `column` это низ
 
 ![img-description](/assets/img/posts/css/flexbox/flex-14.png){: .shadow }
 _justify-content:flex-end_
 
+> Значения start и end в большинстве браузеров идентичны flex-start и flex-end 
+{: .prompt-info }
+
+#### center
+
+Элементы контейнера выстраиваются по центру.
+
+![img-description](/assets/img/posts/css/flexbox/flex-15.png){: .shadow }
+_justify-content:center_
+
+#### left
+
+Выравнивание элементов по левому краю контейнера.
+
+![img-description](/assets/img/posts/css/flexbox/flex-16.png){: .shadow }
+_justify-content:left_
+
+> Отличие left от flex-start в том, что при flex-direction:row-reverse элементы всегда будут с левой стороны
+{: .prompt-info }
+
+#### right
+
+Выравнивание элементов по правому краю контейнера.
+
+![img-description](/assets/img/posts/css/flexbox/flex-17.png){: .shadow }
+_justify-content:right_
+
+#### space-between
+
+Прижимать крайние элементы к левому и правому краям, а элементы между ними распределять равномерно.
+
+![img-description](/assets/img/posts/css/flexbox/flex-20.png){: .shadow }
+_justify-content:space-between_
+
+При `flex-direction:row-reverse` элементы пойдут в обратном направлении.
+
+![img-description](/assets/img/posts/css/flexbox/flex-21.png){: .shadow }
+_justify-content:space-between_
+
+#### space-around
+
+Свободное пространство делится между всеми элементами. Но от крайних элементов слева и справа будет половина этого расстояния.
+
+![img-description](/assets/img/posts/css/flexbox/flex-22.png){: .shadow }
+_justify-content:space-around_
+
+#### space-evenly
+
+Настояние между всеми элементами будет одинаковым.
+
+![img-description](/assets/img/posts/css/flexbox/flex-23.png){: .shadow }
+_justify-content:space-evenly_
+
+> Главное здесь понять как элементы должны располагаться на странице
+{: .prompt-info }
+
+Если `flex-direction:column` и высота контейнера будет больше контета в нем то `justify-content` будет так же работать как и при `flex-direction:row`
+
+![img-description](/assets/img/posts/css/flexbox/flex-24.png){: .shadow }
+_justify-content и flex-direction:column_
+
+### align-items
+
+Выравнивание элементов по вертикальной(поперечной) оси.
+
+Напомню при `row` основная ось идет слева направо, а поперечная сверху вниз.
+
+При `column` основная ось сверху вниз, а поперечная слева направо
+
+#### stretch
+
+Элементы по максимуму заполняют всего родителя.
+
+![img-description](/assets/img/posts/css/flexbox/flex-25.png){: .shadow }
+_align-items:stretch_
+
+> Значение по умолчанию
+{: .prompt-info }
+
+#### flex-start и start
+
+Элементы выстраиваются в начале поперечной оси
+
+![img-description](/assets/img/posts/css/flexbox/flex-27.png){: .shadow }
+_align-items:flex-start и start_
+
+#### flex-end и end
+
+Элементы выстраиваются в конце поперечной оси
+
+![img-description](/assets/img/posts/css/flexbox/flex-28.png){: .shadow }
+_align-items:flex-end и end_
+
+> Значения start и end учитывают направление текста в браузере пользователя
+{: .prompt-info }
+
+#### center
+
+Элементы выстраиваются по центру поперечной оси
+
+![img-description](/assets/img/posts/css/flexbox/flex-30.png){: .shadow }
+_align-items:center_
+
+#### baseline
+
+Элементы выстраиваются по "базовой линии" текста, то есть по низу.
+
+Например, если поменять размер шрифта, то элементы будут выстроены по нижней его части, то есть по базовой линии текста. 
+
+![img-description](/assets/img/posts/css/flexbox/flex-31.png){: .shadow }
+_align-items:baseline_
 
 ## Item
 
@@ -223,22 +341,22 @@ _justify-content:flex-end_
 
 ````css
 * {
-      box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
 .container {
-    font-size: 35px; /* Размер шрифта для контейнера */
-    text-align: center;
-    display: flex;
-    height: 130px; /* Высота контейнера */
-    flex-direction: column; /* Расположение элементов друг под другом */
-    flex-wrap: wrap; /* Разрешеаем переносить элементы на следующую строку */
+  font-size: 35px; /* Размер шрифта для контейнера */
+  text-align: center;
+  display: flex;
+  height: 130px; /* Высота контейнера */
+  flex-direction: column; /* Расположение элементов друг под другом */
+  flex-wrap: wrap; /* Разрешеаем переносить элементы на следующую строку */
 }
 
 .item {
-    background-color: rgba(117,180,157,0.27);
-    border: #000066 1px solid;
-    padding: 8px;
-    width: 200px; /* Фиксированная ширина каждого элемента */
+  background-color: rgba(117,180,157,0.27);
+  border: #000066 1px solid;
+  padding: 8px;
+  width: 200px; /* Фиксированная ширина каждого элемента */
 }
 ````
 
@@ -246,3 +364,124 @@ _justify-content:flex-end_
 
 ![img-description](/assets/img/posts/css/flexbox/flex-12.png){: .shadow }
 _Расстановка элементов друг под другом_
+
+### Обратный порядок элементов, но не перемещая их
+
+Задача не меняя позицию элементов поменять их порядок.
+
+````css
+.container {
+  font-size: 35px;
+  text-align: center;
+  display: flex;
+  flex-direction: row-reverse; /* делаем порядок элементов обратным */
+  justify-content: left; /* жестко говорим располагай по левой стороне */
+}
+
+/* или */
+
+.container {
+  font-size: 35px;
+  text-align: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+}
+
+````
+
+В итоге, если жестко заданы `left` или `right`, элементы будут строго располагаться по нужную сторону.
+
+![img-description](/assets/img/posts/css/flexbox/flex-18.png){: .shadow }
+_Обратный порядок элементов, но не перемещая их left_
+
+![img-description](/assets/img/posts/css/flexbox/flex-19.png){: .shadow }
+_Обратный порядок элементов, но не перемещая их right_
+
+### Колонки с одинаковым расстоянием между ними
+
+Задача сделать адаптивные колонки с одинаковым расстоянием между ними.
+
+```css
+.container {
+    font-size: 35px;
+    height: 100vh; /* растягиваем колонки на всю высоту вьюпорта*/
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; /* равномерное расстояние между колонками */
+    align-items: stretch;
+}
+```
+
+![img-description](/assets/img/posts/css/flexbox/flex-26.png){: .shadow }
+_Колонки с одинаковым расстоянием между ними_
+
+### Адаптивные колонки
+
+Задача сделать 10 простейших адаптивных колонок
+
+````css
+.container {
+  font-size: 35px;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* выравнивание по центру по основной оси */
+  align-items: stretch;
+}
+
+.item {
+  background-color: rgba(117,180,157,0.27);
+  border: #000066 1px solid;
+  padding: 8px;
+  width: 10%; /* так как у нас 10 колонок делаем им ширину в % */
+}
+````
+ 
+В результате получаем такую красоту
+
+![img-description](/assets/img/posts/css/flexbox/flex-29.png){: .shadow }
+_Адаптивные колонки_
+
+### Элемент строго по центру
+
+Задача. Допустим есть элемент с фиксированными значениями, его нужно выставить по центру, нет ничего проще
+
+````css
+.container {
+  font-size: 35px;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* центрирование по основной оси */
+  align-items: center; /* центрирование по вспомогательной оси */
+}
+
+.item {
+  background-color: rgba(117,180,157,0.27);
+  border: #000066 1px solid;
+  padding: 8px;
+}
+
+.item1 {
+  width: 200px;
+  height: 200px;
+}
+````
+
+![img-description](/assets/img/posts/css/flexbox/flex-32.png){: .shadow }
+_Элемент строго по центру_
+
+## Сетки во фреймворках
+
+### Bootsrap
+
+Разберем на примере bootstap сетку на флексах.
+
+## Итог
+
+- Чаще всего используется значения `justify-content` это `space-between` и `center`.
+- Рекомендуется проверять поддержку свойств браузерами на сайте [https://caniuse.com/](https://caniuse.com/?search=justify-content%20flex)
