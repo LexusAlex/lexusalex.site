@@ -1,7 +1,8 @@
 ---
-title: Просто о Flexbox
+title: Просто о Flexbox в css
 description: >-
-   На примерах посмотрим как работать с гибкой сеткой flexbox
+   На реальных примерах посмотрим как работать с гибкой сеткой flexbox.
+   Разберем свойства и научимся их применять
 author: alex
 date: 2055-06-01 18:00:00 +0300
 categories: [Css]
@@ -9,10 +10,6 @@ tags: [flexbox]
 image:
   path: /assets/img/posts/flexbox.png
 ---
-
-https://doka.guide/css/flexbox-guide/
-https://getbootstrap.com/docs/5.3/layout/breakpoints/
-https://blog.skillfactory.ru/glossary/flexbox/
 
 ## Что такое flexbox
 
@@ -312,11 +309,169 @@ _align-items:center_
 ![img-description](/assets/img/posts/css/flexbox/flex-31.png){: .shadow }
 _align-items:baseline_
 
+### align-content
+
+Распределяет элементы по поперечной оси. Можем управлять их поведением
+
+Имеет значение только элементы располагаются в несколько рядов
+
+То есть какие должны быть вводные для срабатывания свойства:
+
+- `flex-wrap: wrap;`
+- `width: 50%;` ширина на самом элементе
+
+> Позиционирование будет применено в рамках нескольких строк
+{: .prompt-info }
+
+#### stretch
+
+Ряды будут растянуты одинаково для того, чтобы занять все пространство родителя.
+
+![img-description](/assets/img/posts/css/flexbox/flex-33.png){: .shadow }
+_align-content:stretch_
+
+> Значение по умолчанию
+{: .prompt-info }
+
+![flex-36.png](/assets/img/posts/css/flexbox/flex-36.png)
+
+#### flex-start и start
+
+Элементы располагаются у начала второстепенной оси
+
+![img-description](/assets/img/posts/css/flexbox/flex-34.png){: .shadow }
+_align-content:flex-start и start_
+
+#### flex-end и end
+
+Элементы располагаются у конца поперечной оси
+
+![img-description](/assets/img/posts/css/flexbox/flex-35.png){: .shadow }
+_align-content:flex-end и end_
+
+#### center
+
+Элементы будут выстроены по центру контейнера
+
+![img-description](/assets/img/posts/css/flexbox/flex-36.png){: .shadow }
+_align-content:center_
+
+#### space-between
+
+Первый и последний элементы встают к краям поперечной оси, остальные элементы распределяются так, чтобы между ними были равномерные отступы.
+
+![img-description](/assets/img/posts/css/flexbox/flex-37.png){: .shadow }
+_align-content:space-between_
+
+#### space-around
+
+У первого и последнего элемента оступы по поперечной оси вдвое меньше отступов между другими элементами. 
+При этом между остальными элементами отступы равнозначны.
+
+![img-description](/assets/img/posts/css/flexbox/flex-38.png){: .shadow }
+_align-content:space-around_
+
+#### space-evenly
+
+Отступы от всех элементов одинаковые 
+
+![img-description](/assets/img/posts/css/flexbox/flex-39.png){: .shadow }
+_align-content:space-evenly_
+
+### gap
+
+Расстояние между строками и столбцами.
+
+Можно указывать два значения, но если указано одно, оно и будет использоваться для колонок и столбцов.
+
+- Первое значение устанавливает отступ между рядами `row` `row-gap`
+- Второе значение устанавливает отступ между колонками `column` `column-gap`
+
+Примеры:
+
+- `gap: 30px calc(10rem - 10px);` динамические промежутки между ячейками сетки
+- `gap: 10px 5px;`
+
+![img-description](/assets/img/posts/css/flexbox/flex-40.png){: .shadow }
+_gap: 10px 5px_
+
+> row-gap и column-gap используются как отдельные свойства
+{: .prompt-info }
+
 ## Item
 
-Дочерние элементы контейнера.
+Прямые дочерние элементы контейнера.
 
-- Все элементы вложенные в элемент уже не являются flex item
+- Все элементы вложенные в элемент уже не являются flex item и их нужно снова сделать контейнерами.
+
+Свойства ниже управляют непосредственно самими элементами.
+
+### order
+
+Меняем порядок отображение элементов внутри контейнера.
+
+По умолчанию элементы отобраться как они идут в разметке.
+
+Значение всех элементов по умолчанию = `0`.
+
+Каждый элемент можно двигать как нам нужно меняя значение `order` на положительное или отрицательное число.
+
+`order` влияет на визуальное отображение элементов.
+
+Примеры значений:
+
+- `0`
+- `-1`
+- `7`
+
+Рассмотрим пример:
+
+![img-description](/assets/img/posts/css/flexbox/flex-41.png){: .shadow }
+_order_
+
+В примере выше у каждого элемента есть свой класс. Зададим значение `order` для некоторых из них
+
+````css
+.item1 {
+  order: 1;
+}
+.item10 {
+  order: 2;
+}
+.item9 {
+  order: -1;
+}
+````
+
+Напоминаю все элементы имеют по умолчанию значение `order=0`
+
+- Элемент 10 идет в самый конец, так как у него `order:2`
+- Элемент 1 идет в след элементу 10, так как у него `order:1`
+- Элемент 9 идет в начало, так как у него `order:-1`
+
+> Использовать order можно например при перемещении элементов при адаптивной верстке например переместить шапку сайта вниз на небольших экранах
+{: .prompt-info }
+
+### align-self
+
+По сути `align-self` переопределяет `align-items` но для одного элемента по текущей линии.
+
+Рассмотрим наиболее ходовые свойства
+
+По умолчанию значение `auto` это значит наследует значение элемента из `align-items`
+
+![img-description](/assets/img/posts/css/flexbox/flex-42.png){: .shadow }
+_align-self_
+
+В примере выше мы выставили разные значения `align-self` для каждого элемента:
+
+- 1 `align-self: auto;` - значение по умолчанию
+- 2 `align-self: start;` - в начало строки
+- 3 `align-self: end;` - в конец строки
+- 4 `align-self: flex-start;` - в начало строки
+- 5 `align-self: flex-end;` - в конец строки
+- 6 `align-self: center;` - посередине строки
+- 7 `align-self: baseline;` - по базовой линии шрифта
 
 ## Примеры
 
