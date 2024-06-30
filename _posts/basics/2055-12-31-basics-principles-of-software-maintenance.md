@@ -38,5 +38,9 @@ https://lexusalex.ru/php-11-designing-systems-and-services
 ### Дублирование кода
 ### Данные из сторонных сервисов
 
+### Подходы к разработке
+
+https://doka.guide/tools/gateway-bff/
+
 
 
