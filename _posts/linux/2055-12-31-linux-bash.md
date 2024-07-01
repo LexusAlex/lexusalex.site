@@ -46,3 +46,8 @@ echo "$x"
 Переменные, введенные в терминале, сохраняются только в текущей сессии
 
 
+Переменная с цифры не может называться
+
+https://selectel.ru/blog/tutorials/linux-bash-scripting-guide/
+
+
