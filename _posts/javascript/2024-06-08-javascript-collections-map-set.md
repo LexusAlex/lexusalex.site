@@ -4,7 +4,7 @@ description: >-
   Разбираемся как Set и Map облегчают работу с данными в javascript
 author: alex
 date: 2024-06-08 22:40:00 +0300
-categories: [Javascript]
+categories: [Javascript,Collections]
 tags: [javascript,set,map]
 image:
   path: /assets/img/posts/javascript.png
