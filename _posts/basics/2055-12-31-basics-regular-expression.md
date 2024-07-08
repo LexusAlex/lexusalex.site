@@ -1,5 +1,5 @@
 ---
-title: Основы регулярных выражений
+title: Регулярные выражения
 description: >-
   Разберемся как работают регулярные выражения на реальных примерах
   Постепенно перейдем от простого к сложному
@@ -9,8 +9,24 @@ categories: [Basics]
 tags: [regular Expression]
 ---
 
+TODO - написать введение
+
 Регулярные выражения используются повсеместно это редакторы кода, различные языки программирования. 
 Уметь их использовать очень помогает в работе.
+
+Базовый вариант регулярных выражений это простой поиск текста, где символы соответствуют сами себе, за исключением специальных символов. 
+
+Например
+
+
+````html
+Строка поиска
+Регулярное выражение
+
+````
+
+https://habr.com/ru/articles/545150/
+http://sajgak.ru/site/php/shpargalka-regularnie-virageniya-pcre/
 
 ## Модификаторы
 
@@ -94,6 +110,7 @@ tags: [regular Expression]
 | `989++7`                                        | `/\++/u`                      | 989 **++** 7                                          | Символ `+` 1 или более раз          | 
 
 https://habr.com/ru/articles/349860/
+https://habr.com/ru/articles/545150/
 http://sajgak.ru/site/php/shpargalka-regularnie-virageniya-pcre/
 
 https://www.youtube.com/watch?v=ozFNilK4qrc&t=1290s
