@@ -98,18 +98,41 @@ TODO - написать введение
 Теперь нашли все возможные варианты.
  
 Еще пример, имеем последовательность **рай сад май вай Кай Сад**.
-Задача найти все слова.
+Задача найти все слова. Просто перечислим все нужные нам буквы.
 
 - `/[КСвмсрайд]/g`
-- <span style="background-color:#7AE;color:white">рай сад май вай Кай Сад</span>
+- <span style="background-color:#7AE;color:white">рай</span> <span style="background-color:#7AE;color:white">сад</span> <span style="background-color:#7AE;color:white">май</span> <span style="background-color:#7AE;color:white">вай</span> <span style="background-color:#7AE;color:white">Кай</span> <span style="background-color:#7AE;color:white">Сад</span>
 
-Можно конечно указать нужные буквы так `/[абвгдеёжзиклмн]/` 
+Можно конечно указать нужные буквы так `/[абвгдеёжзийклмнопрст]/`, но так никто не делает, есть способ проще.
 
+Нужно указать диапазоны символов:
 
-Внутри могут быть литералы, которые меняют поведение символьного класса.
+- `[а-я]`
+- `[А-Я]`
+- `[a-z]`
+- `[A-Z]`
+- `[0-9]`
+
+Либо сразу все символы: 
+
+- `[a-zA-Zа-яА-Я0-9]`
 
 > Символьные классы могут быть в любом месте выражения.
 {: .prompt-info }
+
+С помощью символьных классов найдем все слова в строке **договор договоры договора**, Но при этом не перечисляя весь алфавит, а только нужные буквы.
+
+- `/[а-до-ры]/g`
+- <span style="background-color:#7AE;color:white">договор</span> <span style="background-color:#7AE;color:white">договоры</span> <span style="background-color:#7AE;color:white">договора</span>
+
+Но чаще мы ищем не все слова, а определенные слова и символы в тексте. Например, нужно найти в тексте символ `,` и предшествующие ему определенные буквы:
+
+- `/[авх],/g`
+- это тем<span style="background-color:#7AE;color:white">а,</span> которая привлекает внимание многих исследователей и специалистов в различных областях. Этот загадочный объект представляет интерес для астрономо<span style="background-color:#7AE;color:white">в,</span> физико<span style="background-color:#7AE;color:white">в,</span> биологов и других учены<span style="background-color:#7AE;color:white">х,</span> но также сопряжен с рядом подводных камней и опасностей. Давайте ближе рассмотрим некоторые из них
+
+Внутри могут быть литералы, которые меняют поведение символьного класса.
+
+
 
 
 
@@ -120,6 +143,8 @@ https://habr.com/ru/articles/545150/
 http://sajgak.ru/site/php/shpargalka-regularnie-virageniya-pcre/
 https://devanych.ru/technologies/shpargalka-po-regulyarnym-vyrazheniyam
   
+
+## Задачи 
 
 
 ## Модификаторы
