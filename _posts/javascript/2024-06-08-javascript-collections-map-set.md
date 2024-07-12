@@ -8,6 +8,7 @@ categories: [Javascript,Collections]
 tags: [javascript,set,map]
 image:
   path: /assets/img/posts/javascript.png
+  alt: Коллекции Set и Map в javascript.
 ---
 
 ## Массив и объект
