@@ -5,8 +5,11 @@ description: >-
   от простого к сложному 
 author: alex
 date: 2055-06-02 09:00:00 +0300
-categories: [Basics Regexp]
-tags: [regular Expression]
+categories: [Basics,Regexp]
+tags: [regular expression]
+image:
+  path: /assets/img/posts/regexp.png
+  alt: Регулярные выражения.
 ---
 
 ## Вместо введения
@@ -161,7 +164,7 @@ tags: [regular Expression]
 
 Мы нашли все кроме всех указанных диапазонов. Что не попало в отрицание поиска - это символы `Z-!.,?`
 
-#### Поиск символа -
+#### Поиск символа - (дефис)
 
 Символ дефиса используется как указатель диапазона искомых символов `[0-9]`.
 Но как его найти в тексте?
@@ -174,7 +177,7 @@ tags: [regular Expression]
 Или в конце класса, результат от этого не поменяется:
 
 - регулярное выражение: `/[0-9-]/g`
-- строка поиска и результат: <span style="background-color:#7AE;color:white">-123454</span>
+- строка поиска и результат: <span style="background-color:#7AE;color:white">-123454</span> ()   ()
 
 #### Поиск других символов
 
@@ -185,7 +188,7 @@ tags: [regular Expression]
 
 #### Предопределенные символьные классы
 
-Помимо формы в квадратных скобках существует также краткая форма записи:
+Помимо формы в квадратных скобках существует также краткая форма их записи:
 
 ````text
 \d - целое число [0-9]
@@ -196,11 +199,43 @@ tags: [regular Expression]
 \W - Любой символ кроме буквы,цифры и нижнего подчеркивания [^a-zA-Z0-9_]
 ````
 
-Рассмотрим примеры
+Рассмотрим примеры.
+
+##### Целое число
+
+Найдем все числа и дефис в тексте: 
+
+- регулярное выражение: `/\d\d\d-/g`
+- строка поиска и результат: номер <span style="background-color:#7AE;color:white">123-</span>
+
+Как видим выглядит уже лучше, чем мы бы писали так `/[0-9][0-9][0-9]-/g`. Результат тот же.
+
+##### Все кроме чисел
+
+Если нужно найти все кроме чисел пишем `\D`
+
+- регулярное выражение: `/\D/g`
+- строка поиска и результат: <span style="background-color:#7AE;color:white">текст</span> 78 <span style="background-color:#7AE;color:white">вместе</span> 9 <span style="background-color:#7AE;color:white">с</span> <span style="background-color:#7AE;color:white">числами</span> 123<span style="background-color:#7AE;color:white">!</span>
+
+##### Пробельный символ
+ 
+Далее нужно понять что такое пробельный символ
+
+- регулярное выражение: `/\s/g`
+- строка поиска и результат: много<span style="background-color:#7AE;color:white">  </span>пробелов<span style="background-color:#7AE;color:white"></span>еще<span style="background-color:#7AE;color:white"> </span>и<span style="background-color:#7AE;color:white"> </span>с<span style="background-color:#7AE;color:white"> </span>переносом<span style="background-color:#7AE;color:white"> </span>строки
+
+> В пробельные символы входят
+> - ` ` пробел
+> - `\r` возврат каретки (CR)
+> - `\n` перевод строки (LF)
+> - `\t` табуляция
+> - `\v` вертикальная табуляция
+> - `\f` конец страницы
+{: .prompt-info }
 
 ### Кратко про символьные классы
 
-
+## Квантификаторы
 
 
 
