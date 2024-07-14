@@ -221,8 +221,7 @@ image:
  
 Далее нужно понять что такое пробельный символ
 
-- регулярное выражение: `/\s/g`
-- строка поиска и результат: много<span style="background-color:#7AE;color:white">  </span>пробелов<span style="background-color:#7AE;color:white"></span>еще<span style="background-color:#7AE;color:white"> </span>и<span style="background-color:#7AE;color:white"> </span>с<span style="background-color:#7AE;color:white"> </span>переносом<span style="background-color:#7AE;color:white"> </span>строки
+
 
 > В пробельные символы входят
 > - ` ` пробел
@@ -232,6 +231,9 @@ image:
 > - `\v` вертикальная табуляция
 > - `\f` конец страницы
 {: .prompt-info }
+
+- регулярное выражение: `/\s/g`
+- строка поиска и результат: много<span style="background-color:#7AE;color:white">  </span>пробелов<span style="background-color:#7AE;color:white"></span>еще<span style="background-color:#7AE;color:white"> </span>и<span style="background-color:#7AE;color:white"> </span>с<span style="background-color:#7AE;color:white"> </span>переносом<span style="background-color:#7AE;color:white"> </span>строки
 
 ### Кратко про символьные классы
 
