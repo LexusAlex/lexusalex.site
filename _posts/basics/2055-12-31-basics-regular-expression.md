@@ -221,8 +221,6 @@ image:
  
 Далее нужно понять что такое пробельный символ
 
-
-
 > В пробельные символы входят
 > - ` ` пробел
 > - `\r` возврат каретки (CR)
@@ -234,6 +232,10 @@ image:
 
 - регулярное выражение: `/\s/g`
 - строка поиска и результат: много<span style="background-color:#7AE;color:white">  </span>пробелов<span style="background-color:#7AE;color:white"></span>еще<span style="background-color:#7AE;color:white"> </span>и<span style="background-color:#7AE;color:white"> </span>с<span style="background-color:#7AE;color:white"> </span>переносом<span style="background-color:#7AE;color:white"> </span>строки
+
+##### Кроме пробельных символов
+
+Обратная ситуация
 
 ### Кратко про символьные классы
 
