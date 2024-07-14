@@ -235,7 +235,26 @@ image:
 
 ##### Кроме пробельных символов
 
-Обратная ситуация
+Обратная ситуация когда нам наоборот не нужны пробелы
+
+- регулярное выражение: `/\S/g`
+- строка поиска и результат: <span style="background-color:#7AE;color:white">текст</span> <span style="background-color:#7AE;color:white">с</span>   <span style="background-color:#7AE;color:white">пробелами</span> <span style="background-color:#7AE;color:white">123?</span>
+
+#####  Латинские буквы и цифры
+
+Существует так же команда под которую подходят буквы, цифры и нижнее подчеркивание.
+
+- регулярное выражение: `/\w/g`
+- строка поиска и результат: <span style="background-color:#7AE;color:white">Stay</span> <span style="background-color:#7AE;color:white">go</span> <span style="background-color:#7AE;color:white">home123</span> Русский текст
+
+#####  Латинские не буквы и цифры
+
+И обратная ситуация, когда попадет все кроме букв и цифр
+
+Пример тот же, что и выше
+
+- регулярное выражение: `/\W/g`
+- строка поиска и результат: Stay<span style="background-color:#7AE;color:white"> </span>go<span style="background-color:#7AE;color:white"> </span>home123<span style="background-color:#7AE;color:white"> Русский текст</span>
 
 ### Кратко про символьные классы
 
