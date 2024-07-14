@@ -208,8 +208,127 @@ _Контент вложенных layout_
 
 ## Загрузка данных
 
-По дефолту все запросы кешируются
+Загрузка данных списка происходит очень просто.
 
-https://www.youtube.com/watch?v=0y5ZNChoNM8
+Делаем функцию возвращающую результат:
+
+````javascript
+export async function getR() {
+  const result = await fetch('https://jsonplaceholder.typicode.com/posts') // Специальный fetch
+  return result.json();
+}
+````
+
+Непосредственно вывод
+
+````jsx
+export default async function Page1() {
+  const result = await getR();
+  return (
+    <div>
+      {result.map((r) => (
+        <div>
+          <Link key={r.id} href={`/page1/${r.id}`}>{r.title}</Link>
+        </div>
+      ))}
+      {JSON.stringify(result)}
+      page1
+    </div>
+  );
+}
+````
+
+Загрузить конкретный элемент списка не сложнее. Нужно только передать `id` записи
+ 
+````javascript
+export async function getRId(id) {
+  const result = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  return result.json();
+}
+````
+
+Вывести:
+
+````jsx
+export default async function id({params}) {
+  const id = await getRId(params.id);
+  console.log(id);
+  return <>
+    <p>
+      <h1>{id.title}</h1>
+      <h2>{id.id}</h2>
+      <p>{id.body}</p>
+    </p>
+  </>
+}
+````
+ 
+Таким образом отображение данных можно делать просто без проблем, так как все данные кешируются.
+
+### Кеширование
+
+Чтобы запретить кешировать запросы нужно указать параметр в `fetch`
+
+````javascript
+export async function getR() {
+  const result = await fetch('https://jsonplaceholder.typicode.com/posts',
+    {cache: "no-store"})
+  return result.json();
+}
+````
+
+Например, если информация всегда должна быть актуальной, тогда кеш выключаем.
+
+Если страница обновляется достаточно редко, тогда поведение по дефолту с включенным кешированием
+
+> По дефолту все запросы кешируются.
+{: .prompt-info }
+
+#### Срок жизни кеша
+
+Так же есть возможность задать срок жизни кеша
+
+````javascript
+export async function getR() {
+  const result = await fetch('https://jsonplaceholder.typicode.com/posts',
+    {next: {relalidate: 3600}}) // время в секундах актуальности кеша либо задать 0 если хотим снова без кеша
+  return result.json();
+}
+````
+
+У next есть возможность ревалидировать страницу по тегу и по пути. Next может сбросить кеш конкретного маршрута.
+
+Для этого можно создать специальный маршрут. И дергать его когда нужно ревалидировать страницу
+
+````jsx
+import {revalidateTag} from "next/cache";
+import {NextResponse} from "next/server";
+
+export function GET(request) {
+   const tag = request.nextUrl.searchParams.get("tag");
+
+   revalidateTag(tag);
+
+   return NextResponse.json({
+     revalidate: true,
+     tag,
+   })
+}
+````
+
+### Статические страницы
+
+В next есть возможность сделать статические страницы.
+
+Сначала разберемся как понять, сколько страниц динамических, а сколько статических.
+
+Нужно сделать `build` приложения. В конце билда в консоле будет итоговая строчка со списком собранных страниц
+
+````text
+○  (Static)   prerendered as static content  - статические
+ƒ  (Dynamic)  server-rendered on demand - рендер по запросу
+````
+
+https://www.youtube.com/watch?v=0y5ZNChoNM8&t=4998s
 
 ## Оптимизация
