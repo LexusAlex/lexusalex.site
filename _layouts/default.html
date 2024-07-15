@@ -35,6 +35,17 @@ layout: compress
       <!-- panel -->
       <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 mb-5 text-muted">
         <div class="access">
+          <!-- Yandex.RTB R-A-10213851-1 -->
+          <div id="yandex_rtb_R-A-10213851-1"></div>
+          <script>
+            window.yaContextCb.push(() => {
+              Ya.Context.AdvManager.render({
+                "blockId": "R-A-10213851-1",
+                "renderTo": "yandex_rtb_R-A-10213851-1",
+                "type": "feed"
+              })
+            })
+          </script>
           {% include_cached update-list.html lang=lang %}
           {% include_cached trending-tags.html lang=lang %}
         </div>
@@ -43,18 +54,6 @@ layout: compress
         {% assign _include_path = _include | append: '.html' %}
         {% include {{ _include_path }} lang=lang %}
         {% endfor %}
-
-        <!-- Yandex.RTB R-A-10213851-1 -->
-        <div id="yandex_rtb_R-A-10213851-1"></div>
-        <script>
-          window.yaContextCb.push(() => {
-            Ya.Context.AdvManager.render({
-              "blockId": "R-A-10213851-1",
-              "renderTo": "yandex_rtb_R-A-10213851-1",
-              "type": "feed"
-            })
-          })
-        </script>
       </aside>
     </div>
 
