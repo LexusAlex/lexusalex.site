@@ -262,13 +262,6 @@ image:
 
 
 
-
-
-
-
-
-
-
 https://habr.com/ru/articles/545150/
 http://sajgak.ru/site/php/shpargalka-regularnie-virageniya-pcre/
 https://devanych.ru/technologies/shpargalka-po-regulyarnym-vyrazheniyam
