@@ -29,7 +29,7 @@ tags: [application architecture]
 - Код должен быть покрыт тестами
 
 ## Принципы 12 факторов
-
+https://12factor.net/ru/
 ## Проектирование приложений
 https://lexusalex.ru/php-11-designing-systems-and-services
 ### Модульный монолит
