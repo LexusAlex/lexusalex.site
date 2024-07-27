@@ -12,3 +12,4 @@ https://doka.guide/js/function/
 https://doka.guide/js/function-as-datatype/
 https://learn.javascript.ru/function-basics
 https://learn.javascript.ru/advanced-functions
+
