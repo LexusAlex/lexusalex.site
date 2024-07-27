@@ -12,6 +12,9 @@ image:
 
 https://github.com/ManningBooks/essential-typescript-5 Примеры кода
 
+https://typescript-handbook.ru/docs/ts-1
+https://nauchikus.gitlab.io/typescript-definitive-guide/book/contents.html
+
 ## Введение
 
 Основные возможности typescript направлены на повышение продуктивности разработчиков, в частности за счет 
