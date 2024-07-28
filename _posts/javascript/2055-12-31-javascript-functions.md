@@ -1,7 +1,7 @@
 ---
-title: Функции
+title: Работа функции в javascript
 description: >-
-  
+   Подробно разбираемся с работой функций в javascript
 author: alex
 date: 2055-12-31 18:00:00 +0300
 categories: [Javascript]
