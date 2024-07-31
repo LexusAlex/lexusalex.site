@@ -661,7 +661,7 @@ https://ru.hexlet.io/courses/regexp/lessons/symbols/theory_unit
 
 ## Логическое ИЛИ
 
-Так же может понадобиться выбрать из нескольких значений
+Так же может понадобиться выбрать из нескольких значений:
 
 - регулярное выражение: `/(19|20|30)/g`
 - строка поиска и результат: <span style="background-color:#7AE;color:white">30</span> <span style="background-color:#7AE;color:white">20</span> <span style="background-color:#7AE;color:white">19</span> 21 <span style="background-color:#7AE;color:white">19</span>
@@ -674,6 +674,9 @@ https://ru.hexlet.io/courses/regexp/lessons/symbols/theory_unit
 - строка поиска и результат: <span style="background-color:#7AE;color:white">1987</span>
 
 Под это выражение попадают любые четырех значные года.
+
+> Если перед нами сложное регулярное выражение с подвыражениями, его следует разбить на отдельные части и разбирать посимвольно.
+{: .prompt-info }
 
 ## Как составить регулярное выражение
 
