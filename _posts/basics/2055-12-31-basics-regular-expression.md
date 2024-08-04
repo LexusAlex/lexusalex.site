@@ -6,7 +6,7 @@ description: >-
 author: alex
 date: 2055-06-02 09:00:00 +0300
 categories: [Basics,Regexp]
-tags: [regular expression]
+tags: [regular-expression]
 image:
   path: /assets/img/posts/regexp.png
   alt: Регулярные выражения.
