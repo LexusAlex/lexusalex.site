@@ -5,7 +5,7 @@ description: >-
 author: alex
 date: 2055-08-01 18:00:00 +0300
 categories: [Basics,Data-structures]
-tags: [array,data-structure]
+tags: [array,data-structure,javascript]
 image:
   path: /assets/img/posts/array.webp
   alt: Структуры данных. Массив
