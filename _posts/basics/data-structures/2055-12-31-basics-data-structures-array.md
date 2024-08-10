@@ -193,7 +193,25 @@ let array = [8,17,56,85];
 
 ## Алгоритмы линейного и бинарного поиска
 
-Посмотрим на примере, как может быть реализован алгоритм линейного поиска
+Посмотрим на примере на `javascript`, как может быть реализован алгоритм линейного поиска
+
+````javascript
+// Неотсеортированный массив элементов
+let first = [12,1,45,2,7,8,78,9,42,4];
+// Функция для поиска элементов
+const one = (array, target) => {
+  let steps = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    steps++;
+    if (array[i] === target){
+      return `Найден элемент : ${array[i]} за ${steps} шагов`;
+    }
+  }
+};
+
+console.log(one(arr,7));
+````
 
 https://www.8host.com/blog/linejnyj-i-binarnyj-poisk-v-javascript/
 
