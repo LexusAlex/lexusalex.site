@@ -136,6 +136,12 @@ test2.length // кол-во аргументов
 (x => x).name
 test2.toString() // Исходный код функции
 ````
+
+
+https://www.youtube.com/watch?v=pn5myCmpV2U&t=1820s
+https://github.com/HowProgrammingWorks/Dictionary
+
+https://www.youtube.com/watch?v=hSyA7tcNaCE&list=PLHhi8ymDMrQZad6JDh6HRzY1Wz5WB34w0&index=5
 --------------------------
 
 
