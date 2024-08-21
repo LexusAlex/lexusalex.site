@@ -43,4 +43,7 @@ https://lexusalex.ru/php-11-designing-systems-and-services
 https://doka.guide/tools/gateway-bff/
 
 
+Ставить запятую в последнем элементе массива обязательно
+
+
 

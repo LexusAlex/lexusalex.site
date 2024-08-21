@@ -40,9 +40,13 @@ Object - изменяемый тип данных. Это значит, что �
 
 Объект будет в памяти если есть активная ссылка на него.
 
+Перебор обьекта for in
+
 ### Function
 ### Array
 
+
+Перебор массива, цикл for of
 
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Data_structures
 https://blog.frontend-almanac.ru/5688-ygxnVD
