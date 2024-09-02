@@ -7,7 +7,7 @@ date: 2055-12-31 20:30:00 +0300
 categories: [Php]
 tags: [php]
 image:
-  path: /assets/img/posts/php1.png
+  path: /assets/img/posts/php.webp
   alt: Контейнер внедрения зависимостей в php
 ---
 

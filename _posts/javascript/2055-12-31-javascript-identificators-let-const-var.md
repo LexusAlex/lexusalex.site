@@ -85,7 +85,7 @@ let myNumber = 1;
 myNumber = myNumber + myNumber + myNumber; // 3
 ```
 
-Или изменить тип на "ходу"
+Или изменить тип на "ходу", но тоже не правильно
 
 ````javascript
 let myNumber = '1'; // Здесь строка 1
