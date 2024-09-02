@@ -1,10 +1,10 @@
 ---
 title: Контейнер внедрения зависимостей в php
 description: >-
-   Изучаем что такое контейнер внедрения зависимостей в php. Библиотека php di.
+   Изучаем что такое контейнер внедрения зависимостей в php.
 author: alex
 date: 2055-12-31 20:30:00 +0300
-categories: [Php, Libraries]
+categories: [Php]
 tags: [php]
 image:
   path: /assets/img/posts/php1.png
@@ -277,8 +277,6 @@ echo (new Sum(new Func()))->s(3,3); // 9
 ## Как нам работать с этим в коде
 
 https://elisdn.ru/blog/150/entity-dependencies
-
-## Библиотека php-di
 
 
 Практическое использование контейнера внедрения зависимостей очень важно для гибкости и надежности кода.
