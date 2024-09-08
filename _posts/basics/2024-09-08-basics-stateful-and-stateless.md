@@ -4,7 +4,7 @@ description: >-
   Чем отличаются Stateful и Stateless подходы при разработке api
 author: alex
 date: 2024-09-08 16:10:00 +0300
-categories: [Basics Api]
+categories: [Basics,Api]
 tags: [state, stateful, stateless]
 image:
   path: /assets/img/posts/main/state.png
