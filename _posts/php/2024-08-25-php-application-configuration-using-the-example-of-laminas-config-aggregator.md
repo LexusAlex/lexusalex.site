@@ -7,7 +7,7 @@ date: 2024-08-25 20:30:00 +0300
 categories: [Php, Libraries]
 tags: [php]
 image:
-  path: /assets/img/posts/php.png
+  path: /assets/img/posts/main/php.png
   alt: Конфигурация приложения php на примере laminas-config-aggregator
 ---
 

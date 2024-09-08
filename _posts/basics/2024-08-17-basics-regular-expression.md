@@ -7,7 +7,7 @@ date: 2024-08-17 22:44:00 +0300
 categories: [Basics,Regexp]
 tags: [regular-expression]
 image:
-  path: /assets/img/posts/regexp.png
+  path: /assets/img/posts/main/regexp.png
   alt: Регулярные выражения.
 ---
 

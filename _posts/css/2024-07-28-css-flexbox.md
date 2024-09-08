@@ -8,7 +8,7 @@ date: 2024-07-28 09:30:00 +0300
 categories: [Css, Flexbox]
 tags: [flex]
 image:
-  path: /assets/img/posts/flexbox.png
+  path: /assets/img/posts/main/flexbox.png
   alt: flexbox
 ---
 

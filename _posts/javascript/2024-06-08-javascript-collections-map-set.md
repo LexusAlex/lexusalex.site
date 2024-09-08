@@ -7,7 +7,7 @@ date: 2024-06-08 22:40:00 +0300
 categories: [Javascript,Collections]
 tags: [js,set,map]
 image:
-  path: /assets/img/posts/javascript.png
+  path: /assets/img/posts/main/javascript.png
   alt: Коллекции Set и Map в javascript.
 ---
 
