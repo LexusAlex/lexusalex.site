@@ -8,19 +8,6 @@ categories: [Docker]
 tags: [docker docker-compose]
 ---
 
-## С какими проблемами сталкиваемся
-
-При выкладке программного обеспечения на production мы можем сталкиваться со следующими проблемами:
-
-- Конфликт версий. Разные версии пакетов - разный результат
-- На одном сервере работает, на другом нет.
-- Не возможно масштабирование.
-- Конфликт портов.
-
-## Что дает docker
-
-
-
 https://doka.guide/tools/docker/
 https://yandex.cloud/ru/blog/posts/2022/03/docker-containers
 https://guides.hexlet.io/ru/docker/
@@ -39,6 +26,12 @@ https://hightemp.github.io/doc_notes/%D0%97%D0%B0%D0%BC%D0%B5%D1%82%D0%BA%D0%B8/
 Такая архитектура называется `Stateless`. 
 
 Про `Stateless` и `Stateful` подходы можно почитать в статье [https://lexusalex.site/posts/basics-stateful-and-stateless/](https://lexusalex.site/posts/basics-stateful-and-stateless/)
+
+Внутри контейнеров, как правило, упаковывают только те зависимости которые нужные для выполнения кода.
+
+В идеологии `docker` один контейнер соответствует одному процессу ОС.
+
+Приложения запущенные внутри контейнера, не имеют доступа к основной ОС.
 
 ## Установка
 
@@ -104,6 +97,45 @@ docker compose version # Проверяем версию
 
 Возможно есть способ легче, кто знает, пишите в комментариях.
 
+## Из чего состоит docker
+
+https://yandex.cloud/ru/blog/posts/2022/03/docker-containers#osnovnye-komponenty-docker
+
+> Важно понимать, что docker использует ядро linux хостовой ОС
+{: .prompt-info }
+
+## Образ
+
+Образ состоит из базового образа и доступных для чтения слоев. В итоговый образ входит объединение всех слоев в один.
+
+## Контейнер
+
+Это образ со слоем записи.
+
+Состояния контейнера
+
+https://my-js.org/docs/guide/docker/#%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B-%D0%B8-%D1%84%D0%BB%D0%B0%D0%B3%D0%B8
+
+docker run
+docker restart
+docker pause
+docker kill
+docker stop
+docker start
+docker unpause
+docker create
+docker rm
+
+- running
+- stopped
+- paused
+
+## Плюсы docker
+
+https://yandex.cloud/ru/blog/posts/2022/03/docker-containers#preimushestva-ispolzovaniya-docker
+
+
+https://my-js.org/docs/guide/docker/#docker-compose
 
 
 
