@@ -276,6 +276,25 @@ echo (new Sum(new Func()))->s(3,3); // 9
 
 ## Как нам работать с этим в коде
 
+Представим, что у нас есть параметры или значения, банально мы можем их все передать в метод или в функцию, например:
+
+````php
+class Sum
+{
+  public function sumDigits(int $a, int $b, int $c): int
+  {
+     return $a + $b + $c;
+  }
+}
+
+print_r((new Sum())->sumDigits(1, 2, 3)); // 6
+print_r((new Sum())->sumDigits(1, 2, 3)); // 6
+print_r((new Sum())->sumDigits(1, 2, 3)); // 6
+print_r((new Sum())->sumDigits(1, 2, 3)); // 6
+````
+
+Минус этого подхода, что нужно постоянно передавать все аргументы в метод.
+
 https://elisdn.ru/blog/150/entity-dependencies
 
 
