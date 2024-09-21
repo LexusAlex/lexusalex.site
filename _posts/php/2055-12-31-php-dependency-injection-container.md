@@ -135,7 +135,7 @@ $multiply = function ($num) {
     return ($num * $num);
 };
 
-// Функция складывает умноженны е друг на друга числа
+// Функция складывает умноженные друг на друга числа
 $sumAndMultiply = function ($num1, $num2, $multiply) {
     return  $multiply($num1) + $multiply($num2);
 };
@@ -276,7 +276,7 @@ echo (new Sum(new Func()))->s(3,3); // 9
 
 ## Как нам работать с этим в коде
 
-Представим, что у нас есть параметры или значения, банально мы можем их все передать в метод или в функцию, например:
+Представим, что у нас есть параметры или значения, банально мы можем их все передать **в метод или в функцию**, например:
 
 ````php
 class Sum
@@ -290,10 +290,114 @@ class Sum
 print_r((new Sum())->sumDigits(1, 2, 3)); // 6
 print_r((new Sum())->sumDigits(1, 2, 3)); // 6
 print_r((new Sum())->sumDigits(1, 2, 3)); // 6
-print_r((new Sum())->sumDigits(1, 2, 3)); // 6
 ````
 
-Минус этого подхода, что нужно постоянно передавать все аргументы в метод.
+Минус этого подхода, что нужно постоянно передавать все аргументы в метод при каждом вызове, что не удобно.
+
+Но, что если нам передать **в конструктор**, и потом вызывать, наш метод `sumDigits` уже без аргументов.
+
+````php
+class Sum
+{
+    public int $a = 0;
+    public int $b = 0;
+    public int $c = 0;
+    public function __construct(int $a, int $b, int $c)
+    {
+        $this->a = $a;
+        $this->b = $b;
+        $this->c = $c;
+    }
+    public function sumDigits(): int
+    {
+        return $this->a + $this->b + $this->c;
+    }
+}
+
+print_r((new Sum(1, 2, 3))->sumDigits()); // 6
+print_r((new Sum(1, 2, 3))->sumDigits()); // 6
+print_r((new Sum(1, 2, 3))->sumDigits()); // 6
+````
+
+Теперь, мы один раз передаем все данные в конструктор, уже лучше, но то же дублирование кода.
+
+Но, что если нам нужны дополнительные данные, передадим их в метод.
+
+````php
+class Sum
+{
+    public int $a = 0;
+    public int $b = 0;
+    public int $c = 0;
+    public function __construct(int $a, int $b, int $c)
+    {
+        $this->a = $a;
+        $this->b = $b;
+        $this->c = $c;
+    }
+    public function sumDigits(int $d): int
+    {
+        return $this->a + $this->b + $this->c + $d;
+    }
+}
+
+print_r((new Sum(2, 3, 4))->sumDigits(2)); // 11
+print_r((new Sum(4, 6, 3))->sumDigits(3)); // 16
+print_r((new Sum(7, 8, 3))->sumDigits(4)); // 22
+````
+ 
+Все равно не удобно. Нужно каждый раз создавать объект `Sum` наполнять его данными, так как у нас три разных вычисления.
+
+Чтобы, избавится от дублирования кода, нужно избавить конструктор от изменяемых данных, а все пользовательские данные выносим в метод, еще немного переделаем код.
+
+````php
+class Sum
+{
+    public string $type = '';
+    public function __construct(string $type)
+    {
+       $this->type = $type;
+    }
+    public function manipulationOfDigits(array $digits): int
+    {
+        return ($this->type === 'sum') ? array_sum($digits) : 0;
+    }
+}
+
+$sum = new Sum('sum');
+print_r($sum->manipulationOfDigits([2, 3, 4, 2])); // 11
+print_r($sum->manipulationOfDigits([4, 6, 3, 3])); // 16
+print_r($sum->manipulationOfDigits([7, 8, 3, 4])); // 22
+````
+
+Отлично, получили производительный код, с которым работать гораздо удобнее. К тому же в метод можно передавать неограниченное кол-во чисел. 
+ 
+Мы создали готовый сервис, который можно использовать повторно, передав его в контейнер.
+
+Теперь сделаем наоборот, пользовательские данные передадим в конструктор класса, а неизменяемые данные в метод.
+
+Получаем.
+
+````php
+class Sum
+{
+    public array $digits;
+    public function __construct(array $d)
+    {
+        $this->digits = $d;
+    }
+    public function manipulationOfDigits(string $type): int
+    {
+        return ($type === 'sum') ? array_sum($this->digits) : 0;
+    }
+}
+
+print_r((new Sum([2, 3, 4, 2]))->manipulationOfDigits('sum')); // 11
+print_r((new Sum([4, 6, 3, 3]))->manipulationOfDigits('sum')); // 16
+print_r((new Sum([7, 8, 3, 4]))->manipulationOfDigits('sum')); // 22
+````
+
+Вернулись снова к дублированию.
 
 https://elisdn.ru/blog/150/entity-dependencies
 
