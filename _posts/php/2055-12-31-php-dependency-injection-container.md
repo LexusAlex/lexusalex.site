@@ -29,7 +29,7 @@ print_r($sum(1,2)); // 3
 print_r($sum(8,2)); // 10
 ````
 
-Вроде ничего необычного, обычная самодостаточная функция, которой не требуется внешних зависимостей. Но это не всегда так.
+Вроде ничего необычного, обычная самодостаточная функция, которой не требуется внешних зависимостей. Но это бывает не всегда так.
 
 > Функция результат которой полностью зависит от своих аргументов, называется чистой функцией. 
 {: .prompt-info }
@@ -370,13 +370,11 @@ print_r($sum->manipulationOfDigits([4, 6, 3, 3])); // 16
 print_r($sum->manipulationOfDigits([7, 8, 3, 4])); // 22
 ````
 
-Отлично, получили производительный код, с которым работать гораздо удобнее. К тому же в метод можно передавать неограниченное кол-во чисел. 
+Отлично, получили код, с которым работать гораздо удобнее. К тому же в метод можно передавать неограниченное кол-во чисел, благодаря что мы переписали на передачу массива.
  
 Мы создали готовый сервис, который можно использовать повторно, передав его в контейнер.
 
 Теперь сделаем наоборот, пользовательские данные передадим в конструктор класса, а неизменяемые данные в метод.
-
-Получаем.
 
 ````php
 class Sum
@@ -397,12 +395,116 @@ print_r((new Sum([4, 6, 3, 3]))->manipulationOfDigits('sum')); // 16
 print_r((new Sum([7, 8, 3, 4]))->manipulationOfDigits('sum')); // 22
 ````
 
-Вернулись снова к дублированию.
+Так же в метод можем передать дополнительные данные, например
+
+````php
+class Sum
+{
+    public array $digits;
+    public function __construct(array $d)
+    {
+        $this->digits = $d;
+    }
+    public function manipulationOfDigits(string $type1 = '', string $type2 = ''): int
+    {
+        if ($type1 === 'sum' && $type2 === 'multiply') {
+           return array_sum($this->digits) ** 2;
+        }
+
+        if ($type1 === 'sum') {
+            return array_sum($this->digits);
+        }
+        
+        return 0;
+    }
+}
+
+print_r((new Sum([2, 3, 4, 2]))->manipulationOfDigits('sum','multiply')); // 121
+print_r((new Sum([4, 6, 3, 3]))->manipulationOfDigits('sum')); // 16
+print_r((new Sum([7, 8, 3, 4]))->manipulationOfDigits('sum','multiply')); // 484
+````
+
+Громоздко, но можно и так.
+
+## Что получаем
+
+Мы разобрали классы в конструктор которого мы передаем пользовательские данные и потом например сохраняем их в бд.
+ 
+Например, так:
+
+````php
+$sum = new Sum($data);
+$multiply = new Multiply($data1);
+
+$store->save($sum);
+$store->save($multiply);
+````
+
+И самодостаточные сервисы, которые не работают напрямую с пользовательскими данными, а передаются в метод сервиса только лишь для расчета.
+
+````php
+$service = new Service($configuration);
+
+$check1 = $service->check1($data1);
+$check2 = $service->check2($data1);
+````
+
+Такие сервисы удобно использовать в контейнере
+
+````php
+$container->set(Service::class, function () {
+    return new Service($configuraionData);
+});
+
+// Используем
+$service = $container->get(Service::class);
+$check1 = $service->check1($data1);
+$check2 = $service->check2($data1);
+````
+
+## Фабрики
+
+Но не все объекты такие удобные, многие просто нельзя поместить в контейнер и оттуда доставать.
+
+Что-бы это победить нужно писать свои обертки, чтобы это обойти.
+ 
+````php
+class Sum {
+    public function sum(): int {
+        return 1;
+    }
+}
+class Factory
+{
+  public function create(): Sum
+  {
+      return new Sum();
+  }
+}
+
+class Controller
+{
+    private Factory $factory;
+   public function __construct(Factory $factory) {
+       $this->factory = $factory;
+   }
+
+   public function actionCreate(): int
+   {
+       $sum = $this->factory->create();
+       return $sum->sum();
+   }
+}
+
+print_r((new Controller((new Factory())))->actionCreate());
+````
 
 https://elisdn.ru/blog/150/entity-dependencies
 
 
 Практическое использование контейнера внедрения зависимостей очень важно для гибкости и надежности кода.
+
+А в следующей статье посмотрим на библиотеку для внедрения зависимостей.
 
 https://habr.com/ru/articles/327746/
 https://habr.com/ru/articles/655399/
