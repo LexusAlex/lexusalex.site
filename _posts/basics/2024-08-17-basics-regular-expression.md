@@ -8,6 +8,7 @@ categories: [Basics,Regexp]
 tags: [regular-expression]
 image:
   path: /assets/img/posts/main/regexp.png
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
   alt: Регулярные выражения.
 ---
 
@@ -800,7 +801,30 @@ prefix@domain.domain-zone
 $ конец строки регулярного выражения
 ````
 
-Получаем год от 1900 до 2099
+Получаем год от 1900 до 2099.
+
+В дополнение к этому, немного переделал это регулярное выражение, чтобы проходил диапазон `01.01.1940-31.12.2010`.
+
+````text
+/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(194[0-9]|19[5-9]\d|200\d|201[0])$/;
+````
+
+Что пройдет:
+
+````text
+01.04.1989
+31.12.2005
+03.01.1940
+````
+
+Что не пройдет:
+
+````text
+03.01.1939
+03.01.2024
+20.13.2000
+32.01.1940
+````
 
 ### Ip адрес
 
