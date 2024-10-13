@@ -73,7 +73,7 @@ server {
     add_header X-Frame-Options "SAMEORIGIN";
 
     location /ws {
-        set $upstream http://node:5173;
+        set $upstream http://node:3000;
         proxy_set_header  Host $host;
         proxy_set_header  Upgrade $http_upgrade;
         proxy_set_header  Connection "Upgrade";
@@ -82,7 +82,7 @@ server {
     }
 
     location / {
-        set $upstream http://node:5173;
+        set $upstream http://node:3000;
         proxy_set_header  Host $host;
         proxy_pass        $upstream;
         proxy_redirect    off;
@@ -167,7 +167,7 @@ react-simple
 
 Еще добавим в корень файл `.gitignore`.
 
-````gitignore
+````text
 /node_modules
 /coverage
 /build
