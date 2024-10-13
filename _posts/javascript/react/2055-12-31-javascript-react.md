@@ -13,6 +13,10 @@ React - библиотека для построения пользовател�
 https://www.youtube.com/watch?v=P7r1Pv8JOYk
  
 TODO Остановился https://www.youtube.com/watch?v=nZJdssI5hS4
+
+## Преимущества react
+
+
  
 ## Новый проект на react
 
