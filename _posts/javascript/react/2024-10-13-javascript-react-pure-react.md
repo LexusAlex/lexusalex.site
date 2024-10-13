@@ -1,7 +1,7 @@
 ---
 title: Чистый React
 description: >-
-  Запускаем новый проект на React без лишних зависимостей в docker
+  Запускаем новый проект на React в docker
 author: alex
 date: 2024-10-13 21:30:00 +0300
 categories: [Javascript,React]
