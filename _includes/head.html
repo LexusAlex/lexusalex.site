@@ -48,6 +48,24 @@
   {% assign seo_tags = seo_tags | replace: old_meta_clip, new_meta_clip %}
   {% endif %}
 
+  {% if page.layout == 'category' %}
+    {%- capture tag_description -%}
+      <meta description="{{page.title}}">
+    {%- endcapture -%}
+
+    {% assign old_tag_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+    {% assign seo_tags = seo_tags | replace: old_tag_description, tag_description %}
+  {% endif %}
+
+  {% if page.layout == 'tag' %}
+    {%- capture tag2_description -%}
+    <meta description="{{page.title}}">
+    {%- endcapture -%}
+
+    {% assign old_tag2_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+    {% assign seo_tags = seo_tags | replace: old_tag2_description, tag2_description %}
+  {% endif %}
+
   {{ seo_tags }}
 
   <title>

@@ -1,1 +1,12 @@
 git add _posts/ txt.txt && git commit -m "write posts php-di" && git push origin main && git push gitlab main
+
+  {% if page.layout == 'category' %}
+  {% assign taxonomy = page.category.display_name | downcase | slugify %}
+  {% assign tag = site.data.taxonomy[taxonomy] %}
+  {% if tag.description %}
+  {% assign description = tag.description %}
+  {% else %}
+  {% assign description = page.category.display_name | prepend: page.title %}
+  {% endif %}
+  <meta description="{{ description }}">
+  {% endif %}
