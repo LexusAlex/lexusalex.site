@@ -174,6 +174,28 @@ root2.render(divElement);
 Компонент react
 ````
 
+Получается мы создали три приложения `react`.
+
+Теперь пойдем дальше создадим вложенные элементы
+
+````javascript
+const divElement = React.createElement('div',{ className: 'test' },
+    [React.createElement('b',{key:1},[
+        React.createElement('span',{style:{color:"red"},key:1},'React'),' элемент']
+    )]
+);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(divElement);
+````
+
+Выше мы создали элемент `div` в который положили элемент `b`, а уже в который добавим `span`, 
+контент которого покрасим в красный цвет, так же далее в `b` идет отдельно текст `элемент`.
+
+![react](/assets/img/posts/javascript/react/react-1.png){: .shadow }
+_Вложенные элементы_
+
+В качестве корневого "узла" используют React fragment `<></>` или `<React.Fragment></React.Fragment>`, это такой особый элемент который не выводит никакую разметку, что дает возможность не использовать пустой `div` элемент.
+
 Функциональный компонент - это функция в название которой начинается с большой буквы.
 Функциональный компонент возвращает либо `React элемент` либо `null`.
 
