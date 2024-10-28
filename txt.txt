@@ -10,3 +10,5 @@ git add _posts/ txt.txt && git commit -m "write posts php-di" && git push origin
   {% endif %}
   <meta description="{{ description }}">
   {% endif %}
+
+  Пишем все в _draft
