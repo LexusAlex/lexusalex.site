@@ -176,7 +176,7 @@ root2.render(divElement);
 
 Получается мы создали три приложения `react`.
 
-Теперь пойдем дальше создадим вложенные элементы
+Теперь пойдем дальше и создадим вложенные элементы:
 
 ````javascript
 const divElement = React.createElement('div',{ className: 'test' },
@@ -194,7 +194,176 @@ root.render(divElement);
 ![react](/assets/img/posts/javascript/react/react-1.png){: .shadow }
 _Вложенные элементы_
 
-В качестве корневого "узла" используют React fragment `<></>` или `<React.Fragment></React.Fragment>`, это такой особый элемент который не выводит никакую разметку, что дает возможность не использовать пустой `div` элемент.
+````html
+<div id="root">
+  <div class="test">
+    <b>
+      <span style="color: red;">React</span> 
+      элемент</b>
+  </div>
+</div>
+````
+
+Как видим мы просто конструируем `React element tree` как нам это нужно, с помощью нативных методов `javascript`.
+
+Но, что делать, если нужно добавить несколько элементов в корневой элемент, при этом не создавать пустой `div`.
+
+Чтобы писать более чистый код в react есть специальный элемент `React.Fragment`, он выступает в качестве корневого.
+
+````javascript
+const group = React.createElement(React.Fragment,null,
+    React.createElement('div',null,'Первый div'),
+    React.createElement('div',null,'Второй div'),
+    React.createElement('div',null,'Третий div')
+);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(group);
+````
+
+> `React.Fragment` - это такой особый элемент который не выводит никакую разметку, что дает возможность не использовать пустой `div` элемент
+{: .prompt-info }
+
+В результате у нас получится чистый код:
+
+````html
+<div id="root">
+  <div>Первый div</div>
+  <div>Второй div</div>
+  <div>Третий div</div>
+</div>
+````
+
+### Комбинирование компонентов
+
+Рассмотрим примеры:
+
+#### Дублирование одного компонента
+
+В примере продублируем один компонент несколько раз:
+
+````javascript
+const component1 = React.createElement('div',null,'Компонент 1');
+const component2 = React.createElement(React.Fragment,null,component1,component1,component1);
+ReactDOM.createRoot(document.getElementById('root')).render(component2);
+````
+
+Получаем разметку:
+
+````html
+<div id="root">
+  <div>Компонент 1</div>
+  <div>Компонент 1</div>
+  <div>Компонент 1</div>
+</div>
+````
+
+Здесь все просто, создали один элемент и продублировали его три раза.
+
+#### Элементы меню
+
+Теперь сделаем 5 ссылок элементов меню, более расширенный пример.
+
+````javascript
+const Item = React.createElement('li',null, React.createElement('a',{'href':'https://lexusalex.site','target':'_blank'},'Элемент меню'));
+const Items = React.createElement('ul',null,Item,Item,Item,Item,Item);
+ReactDOM.createRoot(document.getElementById('root')).render(Items);
+````
+В результате получаем разметку:
+
+````html
+<div id="root">
+  <ul>
+    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
+    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
+    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
+    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
+    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
+  </ul>
+</div>
+````
+
+> По неофициальному соглашению имена переменных в которых содержатся компоненты, начинаются с большой буквы, например `Items`.
+{: .prompt-info }
+
+
+Как мы поняли компоненты можно переиспользовать и комбинировать друг с другом. 
+Компоненты можно использовать столько раз, сколько потребуется.
+
+В этом мощь использования компонентов, что ускоряет разработку. 
+Компоненты так же обладают некоторыми другими свойствами, но об этом ниже.
+
+## Свойства
+
+Свойства или `props` - это **неизменяемое значение** внутри элемента.
+
+Они очень похожи на атрибуты, например `href` или `title`.
+
+> Самое важное, понять, что значение из свойства можно только читать. Так же не следует редактировать или добавлять свойства внутри самого компонента. Этим должен заниматься родительский элемент.
+{: .prompt-info }
+
+Перепишем пример с меню выше, для этого вынесем `Item` в **функциональный компонент.**
+
+Код становится сложнее.
+
+````javascript
+// Функциональный компонент Item, куда передаем свойства.
+function Item({ nameLink, Link }) {
+    return React.createElement('li',null, React.createElement('a',{'href':Link,'target':'_blank'},nameLink));
+}
+
+const Items = React.createElement('ul',null,
+    // Вызов нашего компонента с передаечей в него props
+    React.createElement(Item,{nameLink:'lexusalex.site',Link: 'https://lexusalex.site'}),
+    React.createElement(Item,{nameLink:'lexusalex.ru',Link: 'https://lexusalex.ru'}),
+    React.createElement(Item,{nameLink:'ya.ru',Link: 'https://ya.ru'}),
+    React.createElement(Item,{nameLink:'google.com',Link: 'https://google.com'}),
+    React.createElement(Item,{nameLink:'mail.ru',Link: 'https://mail.ru'}),
+);
+ReactDOM.createRoot(document.getElementById('root')).render(Items);
+````
+
+В результате будет выведена ожидаемая разметка:
+
+````html
+<div id="root">
+  <ul>
+    <li><a href="https://lexusalex.site" target="_blank">lexusalex.site</a></li>
+    <li><a href="https://lexusalex.ru" target="_blank">lexusalex.ru</a></li>
+    <li><a href="https://ya.ru" target="_blank">ya.ru</a></li>
+    <li><a href="https://google.com" target="_blank">google.com</a></li>
+    <li><a href="https://mail.ru" target="_blank">mail.ru</a></li>
+  </ul>
+</div>
+````
+
+Например, ссылки мы хотим использовать еще и в другом месте, для этого их можно вынести ссылки в самостоятельный компонент.
+
+````javascript
+// Функциональный компонент
+function Item({ nameLink, Link }) {
+   return React.createElement('li',null, React.createElement('a',{'href':Link,'target':'_blank'},nameLink));
+}
+// Отдельный компонент для вывода ссылок
+function Links() {
+    return React.createElement(React.Fragment,null,
+        React.createElement(Item,{nameLink:'lexusalex.site',Link: 'https://lexusalex.site'}),
+        React.createElement(Item,{nameLink:'lexusalex.ru',Link: 'https://lexusalex.ru'}),
+        React.createElement(Item,{nameLink:'ya.ru',Link: 'https://ya.ru'}),
+        React.createElement(Item,{nameLink:'google.com',Link: 'https://google.com'}),
+        React.createElement(Item,{nameLink:'mail.ru',Link: 'https://mail.ru'})
+    )
+}
+// Вывод
+const Items = React.createElement('ul',null,React.createElement(Links));
+ReactDOM.createRoot(document.getElementById('root')).render(Items);
+````
+
+Не стоит забывать, что это обычный `javascript`, и мы тут ничего не изобрели. Мы просто комбинируем, компоненты как нам нужно.
+
+
+
+
+В качестве корневого "узла" используют React fragment `<></>` или `<React.Fragment></React.Fragment>`.
 
 Функциональный компонент - это функция в название которой начинается с большой буквы.
 Функциональный компонент возвращает либо `React элемент` либо `null`.
