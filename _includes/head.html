@@ -52,9 +52,14 @@
     {%- capture tag_description -%}
       <meta description="{{page.title}}">
     {%- endcapture -%}
+    {%- capture tag_og_description -%}
+      <meta property="og:description" content="{{page.title}}">
+    {%- endcapture -%}
 
     {% assign old_tag_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+    {% assign old_tag_og_description = '<meta property="og:description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
     {% assign seo_tags = seo_tags | replace: old_tag_description, tag_description %}
+    {% assign seo_tags = seo_tags | replace: old_tag_og_description, tag_og_description %}
   {% endif %}
 
   {% if page.layout == 'tag' %}
@@ -62,8 +67,14 @@
     <meta description="{{page.title}}">
     {%- endcapture -%}
 
+    {%- capture tag3_description -%}
+      <meta property="og:description" content="{{page.title}}">
+    {%- endcapture -%}
+
     {% assign old_tag2_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+    {% assign old_tag3_description  = '<meta property="og:description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
     {% assign seo_tags = seo_tags | replace: old_tag2_description, tag2_description %}
+    {% assign seo_tags = seo_tags | replace: old_tag3_description, tag3_description %}
   {% endif %}
 
   {{ seo_tags }}
