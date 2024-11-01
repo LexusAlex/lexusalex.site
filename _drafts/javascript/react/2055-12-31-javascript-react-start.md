@@ -9,7 +9,7 @@ tags: [js,docker,react]
 image:
   path: /assets/img/posts/main/react.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
-  alt: Знакомство с React
+  alt: Начать в React
 ---
 
 Распределить главы
@@ -1023,13 +1023,79 @@ function ShowButton()
 }
 ````
 
-Как это работает. Первоначальное значение = `false`. Если кликнуть на кнопку, значение `show` не будет изменено `show = false`, оно поменяется только при следующей итерации.
+Как это работает. 
+Первоначальное значение = `false`. 
+Если кликнуть на кнопку, значение `show` не будет изменено `show = false`, оно поменяется только при следующей итерации. Так работает хук
+
+### Что вернет хук
+
+````jsx
+const [counter, setCounter] = useState(10);
+````
+
+Получается, что хук возвращает массив из двух странных элементов `[текущее значение, установка нового значения]`. Эти значения можно обрабатывать по-разному, но именно деструктуризация самый часто используемый.
+
+Но сам хук вернет именно то, что мы ему передадим.
+
+Хорошей практикой является размешать в одном состоянии тесно связанные друг с другом данные.
+
+### Задание значения
+
+Присвоить значение можно просто передав его статически
+
+````jsx
+function Opens()
+{
+  const [exp, setExp] = useState(false);
+  return (<>
+    <button onClick={() => setExp(true)}>+</button>
+    <button onClick={() => setExp(false)}>-</button>
+    {exp && <p>Открыли</p>}
+  </>)
+}
+````
+
+Пример очень простой, но показывает возможность статически заданного значения.
+
+Так же можно вернуть новое значение динамически, что мы и делали в примерах выше, но с особенностями:
+
+````jsx
+function Count2() {
+  const [counter, setCounter] = useState(0);
+  return <button onClick={() => {
+    setCounter(value => value + 1);
+    setCounter(value => value + 1);
+    setCounter(value => value + 1);
+  }
+  }>{counter}</button>;
+}
+````
+
+Здесь при каждом клике мы будем плюсовать `+3` к результату. Как бы все понятно, логично, но если просто задать значение без функции:
+
+````jsx
+function Count2() {
+  const [counter, setCounter] = useState(0);
+  return <button onClick={() => {
+    setCounter(1); // Будет выполнен только этот setCounter остальные игнорированны
+    setCounter(1);
+    setCounter(1);
+    setCounter(1);
+    setCounter(1);
+    setCounter(1);
+  }
+  }>{counter}</button>;
+}
+````
+
+Ну и конечно использовать сколько угодно состояний в одном компоненте.
+
 
 ## Примеры
 
 ### Пример 1 - Список элементов
 
-Реализуем стандартный `select` список элементов.
+Реализуем стандартный `select` со списком элементов.
 
 ````jsx
 function Select (props) {
@@ -1048,3 +1114,109 @@ export function App() {
 }
 ````
 
+### Пример 2 - Работа со списком элементов
+
+Реализуем функции:
+
+- Добавление элементов
+- Удаление элементов
+- Изменение элементов
+- Сортировка элементов
+
+Работа происходит с массивом элементов, через состояние.
+
+````jsx
+function Lists() {
+  const [list, setList] = useState([]);
+  const result = list.map((element, index) => {
+    return <p key={index}>{element}</p>;
+  });
+  return <>
+    <button onClick={() => {
+      setList([...list, 'Элемент 1', 'Элемент 2']);
+    }}>add
+    </button>
+    <button onClick={() => {
+      let index = 1;
+      setList([...list.slice(0, index), ...list.slice(index + 1)]);
+    }}>delete
+    </button>
+    <button onClick={() => {
+      let index = 1;
+      setList([...list.slice(0, index), 'поменяли элемент', ...list.slice(index + 1)]);
+    }}>change
+    </button>
+    <button onClick={() => {
+      let copy = Object.assign([], list);
+      copy.sort();
+      setList(copy);
+    }}>sort
+    </button>
+    {result}
+  </>
+}
+
+export function App() {
+  return (
+    <>
+      <Lists></Lists>
+    </>
+  )
+}
+````
+
+На выходе получаем фактически список задач.
+
+### Пример 3. Добавление товаров
+
+А здесь реализуем функционал вывода и добавления товаров с использованием нескольких компонентов
+
+````jsx
+// Список продуктов
+const i = [
+  {id: 1, name: "Товар 1", description: "Описание товара 1"},
+  {id: 2, name: "Товар 2", description: "Описание товара 2"},
+  {id: 3, name: "Товар 3", description: "Описание товара 3"},
+];
+
+// Список элементов
+function Items()
+{
+  const [prods, setProds] = useState(i);
+  let res = (prods.map(prod => {
+    return (
+      <Item
+        key={prod.id}
+        id={prod.id}
+        name={prod.name}
+        description={prod.description}
+      ></Item>
+    )
+  }));
+
+  return (
+    <>
+      {res}
+      <button onClick={() => setProds([...prods, {id: (prods.length+1), name: "Товар " + (prods.length+1), description: "Описание товара " + (prods.length+1)},])}>Добавить товар</button>
+    </>
+  );
+}
+
+// Конкретный элемент
+function Item({id, name, description }) {
+  return <div key={id}>
+    Id: {id}
+    Имя: {name},
+    Описание: {description},
+  </div>;
+}
+
+
+export function App() {
+  return (
+    <>
+      <Items></Items>
+    </>
+  )
+}
+````

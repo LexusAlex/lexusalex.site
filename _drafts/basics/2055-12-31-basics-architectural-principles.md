@@ -118,7 +118,43 @@ Single Responsibility principle
 [5,Банкрот]
 [5,Вася]
 ````
-3 часа
+
+Нужно как можно меньше править уже работающий код.
+
+Нужно делить функционал на разные части, делить на разные классы, не лепить все вс один
+
+````php
+final class Client
+{
+  public function __construct() {
+      private array $providers;
+  }
+  
+  public function generate() {
+    foreach ($this->providers as $provider) {
+        return $provider->url();
+    }  
+  }
+}
+````
+
+Если делать все так нам не нужно менять старый код, в идеале нужно создать новый класс.
+
+class
+test
+
+Но лучше больше классов
+
+class1
+test1
+class2
+test2
+class3
+test3
+
+Этот паттерн называется proxy. Всю инфраструктуру вынесли в отдельный класс, и каждому классу тест
+
+3.53
 
 ### OCP
 
