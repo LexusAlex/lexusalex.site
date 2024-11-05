@@ -8,6 +8,9 @@ categories: [Basics]
 tags: [application architecture]
 ---
  
+
+Про качество кода https://zhurov.me/blog/code-quality-talks.html
+
 Приложение -> Модуль -> Компонент
 
 Основное 
