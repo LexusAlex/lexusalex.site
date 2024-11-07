@@ -172,10 +172,51 @@ open–closed principle
 
 LSP
 
-4.26
+Liskov Substitution Principle
+Принцип подстановки Лисков
+
+Если есть базовый тип, то все его подттипы, должны вести себя так же как же как и базовый
+Применимо к классам и интерфейсам.
+
 
 ISP
+
+interface segregation principle
+Принцип разделения интерфейса
+
+````php
+interface Router 
+{
+    public function matchRequest($request): array 
+    {
+    
+    }
+}
+
+class FastRouterAdapter implements Router
+{
+
+}
+
+new App($router);
+
+$response = $app->handle($request);
+
+class BlogContoller {
+    
+    public function index() {
+    
+    }
+}
+    
+}
+````
+
+4.41
+
 DIP
+
+Все принципы работают, чтобы уменьшить связанность кода и его изменение
 
 GRASP
 

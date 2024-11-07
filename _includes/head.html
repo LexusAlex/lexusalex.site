@@ -50,10 +50,10 @@
 
   {% if page.layout == 'category' %}
     {%- capture tag_description -%}
-      <meta description="{{page.title}}">
+      <meta description="Категория {{page.title}}">
     {%- endcapture -%}
     {%- capture tag_og_description -%}
-      <meta property="og:description" content="{{page.title}}">
+      <meta property="og:description" content="Категория {{page.title}}">
     {%- endcapture -%}
 
     {% assign old_tag_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
@@ -64,11 +64,11 @@
 
   {% if page.layout == 'tag' %}
     {%- capture tag2_description -%}
-    <meta description="{{page.title}}">
+    <meta description="Тег {{page.title}}">
     {%- endcapture -%}
 
     {%- capture tag3_description -%}
-      <meta property="og:description" content="{{page.title}}">
+      <meta property="og:description" content="Тег {{page.title}}">
     {%- endcapture -%}
 
     {% assign old_tag2_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
@@ -80,9 +80,17 @@
   {{ seo_tags }}
 
   <title>
+    {% if page.layout == 'category' %}
+     {{'Категория'}}
+    {% endif %}
+    {% if page.layout == 'tag' %}
+     {{'Тег'}}
+    {% endif %}
     {%- unless page.layout == 'home' -%}
     {{ page.title | append: ' | ' }}
     {%- endunless -%}
+
+
     {{ site.title }}
   </title>
 
