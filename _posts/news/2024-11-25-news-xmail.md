@@ -4,7 +4,7 @@ description: >-
   Как заменить Gmail и повысить безопасность
 author: alex
 date: 2024-11-25 10:55:00 +0300
-categories: [News]
+categories: [News, Services]
 tags: [gmail,xmail]
 image:
   path: /assets/img/posts/news/xmail.webp
