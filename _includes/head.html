@@ -2,7 +2,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta
     name="viewport"
@@ -49,48 +49,40 @@
   {% endif %}
 
   {% if page.layout == 'category' %}
-    {%- capture tag_description -%}
-      <meta description="Категория {{page.title}}">
-    {%- endcapture -%}
-    {%- capture tag_og_description -%}
-      <meta property="og:description" content="Категория {{page.title}}">
-    {%- endcapture -%}
+  {%- capture tag_description -%}
+  <meta description="Категория {{page.title}}">
+  {%- endcapture -%}
+  {%- capture tag_og_description -%}
+  <meta property="og:description" content="Категория {{page.title}}">
+  {%- endcapture -%}
 
-    {% assign old_tag_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
-    {% assign old_tag_og_description = '<meta property="og:description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
-    {% assign seo_tags = seo_tags | replace: old_tag_description, tag_description %}
-    {% assign seo_tags = seo_tags | replace: old_tag_og_description, tag_og_description %}
+  {% assign old_tag_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+  {% assign old_tag_og_description = '<meta property="og:description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+  {% assign seo_tags = seo_tags | replace: old_tag_description, tag_description %}
+  {% assign seo_tags = seo_tags | replace: old_tag_og_description, tag_og_description %}
   {% endif %}
 
   {% if page.layout == 'tag' %}
-    {%- capture tag2_description -%}
-    <meta description="Тег {{page.title}}">
-    {%- endcapture -%}
+  {%- capture tag2_description -%}
+  <meta description="Тег {{page.title}}">
+  {%- endcapture -%}
 
-    {%- capture tag3_description -%}
-      <meta property="og:description" content="Тег {{page.title}}">
-    {%- endcapture -%}
+  {%- capture tag3_description -%}
+  <meta property="og:description" content="Тег {{page.title}}">
+  {%- endcapture -%}
 
-    {% assign old_tag2_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
-    {% assign old_tag3_description  = '<meta property="og:description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
-    {% assign seo_tags = seo_tags | replace: old_tag2_description, tag2_description %}
-    {% assign seo_tags = seo_tags | replace: old_tag3_description, tag3_description %}
+  {% assign old_tag2_description = '<meta name="description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+  {% assign old_tag3_description  = '<meta property="og:description" content="Заметки и статьи о разработке, жизни и хороших инженерных практиках" />' %}
+  {% assign seo_tags = seo_tags | replace: old_tag2_description, tag2_description %}
+  {% assign seo_tags = seo_tags | replace: old_tag3_description, tag3_description %}
   {% endif %}
 
   {{ seo_tags }}
 
   <title>
-    {% if page.layout == 'category' %}
-     {{'Категория'}}
-    {% endif %}
-    {% if page.layout == 'tag' %}
-     {{'Тег'}}
-    {% endif %}
     {%- unless page.layout == 'home' -%}
     {{ page.title | append: ' | ' }}
     {%- endunless -%}
-
-
     {{ site.title }}
   </title>
 
@@ -107,7 +99,7 @@
 
   <!-- Bootstrap -->
   {% unless jekyll.environment == 'production' %}
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   {% endunless %}
 
   <!-- Theme style -->
@@ -134,11 +126,30 @@
   <link rel="stylesheet" href="{{ site.data.origin[type].glightbox.css | relative_url }}">
   {% endif %}
 
-  <!-- JavaScript -->
+  <!-- Scripts -->
 
-  {% unless site.theme_mode %}
-  {% include mode-toggle.html %}
-  {% endunless %}
+  <script src="{{ '/assets/js/dist/theme.min.js' | relative_url }}"></script>
+
+  {% include js-selector.html lang=lang %}
+
+  {% if jekyll.environment == 'production' %}
+  <!-- PWA -->
+  {% if site.pwa.enabled %}
+  <script
+    defer
+    src="{{ '/app.min.js' | relative_url }}?baseurl={{ site.baseurl | default: '' }}&register={{ site.pwa.cache.enabled }}"
+  ></script>
+  {% endif %}
+
+  <!-- Web Analytics -->
+  {% for analytics in site.analytics %}
+  {% capture str %}{{ analytics }}{% endcapture %}
+  {% assign platform = str | split: '{' | first %}
+  {% if site.analytics[platform].id and site.analytics[platform].id != empty %}
+  {% include analytics/{{ platform }}.html %}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
 
   {% include metadata-hook.html %}
 </head>

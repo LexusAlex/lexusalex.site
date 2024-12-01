@@ -32,17 +32,17 @@ bootstrap:
   js: https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
 
 toc:
-  css: https://unpkg.com/tocbot@4.27.20/dist/tocbot.css
-  js: https://unpkg.com/tocbot@4.27.20/dist/tocbot.min.js
+  css: https://unpkg.com/tocbot@4.32.2/dist/tocbot.css
+  js: https://unpkg.com/tocbot@4.32.2/dist/tocbot.min.js
 
 fontawesome:
-  css: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css
+  css: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css
 
 search:
   js: https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.2/simple-jekyll-search.min.js
 
 mermaid:
-  js: https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js
+  js: https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js
 
 dayjs:
   js:
