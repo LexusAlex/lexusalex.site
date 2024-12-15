@@ -146,4 +146,6 @@ npm uninstall next
 
 https://doka.guide/tools/package-managers/
 
+https://aachibilyaev.com/info/articles/react-native/poleznye-komandy-npm/
+
 
