@@ -26,37 +26,25 @@ image:
 
 Избыточная сложность в системе управления замедляет процессы, что может поставить компанию в невыгодное положение по сравнению с конкурентами, такими как OpenAI и другие новаторы в сфере ИИ 
 
-[https://3dnews.ru/1115732/google-sokratila-na-10-kolichestvo-rukovodyashchih-dolgnostey](https://3dnews.ru/1115732/google-sokratila-na-10-kolichestvo-rukovodyashchih-dolgnostey)
-
-[https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html](https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html)
-
 Помимо давления со стороны конкурентов, Google, как и многие другие технологические гиганты, столкнулась с экономическими вызовами последних лет. 
 
-Например, в связи с ростом затрат на разработки и риском рецессии в экономике США, корпорация ранее объявила о сокращении найма новых сотрудников и фиксировании «неэффективных позиций» [https://www.forbes.ru/tekhnologii/471467-google-sokratit-nabor-personala-iz-za-riska-recessii](https://www.forbes.ru/tekhnologii/471467-google-sokratit-nabor-personala-iz-za-riska-recessii)
+Например, в связи с ростом затрат на разработки и риском рецессии в экономике США, корпорация ранее объявила о сокращении найма новых сотрудников и фиксировании "неэффективных позиций".
 
 Дополнительным фактором для реструктуризации стала необходимость оптимизировать операционные расходы компании. 
 
-Подобная "чистка" позволяет перенаправить ресурсы на стратегически важные направления, такие как ИИ, разработки в области рекламы, облачные технологии и другие перспективные проекты [https://bcs-express.ru/novosti-i-analitika/kompanii-ssha-nakrylo-volnoi-sokrashchenii-kto-pod-nee-popal-i-pochemu](https://bcs-express.ru/novosti-i-analitika/kompanii-ssha-nakrylo-volnoi-sokrashchenii-kto-pod-nee-popal-i-pochemu)
+Подобная "чистка" позволяет перенаправить ресурсы на стратегически важные направления, такие как ИИ, разработки в области рекламы, облачные технологии и другие перспективные проекты.
 
 ## Как выглядят изменения на практике
 
 В рамках реструктуризации значительная часть сокращений затронула менеджеров среднего звена. Некоторые должности были полностью упразднены, часть сотрудников переведена на индивидуальные или рядовые позиции. 
 
-Гендиректор Google подчеркнул, что это важно для "сокращения слоёв" в управлении, чтобы минимизировать бюрократию и повысить скорость принятия решений 
-
-[https://3dnews.ru/1115732/google-sokratila-na-10-kolichestvo-rukovodyashchih-dolgnostey](https://3dnews.ru/1115732/google-sokratila-na-10-kolichestvo-rukovodyashchih-dolgnostey)
-
-[https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html](https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html)
+Гендиректор Google подчеркнул, что это важно для "сокращения слоёв" в управлении, чтобы минимизировать бюрократию и повысить скорость принятия решений
 
 Интересно, что Google — не единственная компания, которая упрощает свои процессы таким образом. 
 
 Meta* (признана экстремистской организацией и запрещена в РФ) также активно проводит реорганизацию. 
 
 Она заявила о сокращении расходов на 10% за счёт уменьшения числа сотрудников и оптимизации расходов 
-
-[https://overclockers.ru/blog/Zeroblog/show/198379/Google-sokratila-10-rukovoditelej-i-umen-shila-kolichestvo-sobranij-i-vstrech](https://overclockers.ru/blog/Zeroblog/show/198379/Google-sokratila-10-rukovoditelej-i-umen-shila-kolichestvo-sobranij-i-vstrech)
-
-[https://adindex.ru/news/digital/2022/09/22/306686.phtml](https://adindex.ru/news/digital/2022/09/22/306686.phtml)
 
 ## Сокращение собраний — шаг к эффективности
 
@@ -66,7 +54,7 @@ Meta* (признана экстремистской организацией и
 
 "Собрания ради собраний" признаны избыточной практикой и были во многом упразднены. 
 
-Это решение соответствует стратегии крупных компаний по ускорению процессов и освобождению времени специалистов для выполнения их непосредственных задач [https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html](https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html])
+Это решение соответствует стратегии крупных компаний по ускорению процессов и освобождению времени специалистов для выполнения их непосредственных задач.
 
 ## Глобальный тренд в индустрии технологий
 
@@ -81,10 +69,6 @@ Meta* (признана экстремистской организацией и
 В январе 2023 года Google уже провела одну из крупнейших кампаний по сокращению персонала, что затронуло около 12 тысяч человек. 
 
 Этот шаг, наряду с текущими действиями, говорит о серьёзной трансформации внутри корпорации. Каждое изменение направлено на поддержание лидерства на рынке и адаптацию к новым вызовам 
-
-[https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html](https://www.ixbt.com/news/2024/01/18/realnost-takova-chto-nam-pridetsja-sdelat-trudnyj-vybor--google-sokrashaet-shtat-chtoby-povysit-jeffektivnost-i-skorost.html)
-
-[https://vk.com/wall-216163247_24838](https://vk.com/wall-216163247_24838)
 
 ## Взгляд в будущее
 
