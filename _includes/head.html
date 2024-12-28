@@ -78,12 +78,17 @@
   {% endif %}
 
   {{ seo_tags }}
-
   <title>
     {%- unless page.layout == 'home' -%}
     {{ page.title | append: ' | ' }}
     {%- endunless -%}
     {{ site.title }}
+    {% if page.url == '/page2/' %}
+      {{'2 страница'}}
+    {% endif %}
+    {% if page.url == '/page3/' %}
+      {{'3 страница'}}
+    {% endif %}
   </title>
 
   {% include_cached favicons.html %}
