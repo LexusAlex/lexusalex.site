@@ -279,6 +279,10 @@ docker rm
 
 ## Плюсы docker
 
+Команды docker
+
+https://desoft.ru/2024/12/04/spisok-osnovnyh-komand-dlya-raboty-s-docker/
+
 https://yandex.cloud/ru/blog/posts/2022/03/docker-containers#preimushestva-ispolzovaniya-docker
 
 
