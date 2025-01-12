@@ -332,3 +332,6 @@ export function GET(request) {
 https://www.youtube.com/watch?v=0y5ZNChoNM8&t=4998s
 
 ## Оптимизация
+
+
+https://habr.com/ru/articles/872924/
