@@ -1,5 +1,5 @@
 ---
-title: Управление зависимостями в экосистеме javascript
+title: Зависимости в экосистеме javascript
 description: >-
   Управление зависимостями в экосистеме javascript
 author: alex
@@ -8,5 +8,7 @@ categories: [Javascript,Collections]
 tags: [js,set,map]
 image:
   path: /assets/img/posts/main/javascript.png
-  alt: Управление зависимостями в экосистеме javascript
+  alt: Зависимости в экосистеме javascript
 ---
+
+
