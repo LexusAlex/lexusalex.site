@@ -63,9 +63,12 @@ SELECT * FROM `audit_kp`,`cron`,`events`
 ````sql
 SELECT audit_kp.id,cron.id,`events`.id FROM `audit_kp`,`cron`,`events`;
 -- id id(1) id(2)
--- 1	  1	    1
--- 1	  1	    2
 ````
+
+| id | id(1) | id(2) |
+|----|:-----:|:-----:|
+| 1  |   1   |   1   | 
+| 1  |   1   |   2   |
 
 ### Алиасы
 
@@ -81,6 +84,12 @@ SELECT t1.id column1,t2.id column2,t3.id column3 FROM `audit_kp` t1,`cron` t2,`e
 SELECT t1.id AS column1,t2.id AS column2,t3.id AS column3 FROM `audit_kp` AS t1,`cron` AS t2,`events` AS t3
 ````
 
+| column1 | column2 | column3 |
+|:-------:|:-------:|:-------:|
+|    1    |    1    |    1    | 
+|    1    |    1    |    2    |
+
+
 Алиасы нам могут быть полезны:
 
 - При работе с несколькими таблицами.
@@ -88,11 +97,47 @@ SELECT t1.id AS column1,t2.id AS column2,t3.id AS column3 FROM `audit_kp` AS t1,
 - Чтобы сокрытить запрос.
 - Если объединяем столбцы.
 
+В именах алиасов обычно используют латинские буквы, если в названии нужно использовать русские буквы нужно использовать обратные кавычки. К примеру
+
+````sql
+SELECT t1.id AS `Колонка 1`,t2.id AS column2,t3.id AS column3 FROM `audit_kp` AS t1,`cron` AS t2,`events` AS t3
+````
+
+| Колонка1  | column2 | column3 |
+|:---------:|:-------:|:-------:|
+|     1     |    1    |    1    | 
+|     1     |    1    |    2    |
+
+> Если в имени псевдонима есть пробел нужно использовать кавычки
+{: .prompt-info }
+
+Пример с пробелом в псевдониме.
+
+````sql
+SELECT t1.id AS "column 1",t2.id AS column2,t3.id AS column3 FROM `audit_kp` AS t1,`cron` AS t2,`events` AS t3
+````
+
+Если нужно объединить результаты из всех колонок в одну можно воспользоваться функцией `CONCAT`. Иногда это бывает полезно.
+
+````sql
+SELECT CONCAT(t1.id,'-',t2.id,'-',t3.id) AS result FROM `audit_kp` AS t1,`cron` AS t2,`events` AS t3
+````
+
+Где в функции `CONCAT` нужно указать колонки или строки.
+
+|    result    | 
+|:------------:|
+|    1-1-1     |
+|    1-1-2     |
 
 
 Сейчас, наш запрос в примерах бесполезен, так как мы не получаем полезные данные, а склеиваем все в один.
 
-Добавим условие выборки.
+Добавим условие выборки с помощью подвыражения `WHERE`.
+
+### WHERE
+
+
 
 
 
