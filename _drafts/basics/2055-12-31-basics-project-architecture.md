@@ -35,6 +35,18 @@ tags: [architecture]
 Паромов курс
 11.48
 
+
+слой
+слайс 
+сегменты
+
+app
+pages
+widgets
+features - use cases
+entities - сущности
+shared - инфрастуктурный слой
+
 ## Atomic design
 
 
