@@ -40,12 +40,29 @@ tags: [architecture]
 слайс 
 сегменты
 
+Храним там где это используется
+
 app
 pages
-widgets
+widgets - отображение большых элементов интерфейса
+
 features - use cases
+  
 entities - сущности
+  user
+    assets
+    model
+    ui
+  session
 shared - инфрастуктурный слой
+  ui - элементы кнопки блоки селекты могут взаимодествовать друг с другом
+  lib - адаптеры к библиотекам фасады
+  constants - например пути
+    HOME: '/'
+    BOARD: 'board'
+
+
+Связанные объекты между собой должны быть объединены
 
 ## Atomic design
 
