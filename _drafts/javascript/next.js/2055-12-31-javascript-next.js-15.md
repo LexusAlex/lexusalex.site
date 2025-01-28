@@ -1,5 +1,5 @@
 ---
-title: Про next.js 15
+title: Как использовать next.js 15
 author: alex
 date: 2055-12-31 18:00:00 +0300
 categories: [Next.js]
@@ -50,7 +50,7 @@ export default function IndexPage() {
 
 ## Структура проекта
 
-Допустим у нас корень проета - это папка `src`, тогда на верхнем уровне могут быть следующие директории
+
 
 ````text
 /src
