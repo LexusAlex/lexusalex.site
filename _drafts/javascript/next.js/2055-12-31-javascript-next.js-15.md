@@ -91,8 +91,9 @@ loading.js (React suspense boundary)
 not-found.js (React error boundary)
 page.js or nested layout.js
 
+Этот набор файлов может быть добавлен в каждом сегменте пути. 
 
-Этот набор файлов может быть в каждом сегменте пути
+Файлы с другими названиями, могут быть размещены в каталоге `app` и никак не будут влиять на маршрутизацию.
 
 ## Маршрутизация
 
@@ -108,4 +109,4 @@ page.js or nested layout.js
 Директория `public` содержит статические файлы
 
 
-https://nextjs.org/docs/app/getting-started/installation#set-up-eslint
+https://nextjs.org/docs/app/getting-started/project-structure#private-folders
