@@ -12,6 +12,29 @@ image:
   alt: Начать в React
 ---
 
+## Издалека
+
+Возьмем для примера стандартную `html` страницу примерно с такой версткой и с одним единственным корневым элементом `div`.
+
+````html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="React.js"></script>
+</body>
+</html>
+````
+{: file='index.html'}
+
+
+Остановился
+https://deworker.pro/edu/series/what-is-react/javascript-render
+
 Распределить главы
 
 React - это библиотека для построения пользовательских интерфейсов.
