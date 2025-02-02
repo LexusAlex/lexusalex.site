@@ -129,7 +129,7 @@ page.js or nested layout.js
 
 ### (_p)
 
-Директория `public` содержит статические файлы
+Директория `public` содержит статические файлы шрифты и изображения
 
 
 https://nextjs.org/docs/app/getting-started/project-structure#private-folders
