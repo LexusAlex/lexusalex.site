@@ -123,7 +123,7 @@ SELECT t1.id AS "column 1",t2.id AS column2,t3.id AS column3 FROM `audit_kp` AS 
 SELECT CONCAT(t1.id,'-',t2.id,'-',t3.id) AS result FROM `audit_kp` AS t1,`cron` AS t2,`events` AS t3
 ````
 
-Где в функции `CONCAT` нужно указать колонки или строки.
+Где в функции `CONCAT` нужно указать колонки или строки. Для статистки самое то.
 
 |    result    | 
 |:------------:|
