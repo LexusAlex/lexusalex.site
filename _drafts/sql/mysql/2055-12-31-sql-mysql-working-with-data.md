@@ -137,7 +137,7 @@ SELECT CONCAT(t1.id,'-',t2.id,'-',t3.id) AS result FROM `audit_kp` AS t1,`cron` 
 
 ### WHERE
 
-
+Добавим конкретики в наше выражение
 
 
 
