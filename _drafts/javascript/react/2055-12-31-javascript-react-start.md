@@ -12,7 +12,7 @@ image:
   alt: Начать в React
 ---
 
-## Приложение
+## Начало начал
 
 Возьмем для примера стандартную `html` страницу примерно с такой версткой и с одним единственным элементом `div`.
 
@@ -87,6 +87,9 @@ main.append(application);
 ````
 {: file='React.js'}
 
+> Если в выражении const A = {data: 123}, позже значение нельзя переопределить, так как это константа, но работать с самим объектом внутри можно, ограничений нет.
+> {: .prompt-info }
+
 
 В результате получаем верстку:
 
@@ -110,20 +113,86 @@ main.append(application);
 </div>
 ````
 
-> Если в выражении const A = {data: 123}, позже значение нельзя переопределить, так как это константа, но работать с самим объектом внутри можно, ограничений нет.
-> {: .prompt-info }
+Вроде бы все хорошо, все работает, но код в одну кашу - это не наш метод.
+
+## Разнесение кода на функции
+
+Попробуем разнести код на функции, примерно так.
+
+````javascript
+const state = {
+  date: new Date().toLocaleTimeString('ru-RU'),
+  data: [
+    {id: 89, name: "good1", count: 3},
+    {id: 123, name: "good2", count: 8},
+    {id: 5, name: "good3", count: 56}
+  ]
+}
+
+function Application(state) {
+  let application = document.createElement('div');
+  application.className = 'application';
+  application.append(Time(state));
+  application.append(Data(state));
+  return application;
+}
+
+function Time(state) {
+  let time = document.createElement('div');
+  time.className = "time";
+  time.innerText += state.date;
+  return time;
+}
+
+function Data(state) {
+  const data = document.createElement('div');
+  data.className = "data";
+
+  state.data.forEach((d) => {
+    const div = document.createElement('div');
+    const name = document.createElement('div');
+    name.innerText = d.name;
+    div.append(name);
+
+    const count = document.createElement('div');
+    count.innerText = d.count;
+    div.append(count);
+
+    data.append(div);
+  });
+  return data;
+}
+
+function Root() {
+  return document.getElementById('root');
+}
+
+// Рендер
+
+function Render(Dom,Root) {
+  Root.append(Dom);
+}
+
+Render(Application(state), Root());
+````
+
+Вывод не поменялся. Но код стал приятнее.
+
+Что тут происходит
+
+## Рендер
 
 
-
+Если значение в объекте javascript совпадает со значением свойства - его можно сократить, из `{ name: name }` в `{ name }`.
 
 
 С помощью javascript удобнее манипулировать элементами
 
 `React` использует нативный js, позволяющий через синтаксис `JSX` заменять создание `html` элементов
-
 `Vue` имеет шаблонизатор, который удобен верстальщику.
-
 `React` для программиста, `Vue` для верстальщика.
+
+
 
 
 
