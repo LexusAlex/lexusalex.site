@@ -137,8 +137,25 @@ SELECT CONCAT(t1.id,'-',t2.id,'-',t3.id) AS result FROM `audit_kp` AS t1,`cron` 
 
 ### WHERE
 
-Добавим конкретики в наше выражение
+Добавим конкретики в наше выражение. Чтобы возвращать только нужные нам строки
 
+Можно использовать операторы сравнения, логические операторы, операторы для работы со сроками
+
+Рассмотрим базовый пример, постепенно увеличивая количество условий.
+
+````sql
+-- Четкое соотвествие
+SELECT * FROM cron WHERE id = 1
+-- Два условия через Логическое И
+SELECT * FROM cron WHERE checked = 1 AND period = 4
+-- Три условия + оператор больше либо равно
+SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643
+-- Оператор больше либо равно, меньше либо равно
+SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 AND next_time <= 1737098821
+-- Оператор больше либо равно, меньше либо равно, и не равно
+SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 AND next_time <= 1737098821 AND next_time != 1737098761
+SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 AND next_time <= 1737098821 AND next_time <> 1737098761
+````
 
 
 
