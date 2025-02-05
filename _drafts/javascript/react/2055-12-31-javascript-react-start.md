@@ -130,15 +130,6 @@ const state = {
     {id: 5, name: "good3", count: 56}
   ]
 }
-  
-// Приложение
-function Application(state) {
-  let application = document.createElement('div');
-  application.className = 'application';
-  application.append(Time(state));
-  application.append(Data(state));
-  return application;
-}
 
 // Текущее время
 function Time(state) {
@@ -168,6 +159,15 @@ function Data(state) {
   return data;
 }
 
+// Приложение
+function Application(state) {
+  let application = document.createElement('div');
+  application.className = 'application';
+  application.append(Time(state));
+  application.append(Data(state));
+  return application;
+}
+
 // Корневой элемент
 function Root() {
   return document.getElementById('root');
@@ -181,15 +181,44 @@ function Render(Dom,Root) {
 Render(Application(state), Root());
 ````
 
-Вот так работатать с этим становится приятнее.
+Вот так работать с этим становится приятнее.
 
-Что тут происходит:
+Посмотрим что тут происходит:
 
-Первое, что мы тут делаем - это определяем глобальное состояние объектов, в нашем случае текущее время и данные.
+Первое, что мы тут делаем - это определяем глобальное состояние объектов, константа `state`, в нашем случае текущее время и данные.
 
-Далее мы создаем функция для вывода всех основных блоков `Application, Time, Data, Root`.
+Далее мы создаем функции для вывода всех основных блоков `Application, Time, Data, Root`.
 
-Отдельно остановимся на рендере приложения. Это функция куда передаем новое `DOM` дерево и корневой элемент куда нужно вставить это дерево.
+Отдельно остановимся на рендере приложения. 
+
+Это функция куда передаем новое `DOM` дерево и корневой элемент куда нужно вставить это дерево.
+
+Конечный результат вставляется в `div#root`.
+
+### Тикающие часы
+
+Внесем динамику на нашу страницу, сделаем часы динамическими, с помощью `setInterval`
+
+````javascript
+setInterval( () => {
+    // Получим объекты приложения и время
+    const app = document.querySelector("#root > .application");
+    const time = app.querySelector(".time");
+    
+    // Сгенерируем новое время
+    state.date = new Date().toLocaleTimeString('ru-RU');
+    
+    // Заменим старое время - новым
+    app.replaceChild(Time(state), time);
+}, 1000)
+````
+
+В коде выше раз в секунду запускается повторный вызов функции `Time` с передачей туда нового времени.
+
+Мы написали его таким образом, чтобы менялся элемент полностью, а не только происходило обновление времени.
+
+Такой подход дает некое преимущество, так как мы повторно переиспользуем функцию `Time`, для создания элемента часов.
+
 
 
 
@@ -275,6 +304,8 @@ React не является полноценным фреймворком, он 
 Начать в react можно даже без установки зависимостей, докера, вот этого вот всего.
 
 Просто создадим файл `index.html` примерно с такой разметкой.
+
+https://unpkg.com/react@19.0.0/cjs/react.development.js
 
 ````html
 <!DOCTYPE html>
