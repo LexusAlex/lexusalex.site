@@ -157,6 +157,9 @@ SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 
 SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 AND next_time <= 1737098821 AND next_time <> 1737098761
 ````
 
+Расширенные примеры
+
+https://hmarketing.ru/blog/mysql/operator-where/
 
 
 
