@@ -12,13 +12,13 @@ image:
   alt: Начать в React
 ---
 
-## Простое приложение
+## Приложение текущее время и список элементов
 
-Напишем простое приложение с выводом текущего времени и списка элементов без использования `React`.
+Напишем простое приложение с выводом текущего времени и списка элементов.
 
 ### Начало
 
-Возьмем для примера стандартную `html` страницу примерно с такой версткой и с одним единственным элементом `div`.
+Возмем для примера стандартную `html` страницу примерно с такой версткой и с одним единственным элементом `div`.
 
 ````html
 <!DOCTYPE html>
@@ -393,10 +393,117 @@ server.get('/data').then((data) => {
 
 Нужно написать процедуру синхронизации виртуального элемента и реального элемента и понять нужно ли его перерендеривать, так как меняются не все элементы.
 
-Для начала нужно сделать так, чтобы деревья совпадали.
+Выглядеть процедура синхронизации элементов может примерно так.
+
+Итак, у нас есть два дерева виртуальное и реальное.
+
+````javascript
+function sync (virtualNode, realNode) {
+    // Синхронизируем элементы и текстовые узлы
+    if (virtualNode.id !== realNode.id) {
+        realNode.id = virtualNode.id
+    }
+    if (virtualNode.className !== realNode.className) {
+        realNode.className = virtualNode.className
+    }
+    if (virtualNode.attributes) {
+        Array.from(virtualNode.attributes).forEach((attr) => {
+            realNode[attr.name] = attr.value
+        })
+    }
+    if (virtualNode.nodeValue !== realNode.nodeValue) {
+        realNode.nodeValue = virtualNode.nodeValue
+    }
+
+    // Синхронизируем дочерние элементы
+    const virtualChildren = virtualNode.childNodes
+    const realChildren = realNode.childNodes
+
+    for (let i = 0; i < virtualChildren.length || i < realChildren.length; i++) {
+        const virtual = virtualChildren[i]
+        const real = realChildren[i]
+
+        // Удаление
+        if (virtual === undefined && real !== undefined) {
+            realNode.remove(real)
+        }
+
+        // Обновление
+        if (virtual !== undefined && real !== undefined && virtual.tagName === real.tagName) {
+            sync(virtual, real)
+        }
+
+        // Замена
+        if (virtual !== undefined && real !== undefined && virtual.tagName !== real.tagName) {
+            const newReal = createRealNodeByVirtual(virtual)
+            sync(virtual, newReal)
+            realNode.replaceChild(newReal, real)
+        }
+
+        // Добавление
+        if (virtual !== undefined && real === undefined) {
+            const newReal = createRealNodeByVirtual(virtual)
+            sync(virtual, newReal)
+            realNode.appendChild(newReal)
+        }
+    }
+}
+
+// Создание элементов
+function createRealNodeByVirtual(virtual) {
+    if (virtual.nodeType === Node.TEXT_NODE) {
+        return document.createTextNode('')
+    }
+    return document.createElement(virtual.tagName)
+}
+````
+
+В коде выше синхронизацию элементов и дочерних узлов этих элементов - рекурсивно.
+
+Реальное дерево мы поочередно синхронизируем с виртуальным.
+
+Теперь осталось переписать `Render` на вызов функции `sync`
+
+````javascript
+function Render(VirtualDom,RealRoot) {
+    const virtualDomRoot = document.createElement(RealRoot.tagName)
+    virtualDomRoot.id = RealRoot.id
+    virtualDomRoot.appendChild(VirtualDom);
+
+    sync(virtualDomRoot,RealRoot)
+}
+````
+
+После таких изменений меняться будут только те элементы которые реально поменялись, а не все дерево, что гораздо производительнее предыдущего варианта.
+
+Можно заметить, что виртуальное дерево теперь можно писать в любом формате, например конструировать элементы с помощью объектов в формате `json`, что улучшит читаемость и сократит количество кода.
+
+### Упрощение виртуального DOM дерева
+
+Получается, что все элементы сейчас у нас одноразовые, тем самым можно использовать любые форматы создания элементов.
+
+Можно переписать вывод всех элементов в формате `json`, по заданным нами правилам. 
+
+Именно так это используется в самой библиотеке `React`.
+
+Далее уже речь пойдет о `React`.
+
+## Развернуть React
+
+> Новую версию React 19 нет возможности запустить в html файле в отличие от предыдущей версии React 18
+{: .prompt-info }
+
+Чтобы изучать `React` нужно его сначала развернуть.
+
+Когда-то я уже писал про разворачивание [React](https://lexusalex.site/posts/javascript-react-pure-react/)
+
+Этот способ сейчас не актуален. Развернем проект с помощью современного сборщика `vite`.
 
 
 
+
+https://react.dev/learn/add-react-to-an-existing-project
+https://deworker.pro/edu/series/what-is-react/babel-jsx
 
 
 
