@@ -488,27 +488,243 @@ function Render(VirtualDom,RealRoot) {
 
 Далее уже речь пойдет о `React`.
 
+## Развернуть React
 
-## JSX
+> Мы рассматриваем последнюю версию `React` на данный момент, а это 19, предыдущие версии могут работать не так.
+{: .prompt-info }
 
-Альтернативный синтаксис `javascript`
+Чтобы начать изучать `React` нужно его сначала развернуть.
+
+Когда-то я уже писал про разворачивание [React](https://lexusalex.site/posts/javascript-react-pure-react/) там мы разворачивали приложение устаревшим способом.
+
+Развернем проект с помощью современного сборщика `vite`.
+
+Я все разворачиваю в `docker` на `ubuntu`.
+
+### docker
+
+Сначала подготовим `docker` инфраструктуру. Соберем образы и запустим.
+
+Конфиг nginx
+
+````text
+server {
+    listen 80;
+    charset utf-8;
+    root /react-19;
+    server_tokens off;
+
+    resolver 127.0.0.11 ipv6=off;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+
+    location / {
+        set $upstream http://node:5173;
+        proxy_set_header  Host $host;
+        proxy_set_header  Upgrade $http_upgrade;
+        proxy_set_header  Connection "Upgrade";
+        proxy_pass        $upstream;
+        proxy_redirect    off;
+    }
+}
+````
+{: file='docker/nginx/conf.d/default.conf'}
+
+Образ nginx
+
+````dockerfile
+FROM nginx:stable
+
+COPY ./nginx/conf.d /etc/nginx/conf.d
+
+WORKDIR /react-19
+````
+{: file='docker/nginx/Dockerfile'}
+
+Образ nodejs
+
+````dockerfile
+FROM node:lts
+
+RUN useradd -m alex && usermod -a -G node alex
+
+RUN npm install -g npm@latest
+
+WORKDIR /react-19
+
+USER node
+````
+{: file='docker/node/Dockerfile'}
+
+docker-compose фаил
+
+````yaml
+services:
+  node-cli:
+    build:
+      context: docker
+      dockerfile: node/Dockerfile
+    volumes:
+      - ./:/react-19
+  nginx:
+    build:
+      context: docker
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - node
+  node:
+    build:
+      context: docker
+      dockerfile: node/Dockerfile
+    environment:
+      WDS_SOCKET_PORT: 0
+    volumes:
+      - ./:/react-19
+    command: npm run dev
+    tty: true
+````
+{: file='docker-compose.yml'}
+
+Makefile, что это все запускать
+
+`````makefile
+docker-build:
+	docker compose build --pull
+docker-up:
+	docker compose up -d
+docker-down:
+	docker compose down --remove-orphans
+npm-install:
+	docker compose run --rm node-cli npm install
+npm-be-updated-all:
+	docker compose run --rm node-cli npm outdated --depth=9999
+`````
+{: file='Makefile'}
+
+Чтобы собрать образы достаточно запустить `make docker-build`.
+
+### Установка пакетов
+
+Далее нужно установить пакеты, для этого добавим файл `package.json`. Примерно таким, но в процессе мы его будем дополнять.
+
+````json5
+{
+  "name": "react-19",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.1.0"
+  }
+}
+````
+{: file='package.json'}
+
+Ставим пакеты `make npm-install`.
+
+По большему счету технические приготовления мы сделали, осталось запустить наконец приложение.
+
+### Запуск приложения
+
+Сначала создадим базовую разметку
+
+````html
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
+````
+{: file='index.html'}
+
+Теперь конфигурационный файл `vite`.
+
+````javascript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+    plugins: [react()],
+    server: {
+        watch: {
+            usePolling: true
+        },
+        host: true,
+        strictPort: true
+    },
+})
+````
+{: file='vite.config.js'}
+
+Точка входа в приложение, примерно такой 
+
+````jsx
+import {createElement} from 'react'
+import { createRoot } from 'react-dom/client'
+
+const root = createRoot(document.getElementById('root'));
+
+root.render(<>Приложение</>);
+````
+{: file='src/main.jsx'}
+
+Запускаем приложение `make docker-up`, после чего в браузере по адресу `http://127.0.0.1/` мы должны увидеть текст `Приложение`.
+
+Далее с целью изучения весь код мы будем писать в файле `main.jsx`.
+
+На этом базовая настройка `React` завершена.
+
+
+
 
 ## Особенности React
 
 Итак `React` это библиотека для создания пользовательских интерфейсов.
 
 
+## JSX
 
-## Развернуть React
+`JSX` - это альтернативный синтаксис `javascript`.
 
-> Новую версию React 19 нет возможности запустить в html файле в отличие от предыдущей версии React 18
-{: .prompt-info }
+Браузер по умолчанию умеет работать только с `javascript`, когда мы указываем его в теге `script`.
 
-Чтобы изучать `React` нужно его сначала развернуть.
+Но не все браузеры умеют исполнять современный `javascript`, для того чтобы это работало используются преобразователи.
 
-Когда-то я уже писал про разворачивание [React](https://lexusalex.site/posts/javascript-react-pure-react/)
+Самой популярной такой библиотекой сейчас является [https://babeljs.io/](https://babeljs.io/). `babel` умеет конвентировать
 
-Этот способ сейчас не актуален. Развернем проект с помощью современного сборщика `vite`.
+`JSX` в обычный `javascript`
+
+https://react.dev/learn/writing-markup-with-jsx
+
+
+
+
+
+
+
+
 
 
 
@@ -531,11 +747,6 @@ https://deworker.pro/edu/series/what-is-react/babel-jsx
 `React` для программиста, `Vue` для верстальщика.
 
 
-
-
-
-Остановился
-https://deworker.pro/edu/series/what-is-react/javascript-render
 
 Распределить главы
 
@@ -1820,3 +2031,5 @@ export function App() {
   )
 }
 ````
+
+## Деплой на production
