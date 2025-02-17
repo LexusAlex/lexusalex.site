@@ -1074,6 +1074,8 @@ Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fr
 > пустой `div` элемент
 > {: .prompt-info }
 
+Презентационный компонент, который выводит, а компонент, который содержит инфраструктурный код называют контейнерным.
+
 ## Примеры использования компонентов
 
 ### Дублирование одного компонента
@@ -1120,36 +1122,51 @@ createRoot(document.getElementById('root')).render(
 
 ### Элементы меню
 
-Теперь сделаем пример с пунктами меню, например 
+Теперь сделаем пример с пунктами меню
 
+То есть нам нужно сделать два компонента.
 
-#### Элементы меню
+Первый компонент `Item` который выводит конкретный пункт меню.
 
-Теперь сделаем 5 ссылок элементов меню, более расширенный пример.
-
-````javascript
-const Item = React.createElement('li', null, React.createElement('a', {
-  'href': 'https://lexusalex.site',
-  'target': '_blank'
-}, 'Элемент меню'));
-const Items = React.createElement('ul', null, Item, Item, Item, Item, Item);
-ReactDOM.createRoot(document.getElementById('root')).render(Items);
+````jsx
+export default function Item({i})
+{
+    return <a href={i.url}>{i.name}</a>
+}
 ````
+{: file='src/Item.jsx'}
 
-В результате получаем разметку:
+Второй компонент который уже выводит все наши пункты меню, в примитивном виде это может быть выглядеть так
+
+````jsx
+export default function Items() {
+  let items = [
+    {name: 'Главная',url: 'site.ru',key: 1},
+    {name: 'Блог',url: 'site.ru/blog',key: 2},
+    {name: 'О нас',url: 'site.ru/about',key: 3},
+    {name: 'Еще ссылка',url: 'site.ru/about',key: 4}
+  ];
+
+  return (items.map(item => {
+    return <Item i={item}></Item>
+  }));
+}
+````
+{: file='src/Items.jsx'}
+
+Получаем вполне ожидаемую разметку
 
 ````html
 
 <div id="root">
-  <ul>
-    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
-    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
-    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
-    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
-    <li><a href="https://lexusalex.site" target="_blank">Элемент меню</a></li>
-  </ul>
+  <a href="site.ru">Главная</a>
+  <a href="site.ru/blog">Блог</a>
+  <a href="site.ru/about">О нас</a>
+  <a href="site.ru/about">Еще ссылка</a>
 </div>
 ````
+
+TODO
 
 > По неофициальному соглашению имена переменных в которых содержатся компоненты, начинаются с большой буквы, например
 `Items`.
@@ -1623,6 +1640,12 @@ export function App({test = "test"}) {
 
 ## Состояние
 
+Все виды управления состоянием в React
+https://it-dev-journal.ru/articles/vse-vidy-upravleniya-sostoyaniem-v-react
+
+https://it-dev-journal.ru/articles/kak-zaprashivat-dannye-v-react-js-s-fetch
+
+https://it-dev-journal.ru/articles/reakciya-na-vvod-s-sostoyaniem
 Объект состояние может выглядеть так.
 
 Самое главное, что внутри нет напрямую используемых структур
@@ -2098,6 +2121,12 @@ export function App() {
   )
 }
 ````
+
+## Контекст
+
+Удобная штука для передачи пропса через все приложение
+
+https://react.dev/reference/react/createContext
 
 ## Деплой на production
 
