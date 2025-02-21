@@ -144,20 +144,67 @@ SELECT CONCAT(t1.id,'-',t2.id,'-',t3.id) AS result FROM `audit_kp` AS t1,`cron` 
 Рассмотрим базовый пример, постепенно увеличивая количество условий.
 
 ````sql
--- Четкое соотвествие
-SELECT * FROM cron WHERE id = 1
--- Два условия через Логическое И
-SELECT * FROM cron WHERE checked = 1 AND period = 4
--- Три условия + оператор больше либо равно
-SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643
--- Оператор больше либо равно, меньше либо равно
-SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 AND next_time <= 1737098821
--- Оператор больше либо равно, меньше либо равно, и не равно
-SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 AND next_time <= 1737098821 AND next_time != 1737098761
-SELECT * FROM cron WHERE checked = 1 AND period = 4 AND next_time >= 1737098643 AND next_time <= 1737098821 AND next_time <> 1737098761
+-- Это выражение без условий выведет все строки 
+SELECT * FROM `application_types`
 ````
 
-Расширенные примеры
+Посмотрим на операторы сравнения
+
+````sql
+-- Четкое сопоставление =
+SELECT * FROM `application_types` WHERE group_id = 3
+-- Не равно <> !=
+SELECT * FROM `application_types` WHERE group_id <> 3
+SELECT * FROM `application_types` WHERE group_id != 3
+-- Меньше <
+SELECT * FROM `application_types` WHERE group_id < 3   
+-- Меньше либо равно <=
+SELECT * FROM `application_types` WHERE group_id <= 3
+-- Больше >
+SELECT * FROM `application_types` WHERE group_id > 3
+-- Больше либо равно >=
+SELECT * FROM `application_types` WHERE group_id >= 3
+````
+
+А что если нам нужно больше условий, здесь нам помогут логические операторы
+
+````sql
+-- NOT Не равно
+SELECT * FROM `application_types` WHERE NOT group_id = 3
+-- AND Логическое И
+SELECT * FROM `application_types` WHERE group_id > 3 AND group_id < 5
+-- OR Логическое ИЛИ
+SELECT * FROM `application_types` WHERE group_id = 3 OR group_id = 5
+````
+
+Эти операторы можно сочетать друг с другом, практически как угодно.
+
+Например, в таком сложном условии 
+
+````sql
+SELECT *
+FROM `application_types`
+WHERE (group_id = 3 AND price < 2000 AND NOT price = 500 AND deleted = 0)
+   OR (group_id = 5 AND price < 2000)
+````
+
+Также если таблиц становится несколько условие `WHERE` поможет нам отфильтровать ненужные записи.
+
+````sql
+SELECT *
+FROM `application_types`,
+     application_type_groups
+WHERE application_types.group_id = application_type_groups.id
+  AND application_type_groups.`name` = 'Охрана труда'
+  AND NOT application_types.price = 500
+  AND application_types.exam_type = 2
+  AND application_type_groups.position = 1
+  AND application_types.id > 200
+  AND application_types.id < 300
+````
+
+Можно заметить имея несколько базовых конструкций уже можно делать много вещей, получая при этом полезные данные.
+
 
 https://hmarketing.ru/blog/mysql/operator-where/
 
