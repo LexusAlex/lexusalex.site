@@ -1063,7 +1063,7 @@ createRoot(document.getElementById('root')).render(
 Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>
 ````
 
-Чтобы писать более чистый код в react есть специальный элемент `Fragment`, он выступает в качестве корневого.
+Чтобы писать более чистый код в react есть специальный элемент `React fragment` `<></>` или `<React.Fragment></React.Fragment>`, он выступает в качестве корневого.
 
 Получается такой код
 
@@ -1078,6 +1078,22 @@ Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fr
 > `Fragment` - это такой особый элемент который не выводит никакую разметку, что дает возможность не использовать
 > пустой `div` элемент
 > {: .prompt-info }
+
+
+Атрибуты и свойства здесь не используются, но можно использовать свойство `key` для указания уникального ключа, к
+примеру при переборе
+
+````jsx
+export default function App() {
+  return (
+    <>
+      <Fragment>1</Fragment>
+      <Fragment>2</Fragment>
+      <Fragment>3</Fragment>
+    </>
+  )
+}
+````
 
 ## Примеры использования компонентов
 
@@ -1235,13 +1251,13 @@ export default function Component3({param})
 Для демонстрации использования подстановки переменных создадим компонент `App`:
 
 ````jsx
-export function App() {
+export default function App() {
   // Переменные подстанавливаются в фигурных скобках
   const text = 'Текст';
   const date = new Date().toLocaleDateString();
   const arr = [1, 2, 3];
   const obj = {a: 1, b: 2};
-  // Теги должны быть обязательно закрыты
+  // Теги должны быть обязательно закрыты, так как это JSX
   const newTag = <b>Жирная строка</b>;
   // В атрибутах тоже работает
   const attr = "titleValue";
@@ -1265,7 +1281,7 @@ export function App() {
 
 ````text
 Текст
-Дата 10/30/2024
+Дата 2/22/2025
 2
 2
 Просто вывод
@@ -1307,7 +1323,7 @@ export function App(props) {
 }
 
 // Даже если ничего не передать props все равно существует, он пустой
-export function App(props) {
+export default function App(props) {
   console.log(props); // Object
   return (
     <div></div>
@@ -1320,7 +1336,7 @@ export function App(props) {
 ````jsx
 <App test1={"123"} test2={"456"}/>
 
-export function App({test1, test2}) {
+export default function App({test1, test2}) {
   return (
     <>
       <div>{test1}</div>
@@ -1331,7 +1347,7 @@ export function App({test1, test2}) {
 }
 ````
 
-> React будет рендерить все свойства даже если их нет в спецификации HTML
+> React будет рендерить все свойства даже если их нет в спецификации HTML, на это не стоит рассчитывать
 > {: .prompt-info }
 
 Если нужно показать объект, то просто передаем его параметрами
@@ -1340,7 +1356,7 @@ export function App({test1, test2}) {
 const test = {'id': 1, 'name': 'test'}
 <App id={test.id} name={test.name}/>
 
-export function App({id, name}) {
+export default function App({id, name}) {
   return (
     <>
       <div>{id}</div>
@@ -1355,7 +1371,7 @@ export function App({id, name}) {
 ````jsx
 const test = {'id': 1, 'name': 'test'}
 <App {...test}/> // При таком будут отрендерены все свойства объекта
-export function App(test) {
+export default function App(test) {
   return (
     <>
       <div>{test.id}</div>
@@ -1367,17 +1383,19 @@ export function App(test) {
 
 Наиболее безопасным способом, как мне кажется является точное перечисление свойств, только так можно передать
 определенное их количество.
+
 В случае со `spread` оператором, в объекте может быть произвольное количество свойств.
 
 ### Условные конструкции
 
 Понятно, что в любой программе без условий никуда. 
-По сути это же `javascript`, а это значит можно использовать любые языковые конструкции.
+
+По сути это же `javascript`, а это значит можно использовать любые языковые конструкции, и не боятся этого
 
 Например, здесь используем тернарный оператор.
 
 ````jsx
-export function App() {
+export default function App() {
   let arr = [1, 2, 3];
   // Проверяем, что массив не пуст
   let res = arr.length ? (<div>В массиве что-то есть</div>) : (<div>Массив пуст</div>);
@@ -1387,10 +1405,10 @@ export function App() {
 }
 ````
 
-Так же можно сделать быстрый возврат, если не нужно, что бы код двигался дальше.
+Так же можно сделать быстрый возврат, если не нужно, что бы код выполнялся дальше.
 
 ````jsx
-export function App() {
+export default function App() {
   let page = 'test';
   // Если не test, то выходим ничего не рендеря
   if (page !== 'test') {
@@ -1412,7 +1430,7 @@ function Verified() {
   return (<>verified</>);
 }
 
-export function App() {
+export default function App() {
   let isVerified = true;
   let check = true;
   // Код не дойдет до рендера если хотя бы одно значение будет false
@@ -1421,17 +1439,17 @@ export function App() {
 }
 ````
 
-Проверки можно вставлять в любое место `JSX`. Для сложных случаев ветвления лучше набросать структуру отдельно, а потом
-уже реализовывать.
+Проверки можно вставлять в любое место `JSX`. 
+Для сложных случаев ветвления, лучше набросать структуру отдельно, а потом уже реализовывать.
 
 > Если компонент не содержит дочерних элементов, рекомендуется писать его одиночным тегом, в противном случае парным
 > тегом.
 > {: .prompt-info }
 
-### На что обратить внимание
+### Особенности
 
-1. Закрывающий слеш обязателен в парных тегах `<Item></Item>` и в одинарных `<Item />`
-2. `JSX` автоматически экранирует специальные символы html такие как `&nbsp;` или `&copy;`
+1. Закрывающий слеш обязателен и в парных тегах `<Item></Item>` и в одинарных `<Item />`
+2. `JSX` автоматически экранирует специальные символы `html` такие как `&nbsp;` или `&copy;`
 3. Атрибут `style` это объект, например такой `{'fontSize':'10px','color':'red'}`, но если передать значение напрямую,
    получим ошибку, чтобы этого избежать в двойных фигурных скобках `{{'fontSize':'10px','color':'red'}}`
 4. Другие имена для атрибутов `class` и `for`, вместо них следует использовать `className` и `htmlFor`, в остальном
@@ -1439,7 +1457,7 @@ export function App() {
    вместо `autoplay` или `maxLength` вместо `maxlength` (`React` просто такие атрибуты не увидит).
 5. В элементах форм атрибуты `disabled,required,checked,autofocus,readOnly`, нужно писать так`<input disabled={false}/>`
    а не так `<input disabled="false"/>`, так как `false` это не пустая строка, следовательно, это `true`. Если написать
-   `<input required />`, React будет считать это значение `true`
+   `<input required />`, React будет считать это значение `true`.
 
 Так же можно воспользоваться инвертированием значения:
 
@@ -1464,8 +1482,8 @@ let edit = false;
 ТестТест2Тест3
 ````
 
-Как, все-таки дать понять `React`, что пробелы нужны и важны.
-Просто указать в выражении.
+Как, все-таки дать понять `React`, что пробелы нам нужны и важны.
+Просто указать их в выражении.
 
 ````jsx
 <>
@@ -1493,8 +1511,6 @@ let edit = false;
 Тест Тест2 Тест3
 ````
 
-TODO
-
 ## Дочерние элементы - свойство children
 
 Теперь разберемся с дочерними элементами. Это такие элементы которые непосредственно лежат в родительском элементе.
@@ -1502,7 +1518,7 @@ TODO
 У нас есть следующий `JSX`:
 
 ````jsx
-export function App(test) {
+export default function App(test) {
   return (
     <Parent>
       <Child type="1"></Child>
@@ -1523,7 +1539,7 @@ function Child(props) {
 }
 ````
 
-Далее в компоненте `Parent` мы получаем доступ ко всем его дочерним элементам, доступ к конкретному пропсу.
+Далее в компоненте `Parent` мы получаем доступ ко всем его дочерним элементам, доступ к конкретному пропсу и его значению
 
 ````jsx
 function Parent(props) {
@@ -1533,27 +1549,9 @@ function Parent(props) {
 
 > При рендере элементов из массива или другого списка в свойство key рекомендуется подставлять не индекс массива, а
 > уникальный идентификатор элемента, это сбережет от ошибок в будущем.
+
 > Каждый дочерний узел должен иметь уникальное свойство `key`.
 > {: .prompt-info }
-
-## React Fragment
-
-В качестве корневого "узла" удобно использовать `React fragment` `<></>` или `<React.Fragment></React.Fragment>`.
-
-Атрибуты и свойства здесь не используются, но можно использовать свойство `key` для указания уникального ключа, к
-примеру при переборе
-
-````jsx
-export function App() {
-  return (
-    <>
-      <Fragment>1</Fragment>
-      <Fragment>2</Fragment>
-      <Fragment>3</Fragment>
-    </>
-  )
-}
-````
 
 ## Функциональные компоненты
 
@@ -1604,9 +1602,10 @@ export function App({test = "test"}) {
 
 - Содержат меньше строк кода.
 - Функциональные компоненты проще читать
-- Можно
-  писать [чистые функции](https://lexusalex.site/posts/php-dependency-injection-container/#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D1%8F%D1%89%D0%B0%D1%8F-%D0%BE%D1%82-%D1%81%D0%B2%D0%BE%D0%B8%D1%85-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%BE%D0%B2)
+- Можно писать [чистые функции](https://lexusalex.site/posts/php-dependency-injection-container/#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B2%D0%B8%D1%81%D1%8F%D1%89%D0%B0%D1%8F-%D0%BE%D1%82-%D1%81%D0%B2%D0%BE%D0%B8%D1%85-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%BE%D0%B2)
 - Удобно тестировать компонент
+
+
 
 ## Состояние
 
