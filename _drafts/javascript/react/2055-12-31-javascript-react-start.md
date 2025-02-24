@@ -2039,7 +2039,20 @@ function Count2() {
 
 Специальный хук `useEffect` может помочь если нужно загрузить внешние данные, создание интервала.
 
-TODO
+````jsx
+useEffect(() => {
+  console.log(new Date().toLocaleTimeString('ru-RU'));
+}, []);
+````
+
+
+````jsx
+useEffect(() => {
+  setInterval( () => {
+    setTime(new Date().toLocaleTimeString('ru-RU'));
+  },1000)
+}, [1]);
+````
 
 
 
