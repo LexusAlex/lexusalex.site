@@ -18,3 +18,8 @@ Prettier	.prettierrc.json	Больше информации
 Stylelint	.stylelintrc.json	Больше информации
 TailwindCSS	tailwind.config.js	Больше информации
 Vitest	vitest.config.ts	Больше информации
+
+
+Ничего в плагинах не может быть на верхнем уровне
+
+2.09
