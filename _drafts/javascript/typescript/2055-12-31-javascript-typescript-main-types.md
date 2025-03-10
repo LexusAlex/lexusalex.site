@@ -157,6 +157,20 @@ const c_2: number|string = 5;
 
 Важно понимать что в js все типы будут удалены, js на них пофиг
 
+## Утверждение
+
+````typescript
+const el = document.querySelector('#app')!;
+
+el.innerHTML = 'str';
+````
+ 
+Мы говорим, что `null` быть не может.
+
+Typescript не может быть связан с `html` разметкой
+
+Typescript пытается интерпертировать тип максимально широко.
+
 
 
 
@@ -184,7 +198,7 @@ src/main.ts:29:18 - error TS7006: Parameter 'b' implicitly has an 'any' type.
 
 ts
 1
-52.50
+1.11
 
 js
 1
