@@ -85,6 +85,24 @@ typescript старается загнать нас рамки, чтобы мы 
 
 ## Сливание типов
 
+Рассмотрим возможность `typescript` склеивать типы
+
+````typescript
+type One = {
+    'type': number
+}
+
+type Two = {
+  'test': string
+}
+
+const t: One & Two = {
+    type: 123,
+    test: "test"
+}
+````
+
+
 ? означает необязательный
 
 ts
