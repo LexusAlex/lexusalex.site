@@ -102,12 +102,59 @@ const t: One & Two = {
 }
 ````
 
+## ? Необязательный атрибут
 
-? означает необязательный
+Рассмотрим такую иерархию компонентов
+
+````typescript
+// Базовый тип
+type RouteRecordBase = {
+    path: string
+}
+
+// Маршрут компонент
+type RouteRecordComponent = RouteRecordBase & {
+    type: 'component',
+    component: () => string,
+    children?: RouteRecord[]
+}
+
+// Маршрут редирект
+type RouteRecordRedirect = RouteRecordBase & {
+    type: 'redirect',
+    redirect: string
+}
+
+// Условие ИЛИ для двух типов
+type RouteRecord = RouteRecordComponent | RouteRecordRedirect;
+
+function createRouter(routes: RouteRecord[]){
+    return routes;
+}
+
+createRouter([
+    {
+        type: 'component',
+        path: '/',
+        component: () => 'home page'
+    },
+    {
+        type: 'redirect',
+        path: '/old',
+        redirect: '/',
+    },
+    {
+        type: 'redirect',
+        path: '/products',
+        redirect: '/catalog',
+    }
+])
+````
+
 
 ts
 1
-1.17
+1.35
 
 js
 1
