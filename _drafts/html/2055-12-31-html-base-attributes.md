@@ -73,9 +73,9 @@ image:
 
 - Стилизации через `css`
 - Доступа к элементу через `javascript`
-- Используется для созданя якоря для ссылок внутри страницы
+- Используется для создания якоря для ссылок внутри страницы
 
-> Элемента может иметь только один id в рамках всего документа.
+> Элемент может иметь только один id в рамках всего документа.
 > {: .prompt-info }
 
 #### slot
@@ -237,7 +237,7 @@ window.onload = function() {
 
 #### hidden
 
-Атрибут указывает, что элемент еще не или больше не актуален. Днлает элемент полностью скрытым, но в разметке он присутствует.
+Атрибут указывает, что элемент еще не или больше не актуален. Делает элемент полностью скрытым, но в разметке он присутствует.
 
 Браузер не будет отображать такие элементы.
 
@@ -247,7 +247,7 @@ window.onload = function() {
 <p hidden>Этот текст не будет отображаться.</p>
 ````
 
-`hidden` является семантическим атрибутом, указывающим, что элемент нерелевантен. Браузер не отображает элемент, и элемент не занимает места на странице.
+`hidden` является семантическим атрибутом, указывающим, что элемент нерелевантен. Браузер не отображает элемент, и элемент не занимает места на странице, по сути это элемент с `display: none`
 
 Когда можно использовать `hidden`.
 
@@ -255,6 +255,8 @@ window.onload = function() {
 - Когда нужно скрыть элемент, который не должен быть виден пользователю, но должен оставаться доступным для программного доступа (например, для `JavaScript`).
 
 Использование этого атрибута является семантически правильным способом скрыть элемент.
+
+Важно понимать что элемент полностью скрыт, его как будто нет, но в то же время он существует в `DOM` дереве.
 
 #### inert 
 
@@ -279,6 +281,8 @@ window.onload = function() {
 Так же если действие с элементом нежелательно по какой-либо причине, можно запретить взаимодействие с ним.
 
 По итого атрибут `inert` - это простое и эффективное решение.
+
+При показе элемента `<dialog>` браузеры добавляет `inert` его сами.
 
 #### inputmode
 
@@ -444,6 +448,9 @@ customElements.define('custom-button', CustomButton, { extends: 'button' });
 - Используйте `tabindex="-1"` для элементов, которые должны быть сфокусированы только программно.
 - Проверяйте порядок фокусировки на вашем сайте, чтобы убедиться, что он логичен и удобен для пользователей, использующих клавиатуру для навигации.
 
+> По умолчанию у всех тегов в порядке навигации стоит значение 0
+{: .prompt-info }
+
 #### translate
 
 Указывает, следует ли переводить текстовое содержимое элемента.
@@ -472,23 +479,92 @@ customElements.define('custom-button', CustomButton, { extends: 'button' });
 <textarea writingsuggestions="true">Текст с опечатками</textarea>
 ````
 
+#### Что по глобальным атрибутам
+
+Как видим глобальных атрибутов много, на все случаи жизни. Тут подсказки при наведении на элемент, различные автоподстановки, фокусировки, возможность редактировать контент блока.
+
+Так есть атрибуты с помощью которых можно менять направление текста, делать элемент перетаскиваемым, скрытым, выключенным, кастомным.
+
+Главное их использовать с умом и в нужном контексте.
+
+#### data атрибуты
+
+Формирует класс атрибутов, для обмена данными например через `javascript`.
+
+Атрибут `data-*` предназначен для хранения произвольных данных, специфичных для страницы или приложения, в элементах. 
+
+Все атрибуты начинаются с префикса `data`, за которым идет имя атрибута, например
+
+````text
+data-test
+data-image
+data-image-id
+data-test-my-super-name
+data-testid
+````
+
+Атрибуты могут быть так же без значения.
+
+> Не рекомендуется использовать любые кастомные атрибуты которых нет в стандарте
+{: .prompt-info }
+
+### Атрибуты событий
+
+Атрибуты событий — это специальные атрибуты, которые можно использовать в элементах для выполнения `JavaScript`-кода при возникновении определенных событий. 
+
+Они позволяют добавлять интерактивность на веб-страницы, реагируя на действия пользователя или изменения в состоянии браузера.
+
+В этом перечне мы просто их перечислим, а использовать их уже будем используя `javascript` в других статьях.
+
+#### body
+
+Сначала мы посмотрим обработчики событий у элемента `body` рассмотренного в статье [Html. Базовые теги](https://lexusalex.site/posts/html-base-tags/) 
+
+Для демонстрации сделаем простую `javascript` функцию
+
+````javascript
+function eventFunction(name) {
+  console.log(name)
+}
+````
+
+Использовать будем так 
+
+````html
+<body onafterprint="eventFunction('onafterprint')" onbeforeprint="eventFunction('onbeforeprint')"></body>
+````
+
+##### onbeforeprint
+
+`onbeforeprint` - это обработчик события, который позволяет выполнять `JavaScript`-код непосредственно перед тем, как пользователь инициирует печать страницы. Это может быть полезно для внесения изменений в страницу, которые будут видны только при печати, например, для удаления ненужных элементов, изменения стилей или добавления дополнительной информации.
+
+##### onafterprint
 
 
-### data атрибуты
-
-data-*: Формирует класс атрибутов, называемых пользовательскими атрибутами данных, которые позволяют обмениваться проприетарной информацией между HTML и его DOM-представлением, которая может использоваться скриптами .
-
-
-### role
-
-https://html.spec.whatwg.org/#global-attributes
+````html
+<body onafterprint="console.log('onafterprint');"></body>
+````
 
 
-Атрибуты событий
 
-Атрибуты событий — это специальные атрибуты, которые можно использовать в HTML-элементах для выполнения JavaScript-кода при возникновении определенных событий. Они позволяют добавлять интерактивность на веб-страницы, реагируя на действия пользователя или изменения в состоянии браузера.
+##### onbeforeunload
+##### onhashchange
+##### onlanguagechange
+##### onmessage
+##### onmessageerror
+##### onoffline
+##### ononline
+##### onpageswap
+##### onpagehide
+##### onpagereveal
+##### onpageshow
+##### onpopstate
+##### onrejectionhandled
+##### onstorage
+##### onunhandledrejection
+##### onunload
 
-Вот список предоставленных вами атрибутов событий, сгруппированных по категориям для лучшего понимания:
+
 Атрибуты событий, связанные с вводом данных:
 
     onbeforeinput: Событие возникает до изменения значения элемента <input> или <textarea>.
@@ -583,6 +659,79 @@ https://html.spec.whatwg.org/#global-attributes
     onslotchange: Событие возникает при изменении слота в Shadow DOM.
     oncommand: Событие возникает при выполнении команды.
 
+
+    onauxclick
+    onbeforeinput
+    onbeforematch
+    onbeforetoggle
+    onblur*
+    oncancel
+    foncanplay
+    oncanplaythrough
+    onchange
+    onclick
+    onclose
+    oncommand
+    oncontextlost
+    oncontextmenu
+    oncontextrestored
+    oncopy
+    oncuechange
+    oncut
+    ondblclick
+    ondrag
+    ondragend
+    ondragenter
+    ondragleave
+    ondragover
+    ondragstart
+    ondrop
+    ondurationchange
+    onemptied
+    onended
+    onerror*
+    onfocus*
+    onformdata
+    oninput
+    oninvalid
+    onkeydown
+    onkeypress
+    onkeyup
+    onload*
+    onloadeddata
+    onloadedmetadata
+    onloadstart
+    onmousedown
+    onmouseenter
+    onmouseleave
+    onmousemove
+    onmouseout
+    onmouseover
+    onmouseup
+    onpaste
+    onpause
+    onplay
+    onplaying
+    onprogress
+    onratechange
+    onreset
+    onresize*
+    onscroll*
+    onscrollend*
+    onsecuritypolicyviolation
+    onseeked
+    onseeking
+    onselect
+    onslotchange
+    onstalled
+    onsubmit
+    onsuspend
+    ontimeupdate
+    ontoggle
+    onvolumechange
+    onwaiting
+    onwheel
+
 Пример использования атрибута события onclick:
 
 html
@@ -611,23 +760,3 @@ html
 
 
 
-События элемента `body`
-
-onafterprint
-onbeforeprint
-onbeforeunload
-onhashchange
-onlanguagechange
-onmessage
-onmessageerror
-onoffline
-ononline
-onpageswap
-onpagehide
-onpagereveal
-onpageshow
-onpopstate
-onrejectionhandled
-onstorage
-onunhandledrejection
-onunload
