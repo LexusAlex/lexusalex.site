@@ -311,6 +311,26 @@ section {
 </aside>
 ````
 
+#### Дополнительынй контент в блоге
+
+````html
+<header>
+  <h1></h1>
+</header>
+<aside>
+  <nav>
+    <h2></h2>
+  </nav>
+</aside>
+<aside>
+  <h2></h2>
+</aside>
+<article>
+  <h2></h2>
+</article>
+<footer></footer>
+````
+
 ### Поддержка браузерами
 ### Стили по умолчанию
 
