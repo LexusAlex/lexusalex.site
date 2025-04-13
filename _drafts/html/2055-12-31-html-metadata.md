@@ -1,0 +1,112 @@
+---
+title: Html. Метаданные страницы
+description: >-
+  Рассмотрим теги для метаданных страницы
+author: alex
+date: 2055-04-13 20:50:00 +0300
+categories: [Html]
+image:
+  path: /assets/img/posts/main/flat.webp
+  lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
+  alt: Html. Метаданные страницы
+---
+
+## Вводная 
+
+В статье [https://lexusalex.site/posts/html-base-tags/](https://lexusalex.site/posts/html-base-tags/) мы рассмотрели базовые теги среди которых был тег `<head>`. 
+
+Сегодня рассмотрим какие метаданные страницы.
+
+Метаданные страницы - это данные о данных, которые не отображаются непосредственно на самой странице, но предоставляют информацию о ней для браузеров, поисковых систем и других веб-сервисов. 
+
+Они содержатся в элементе `<head>`.
+
+Элементы также могут предоставлять внешнюю информацию для страницы.
+
+## base
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+
+href; target
+
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+## link
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+
+href; crossorigin; rel; as; media; hreflang; type; sizes; imagesrcset; imagesizes; referrerpolicy; integrity; blocking; color; disabled; fetchpriority
+
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+## meta
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+
+name; http-equiv; content; charset; media
+
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+## noscript
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+## script
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+
+src; type; nomodule; async; defer; crossorigin; integrity; referrerpolicy; blocking; fetchpriority
+
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+## style
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+
+media; blocking
+
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+## template
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+
+shadowrootmode; shadowrootdelegatesfocus; shadowrootclonable; shadowrootserializable
+
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+## title
+### Назначение
+### Особенности
+### Родительские/Дочерние элементы
+### Атрибуты
+### Примеры
+### Поддержка браузерами
+### Стили по умолчанию
+
+
+
+Тег мета
+https://html.spec.whatwg.org/#document-metadata
