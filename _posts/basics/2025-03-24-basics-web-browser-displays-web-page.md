@@ -4,7 +4,7 @@ description: >-
   Рассмотрим процесс отображения веб-страницы браузером
 author: alex
 date: 2025-03-24 22:20:00 +0300
-categories: [Basics,Web]
+categories: [Basics,Web,Html]
 tags: [js,html,css]
 image:
   path: /assets/img/posts/main/paint.webp
