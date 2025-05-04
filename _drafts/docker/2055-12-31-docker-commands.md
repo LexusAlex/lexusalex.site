@@ -16,4 +16,9 @@ docker inspect \
 -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 9f972bfffd0faaaa3694723302a7d75cab5b42e3487d1f4d8c393c44eb822996
 
 
+Контейнер - это просто обычный процесс в linux
+
+https://www.youtube.com/watch?v=rJRLZfk3a8U&t=1s
+
+
 
