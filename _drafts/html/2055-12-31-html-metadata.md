@@ -161,7 +161,22 @@ base {
 
 ### Атрибуты
 
-href; crossorigin; rel; as; media; hreflang; type; sizes; imagesrcset; imagesizes; referrerpolicy; integrity; blocking; color; disabled; fetchpriority
+#### href 
+#### crossorigin
+#### rel
+#### as
+#### media
+#### hreflang
+#### type
+#### sizes
+#### imagesrcset
+#### imagesizes
+#### referrerpolicy
+#### integrity
+#### blocking
+#### color
+#### disabled
+#### fetchpriority
 
 ### Примеры
 ### Поддержка браузерами
