@@ -117,7 +117,7 @@ SELECT t1.id AS `Колонка 1`,t2.id AS column2,t3.id AS column3 FROM `audit
 SELECT t1.id AS "column 1",t2.id AS column2,t3.id AS column3 FROM `audit_kp` AS t1,`cron` AS t2,`events` AS t3
 ````
 
-Если нужно объединить результаты из всех колонок в одну можно воспользоваться функцией `CONCAT`. Иногда это бывает полезно.
+Если нужно объединить результаты из всех колонок в одну можно воспользоваться функцией `CONCAT`. Иногда это бывает полезно. Например
 
 ````sql
 SELECT CONCAT(t1.id,'-',t2.id,'-',t3.id) AS result FROM `audit_kp` AS t1,`cron` AS t2,`events` AS t3
@@ -157,9 +157,9 @@ SELECT * FROM `application_types` WHERE group_id = 3
 SELECT * FROM `application_types` WHERE group_id <> 3
 SELECT * FROM `application_types` WHERE group_id != 3
 -- Меньше <
-SELECT * FROM `application_types` WHERE group_id < 3   
+SELECT * FROM `application_types` WHERE group_id < 3 -- В примере идентификатор 3 не попадает в выборку 
 -- Меньше либо равно <=
-SELECT * FROM `application_types` WHERE group_id <= 3
+SELECT * FROM `application_types` WHERE group_id <= 3 -- Вот теперь 3 попадает в выборку
 -- Больше >
 SELECT * FROM `application_types` WHERE group_id > 3
 -- Больше либо равно >=
@@ -203,12 +203,29 @@ WHERE application_types.group_id = application_type_groups.id
   AND application_types.id < 300
 ````
 
+Если нам нужны не все поля двух таблиц, мы уже умеем их указывать, да еще можем использовать алиасы для сокращенной записи
+
+````sql
+SELECT t.id AS t_id,
+       t.group_id AS t_g_id,
+       t.`name` AS t_name,
+			 g.`name` AS g_name	
+FROM `application_types` AS t,
+      application_type_groups AS g
+WHERE t.group_id = g.id
+````
+
+Далее можно использовать любые конструкции, операторы
+
 Можно заметить имея несколько базовых конструкций уже можно делать много вещей, получая при этом полезные данные.
 
 
 https://hmarketing.ru/blog/mysql/operator-where/
 
 
+## INSERT вставка данных
+## UPDATE обновление данных
+## DELETE удаление данных
 
 UPDATE `` SET `sum` = 2 WHERE `sum` = 2 LIMIT 1;
 INSERT INTO `` (`sum`) VALUES (2);
