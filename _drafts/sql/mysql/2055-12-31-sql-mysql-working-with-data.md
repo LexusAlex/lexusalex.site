@@ -227,6 +227,7 @@ https://hmarketing.ru/blog/mysql/operator-where/
 ## UPDATE обновление данных
 ## DELETE удаление данных
 
+
 UPDATE `` SET `sum` = 2 WHERE `sum` = 2 LIMIT 1;
 INSERT INTO `` (`sum`) VALUES (2);
 
