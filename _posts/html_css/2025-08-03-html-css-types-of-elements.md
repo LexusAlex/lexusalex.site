@@ -3,8 +3,8 @@ title: Типы html элементов
 description: >-
   Разбираемся в типах html элементов
 author: alex
-date: 2055-03-26 14:20:00 +0300
-categories: [Css]
+date: 2025-08-03 14:20:00 +0300
+categories: [Html]
 image:
   path: /assets/img/posts/main/html.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -32,7 +32,7 @@ image:
 Связи между группами элементов показаны на схеме. 
 
 ![img-description](/assets/img/posts/html/groups_elements.png){: .shadow }
-_Большие группы элементов html_
+_Группы элементов html_
 
 - `Flow` (Потоковый) - самая общая группа элементов, которые составляют поток документа
 - `Sectioning` (Секции) - элементы создают секции в документе. Они определяют структуру документа.
@@ -52,3 +52,15 @@ _Большие группы элементов html_
 Так же еще есть дополнительные группы элементов:
 
 - `Form-associated elements` - элементы связанные с формами и участвующие в ее отправке
+- `Listed elements` - это элементы, которые есть в `API` `form.elements` и `fieldset.elements`
+- `Submittable elements` - элементы которые могут отправлять из формы
+- `Resettable elements` - элементы формы которые можно сбрасывать
+- `Autocapitalize-and-autocorrect-inheriting elements` - элементы, которые наследуют атрибуты `autocapitalize` и `autocorrect` от элемента `form`.
+- `Labelable elements` - элементы в которых можно использовать элемент `label`.
+- `Palpable` - содержимое элементов этой группы, которое визуально физически воспринимается пользователем, например, текст, изображения, видео и другие элементы, которые можно "ощутить" на странице. Это контент, который виден и доступен для взаимодействия.
+- `Script-supporting elements` - элементы которые поддерживают скрипты, но сами по себе никак не отображаются на странице
+- `select element inner content elements` - элементы которые разрешены в качестве потомков `select`.
+- `optgroup element inner content elements` - элементы которые разрешены в качестве потомков `optgroup`.
+- `option element inner content elements` - элементы которые разрешены в качестве потомков `option`.
+
+Не вижу смысла перечислять элементы из каждой из этих групп, гораздо полезнее будет рассмотреть как элементы используются.
