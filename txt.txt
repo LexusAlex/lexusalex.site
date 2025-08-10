@@ -14,3 +14,11 @@ git add _posts/ txt.txt && git commit -m "write posts php-di" && git push origin
   Пишем все в _draft
 
 https://github.com/cotes2020/chirpy-starter/compare/v5.3.1...v5.3.2
+
+
+div.block
+.block
+input.text.text2#identifier
+div+h3+p+div друг за другом
+section.s>section.b>main#main>div.container вкладывание друг в друга
+ul.list>li.item*5 кол-во
