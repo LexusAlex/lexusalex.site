@@ -5,9 +5,13 @@
   <title>Title</title>
   <style>
 
-p span {
-  background-color: #2bcc2b;
-}
+    article > p {
+      font-weight: bold;
+    }
+
+    article p {
+      color: green;
+    }
 
 
 
@@ -15,10 +19,14 @@ p span {
 </head>
 
 <body>
-<p>
-  <span>span</span>
-  <span>span</span>
-</p>
+
+<article>
+  <p>Этот абзац находится внутри article.</p>
+  <div>
+    <p>Этот абзац находится внутри div, который находится внутри article.</p>
+  </div>
+</article>
+
 </body>
 
 
