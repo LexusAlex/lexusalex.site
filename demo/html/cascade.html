@@ -5,13 +5,9 @@
   <title>Title</title>
   <style>
 
-    article > p {
-      font-weight: bold;
-    }
-
-    article p {
-      color: green;
-    }
+.test ~ div {
+  background-color: #90a959;
+}
 
 
 
@@ -20,12 +16,14 @@
 
 <body>
 
-<article>
-  <p>Этот абзац находится внутри article.</p>
-  <div>
-    <p>Этот абзац находится внутри div, который находится внутри article.</p>
-  </div>
-</article>
+
+<div class="test">
+  <div>test 1</div>
+</div>
+<div>test 2</div>
+<div>test 3</div>
+<div>test 4</div>
+
 
 </body>
 
