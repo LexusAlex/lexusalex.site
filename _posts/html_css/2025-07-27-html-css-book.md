@@ -17,3 +17,8 @@ image:
 2. [Типы html элементов](https://lexusalex.site/posts/html-css-types-of-elements//){:target="_blank"}
 
 ## Сss
+
+1. Селекторы
+   1. Базовые селекторы
+   2. Псевдоклассы
+   3. Псевдоэлементы
