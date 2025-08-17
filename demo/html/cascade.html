@@ -5,24 +5,63 @@
   <title>Title</title>
   <style>
 
-.test ~ div {
-  background-color: #90a959;
+/* Универсальный */
+* {
+  color: #2bcc2b;
+}
+
+/* Тега */
+div {
+  color: #bcbecc;
+}
+
+/*Идентификатор*/
+#id {
+  color: #e0ff76;
+}
+
+/*Класс*/
+.class {
+  color: #cf4e26;
+}
+
+/*Атрибут*/
+[lang] {
+  color: #000000;
+}
+
+/*Конкретный атрибут*/
+[lang="ru"] {
+  color: rgba(55, 153, 189, 0.74);
+}
+
+/*Одно из значений атрибута*/
+[class~="o"] {
+  color: rgba(244, 6, 6, 0.74);
 }
 
 
+article h1 {
+  color: blue;
+}
 
   </style>
 </head>
 
 <body>
 
+<article>
+  <div class="o y u">
+    <div class="class o" lang="en">
+      <div id="id">
+        <div lang="ru">
+          <h1>article h1</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
 
-<div class="test">
-  <div>test 1</div>
-</div>
-<div>test 2</div>
-<div>test 3</div>
-<div>test 4</div>
 
 
 </body>
