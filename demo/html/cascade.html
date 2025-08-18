@@ -40,6 +40,15 @@ div {
   color: rgba(244, 6, 6, 0.74);
 }
 
+/*Значение атрибута за которым идет - */
+[lang |="en"] {
+  color: rgba(179, 213, 156, 0.74);
+}
+
+/*Значение атрибута начинается с*/
+[href^="https://"] {
+  background-color: #2e2f31;
+}
 
 article h1 {
   color: blue;
@@ -53,8 +62,11 @@ article h1 {
 <article>
   <div class="o y u">
     <div class="class o" lang="en">
-      <div id="id">
+      <div id="id" lang="en-GB">12
         <div lang="ru">
+          <a href="https://123">123</a>
+          <a href="https://456">456</a>
+          <a href="http://890">890</a>
           <h1>article h1</h1>
         </div>
       </div>
