@@ -50,9 +50,90 @@ div {
   background-color: #2e2f31;
 }
 
+/*Значение атрибута заканчивается значением*/
+[href$="1"],[class$="1"] {
+  background-color: #7e9335;
+}
+
+/*Значение атрибута может быть в любом месте атрибута*/
+[title*="title"] {
+  background-color: #8250df;
+}
+
+/*Селектор потомка*/
 article h1 {
   color: blue;
 }
+
+/*Селектор потомка*/
+div div div div div  {
+  background-color: #e8bb0b;
+}
+
+/*Селектор потомка*/
+ul .one {
+  color: saddlebrown;
+}
+
+/*Непосредственно вложенный селектор*/
+ul > .a-123 {
+  background-color: rgba(55, 153, 189, 0.74);
+}
+
+/*Непосредственно вложенный селектор*/
+ul > ul > li {
+  background-color: #f08a8b;
+}
+
+/* Объединение селекторов*/
+.a.b.c {
+  color: teal;
+}
+
+/* Объединение селекторов*/
+.t b.m.fg.ht > span {
+  background-color: #ef0909;
+}
+
+/* Объединение селекторов*/
+.tag1.tag2 {
+  background-color: #7eca63;
+}
+
+/* Объединение селекторов*/
+p.tag1 > b.t1.t2 {
+  color: #ef0909;
+}
+
+/* Смежный селектор*/
+div.r1 + div.r2 {
+  background-color: #f08a8b;
+}
+
+/* Смежный селектор*/
+li.item + li {
+  color: yellow;
+}
+
+/* последующий селектор*/
+li.header ~ .box {
+  background-color: #4865ae;
+}
+/* последующий селектор*/
+li.header ~ li {
+  border-top: 1px solid #fa0202;
+}
+
+/*Группировка селекторов*/
+h5 {
+  color: #8250df;
+}
+
+/*Группировка селекторов*/
+h4,h5 {
+  color: #bfb16a;
+}
+
 
   </style>
 </head>
@@ -67,15 +148,130 @@ article h1 {
           <a href="https://123">123</a>
           <a href="https://456">456</a>
           <a href="http://127.0.0.1">890</a>
+          <span class="werwfsfd1">890</span>
           <h1>article h1</h1>
+          <h2 title="h2-title-h2">h2</h2>
+          <h3>h3</h3>
+          <h4 title="title-h4">h4</h4>
+          <h1>article h1</h1>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <h1>article h1</h1>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </article>
 
+<ul>
+  <li class="one">1</li>
+  <li>2</li>
+</ul>
+
+<div>
+  <ul>
+    <li class="one">1</li>
+    <li>2</li>
+  </ul>
+</div>
+
+<p>
+  <p>
+    <p>
+      <div>
+        <ul>
+          <li class="one">1</li>
+          <li>2</li>
+        </ul>
+      </div>
+    </p>
+  </p>
+</p>
 
 
+<ul>
+  <li class="a-123">1</li>
+  <li>2</li>
+  <ul>
+    <li>
+      <ul>
+        <li>inner li</li>
+      </ul>
+    </li>
+  </ul>
+</ul>
+
+<div>
+  <ul>
+    <li class="a-123">1</li>
+    <li>2</li>
+    <ul>
+      <li>
+        <ul>
+          <li>inner li</li>
+        </ul>
+      </li>
+    </ul>
+  </ul>
+</div>
+
+<div class="a b c">teal</div>
+<div class="c b a">teal</div>
+<div class="c b a h">teal</div>
+
+<p class="d f">re</p>
+
+<p class="t">
+  <b class="m fg ht">
+    <span>123</span>
+  </b>
+  <b class="m fg">
+    <span>5647</span>
+  </b>
+</p>
+
+<div class="tag1 tag2">t</div>
+
+<div>
+  <div>
+    <div class="tag2 tag1">t</div>
+  </div>
+</div>
+
+<p class="tag1">
+  <b class="t2">p</b>
+  <b class="t1 t2">p</b>
+</p>
+
+<div class="r1">1</div>
+<div class="r2">2</div>
+<div class="r3">3</div>
+<div class="r2">4</div>
+
+<ul class="rt">
+  <li class="item">1</li>
+  <li class="item">2</li>
+  <li class="item">3</li>
+</ul>
+
+
+<ul>
+  <li class="header">1</li>
+  <li class="box">2</li>
+  <li class="box1">3</li>
+  <li class="box">4</li>
+  <li class="box2">5</li>
+  <li class="box2">6</li>
+  <li class="box">7</li>
+</ul>
+
+<h5>h5</h5>
 </body>
 
 
