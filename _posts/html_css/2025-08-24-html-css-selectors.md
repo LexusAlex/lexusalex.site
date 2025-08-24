@@ -1177,9 +1177,9 @@ h4,h5 {
     <div class="class o" lang="en">
       <div id="id" lang="en-GB">12
         <div lang="ru">
-          <a href="https://123">123</a>
-          <a href="https://456">456</a>
-          <a href="http://123.0.0.0">890</a>
+          <a href="https://123.1.1.1">123</a>
+          <a href="https://123.1.1.1">456</a>
+          <a href="http://123.1.1.1">890</a>
           <span class="werwfsfd1">890</span>
           <h1>article h1</h1>
           <h2 title="h2-title-h2">h2</h2>
