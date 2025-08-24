@@ -1,5 +1,5 @@
 ---
-title: Html и Сss. Погружение в искусство
+title: Html и Сss. Погружение
 description: >-
   Современные техники и лучшие практики в html и css
 author: alex
@@ -15,11 +15,11 @@ image:
 
 1. Элементы
    1. [Про блочные и строчные элементы](https://lexusalex.site/posts/html-css-block-and-inline-elements/){:target="_blank"}
-   2. [Типы html элементов](https://lexusalex.site/posts/html-css-types-of-elements//){:target="_blank"}
+   2. [Типы html элементов](https://lexusalex.site/posts/html-css-types-of-elements/){:target="_blank"}
 
 ## Сss
 
 1. Селекторы
-   1. Базовые селекторы
+   1. [Базовые селекторы](https://lexusalex.site/posts/html-css-selectors/){:target="_blank"}
    2. Псевдоклассы
    3. Псевдоэлементы
