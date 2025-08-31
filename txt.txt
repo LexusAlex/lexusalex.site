@@ -1,4 +1,4 @@
-git add _posts/ txt.txt && git commit -m "write posts php-di" && git push origin main && git push gitlab main
+git add _posts/ _drafts demo txt.txt && git commit -m "atricle draft" && git push origin main && git push gitlab main
 
   {% if page.layout == 'category' %}
   {% assign taxonomy = page.category.display_name | downcase | slugify %}
