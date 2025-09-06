@@ -74,3 +74,5 @@ image:
 
 
 https://fruntend.com/posts/otlichie-mezhdu-nth-child-i-nth-of-type
+
+https://github.com/Max-Starling/Notes/blob/master/CSS.md#%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-css
