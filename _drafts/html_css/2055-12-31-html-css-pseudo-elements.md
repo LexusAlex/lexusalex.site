@@ -1,3 +1,8 @@
+
+Псевдоэлементы служат для обращения к отдельным частям элементов, тогда как псевдоклассы позволяют стилям различать разные типы элементов.
+
+https://drafts.csswg.org/selectors/#overview
+
 .title::before {
 content: "“";
 position: absolute;
