@@ -1,5 +1,5 @@
 ---
-title: Html и Сss. Погружение
+title: Html и Сss. Все есть тег.
 description: >-
   Современные техники и лучшие практики в html и css
 author: alex
@@ -20,6 +20,7 @@ image:
 ## Сss
 
 1. Селекторы
-   1. [Базовые селекторы](https://lexusalex.site/posts/html-css-selectors/){:target="_blank"}
-   2. Псевдоклассы
-   3. Псевдоэлементы
+   1. [Типы отношений элементов в CSS](https://lexusalex.site/posts/html-css-types-of-element-relationships/){:target="_blank"}  
+   2. [Базовые селекторы](https://lexusalex.site/posts/html-css-selectors/){:target="_blank"}
+   3. Псевдоклассы
+   4. Псевдоэлементы
