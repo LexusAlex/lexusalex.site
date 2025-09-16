@@ -1308,6 +1308,86 @@ h4,h5 {
 
 ## Поддержка браузерами
 
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Селектор</th>
+        <th style="text-align: center">Chrome</th>
+        <th style="text-align: center">Edge</th>
+        <th style="text-align: center">Firefox</th>
+        <th style="text-align: center">Opera</th>
+        <th style="text-align: center">Safari</th>
+        <th style="text-align: center">Chrome Android</th>
+        <th style="text-align: center">Firefox for Android</th>
+        <th style="text-align: center">Opera Android</th>
+        <th style="text-align: center">Safari on iOS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;">*</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td> 
+     </tr>
+      <tr>
+        <td style="text-align: center;">E</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td> 
+     </tr>
+      <tr>
+        <td style="text-align: center;">#id</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">.class</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td> 
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td> 
+     </tr>
+    </tbody>
+  </table>
+</div>
 
 
 
