@@ -631,6 +631,97 @@ p[title="test"] {
 
 В данном случае подходят все три элемента.
 
+### `[a = v i]` атрибут равен значению v в любом регистре
+
+Выберем все теги, где подстрока будет в любом регистре.
+
+````css
+p[title='title' i] {
+  background-color: #868686;
+}
+````
+
+````html
+<p title="title">p</p>
+<p title="Title">p</p>
+<p title="TITLE">p</p>
+<p title="tItLe">p</p>
+````
+
+Где это может быть полезно, например в динамически меняющихся названиях атрибутов, один селектор покрывает все варианты
+
+### `[a *= v i]` атрибут содержит значение v в любом регистре
+
+````css
+p[title *='title' i] {
+  background-color: #868686;
+}
+````
+
+````html
+<p title="123title567">p</p>
+<p title="Title-енгв">p</p>
+<p title="1TITLE1">p</p>
+<p title="tItLe4576456456456">p</p>
+````
+
+### `[a ~= v i]` атрибут содержит одно из слов в любом регистре
+
+````css
+p[title ~='test' i] {
+  background-color: #868686;
+}
+````
+
+````html
+<p title="two test one">p</p>
+<p title="TEST three">p</p>
+<p title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate hic impedit maiores possimus quisquam quos vero. Culpa eius explicabo facilis, ipsa iste, magni nisi nostrum quia rerum TeSt sint vel.">p</p>
+````
+
+### `[a |= v i]` атрибут содержит точное слово либо за ним идет - в любом регистре
+
+````css
+p[title |='test' i] {
+  background-color: #868686;
+}
+````
+
+````html
+<p title="test">p</p>
+<p title="TEST">p</p>
+<p title="Test-test123">p</p>
+<p title="Test-test123">p</p>
+````
+
+### `[a ^= v i]` значение должно начинаться с v в любом регистре
+
+````css
+p[title ^='test' i] {
+  background-color: #868686;
+}
+````
+
+````html
+<p title="test">p</p>
+<p title="TEST">p</p>
+<p title="Test-test123">p</p>
+````
+
+### `[a $= v i]` значение должно заканчиваться с v в любом регистре
+
+````css
+p[title $='test' i] {
+  background-color: #868686;
+}
+````
+
+````html
+<p title="123test">p</p>
+<p title="34645654TEST">p</p>
+<p title="123123213Test-test">p</p>
+````
+
 ## Вложенный (потомков) селектор (E E)
 
 Вложенный селектор или **селектор потомков** управляет вложенными элементами друг в друга. Правая часть селектора это родительские элементы, а последующие вложенные в них.
@@ -970,9 +1061,11 @@ div.p.h[title="title"]{
    1. `[href^="https://"] { background-color: #2e2f31;}`
 10. Атрибут, значение которого заканчивается определенным символом `[selector$="value"]`. (Уровень 3)
     1. `[href$="1"],[class$="1"] { background-color: #7e9335;}` В примере мы сгруппировали селекторы, чтобы добиться нужный результат
-11. Выбирает все элементы с указанным атрибутом, значение которого содержит указанное значение где-либо внутри. `[selector*="value"]`. (Уровень 3)
+11. Выбирает все элементы с указанным атрибутом, значение которого содержит указанное значение где-либо внутри, сначала с конца или в составе атрибута. `[selector*="value" i] [selector="value" i] [selector|="value" i] [selector~="value" i] [selector^="value" i] [selector$="value" i]`. (Уровень 4)
+    1. `[title*="title" i] { background-color: #8250df;}`.
+12. Выбирает все элементы с указанным атрибутом, значение которого содержит указанное значение где-либо внутри. `[selector*="value"]`. (Уровень 3)
     1. `[title*="title"] { background-color: #8250df;}`. В данном случае попадают элементы с `title` `h2-title-h2` и `title-h4`
-12. Селектор потомка `selector selector selector` или "пробельный селектор" (Уровень 1)
+13. Селектор потомка `selector selector selector` или "пробельный селектор" (Уровень 1)
     1. `?` Выбирает элементы которые находятся внутри другого элемента все зависимости от уровня вложенности
     2. `?` Можно использовать любые селекторы используемые выше
     3. `-` Селектор `div div div div div  {background-color: #e8bb0b;}` может замедлить редеринг страницы
@@ -980,7 +1073,7 @@ div.p.h[title="title"]{
     5. `?` Используется когда нужно применить стиль ко всем элементам определённого типа внутри контейнера, независимо от глубины вложенности.
     6. `article h1 { color: blue;}`
     7. `ul .one { color: saddlebrown;}`
-13. Непосредственно вложенный селектор `selector > selector` (Уровень 2)
+14. Непосредственно вложенный селектор `selector > selector` (Уровень 2)
     1. `?` Выбирает только прямые потомки, игнорируя вложенность элементов на более глубоких уровнях, применяется только к тем элементам которые находятся напрямую внутри родителя
     2. `ul > .a-123 { background-color: rgba(55, 153, 189, 0.74);}`
     3. `ul > ul > li { background-color: #f08a8b;}` множественная вложенность
@@ -990,7 +1083,7 @@ div.p.h[title="title"]{
     7. `?` Использовать можно для стилизации элементов верхнего уровня и для контроля четкой структуры документа
     8. `.menu > ul > li > a { color: white; background: #333;}`
     9. `.submenu a { color: black; background: #f0f0f0;}`
-14. Объединение двух и более селекторов `.selector.selector`
+15. Объединение двух и более селекторов `.selector.selector`
     1. `?` Выбирает элементы в которых присвоены все указанные классы одновременно, _можно в разном порядке_, но **совместное присутствие обязательно**
     2. `.btn.primary.large { padding: 15px 30px;}`
     3. `.a.b.c { color: teal;}`
@@ -1003,7 +1096,7 @@ div.p.h[title="title"]{
     10. Когда нужно применять стили к определенному набору классов, и точно их выбрать.
     11. `+` Чаще такие селекторы работают быстрее чем вложенные.
     12. `-` Желательно избегать больших комбинаций селекторов - это усложняет поддержку кода
-15. Смежные селекторы `selector + selector` (Уровень 2)
+16. Смежные селекторы `selector + selector` (Уровень 2)
     1. `?` Выбирает элемент который, идет за элементом на одном уровне вложенности  
     2. `?` Работает только для соседних элементов имеющих общего родителя и идущих друг за другом
     3. `div.r1 + div.r2 { background-color: #f08a8b;}`
@@ -1017,7 +1110,7 @@ div.p.h[title="title"]{
     11. `+` Такие селекторы работают быстро, так как браузеры проверяют только следующий элемент
     12. `-` Нельзя выбрать предыдущий элемент или элементы на разных уровнях вложенности
     13. `?` Используйте селектор, когда нужно применить стиль только **к непосредственно следующему элементу**.
-16. Последующие селекторы `selector ~ selector`. (Уровень 3)
+17. Последующие селекторы `selector ~ selector`. (Уровень 3)
     1. Выбирает все элементы которые являются сестринскими по отношению к указанному элементу
     2. `li.header ~ .box { background-color: #4865ae;}`
     3. `li.header ~ li { border-top: 1px solid #fa0202;}` Стилизация всех пунктов меню кроме первого
@@ -1026,7 +1119,7 @@ div.p.h[title="title"]{
     6. `-` Селектор работает медленнее чем другие селекторы, так как проверяет все элементы
     7. `?` Селектор чувствителен к порядку элементов
     8. `-` Не выбирает элементы идущие до `element ~ element`
-17. Перечисление селекторов `selector,selector`
+18. Перечисление селекторов `selector,selector`
     1. `?`  Группировка селекторов позволяет применять одинаковые стили к разным элементам, это позволяет убрать дублирование кода
     2. `h1, h2, h3 { color: #333; font-family: Arial, sans-serif;}`
     3. `?` Каждый селектор в списке работает независимо
@@ -1378,12 +1471,168 @@ h4,h5 {
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td> 
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a="v"]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a~=v]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a |= v]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a ^= v]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a $= v]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a *= v]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a {*|$~}= v i]</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">49</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">79</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">47</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">36</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">49</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">47</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">36</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">[a {*|$~}= v s]</td>
+        <td style="text-align: center;background-color: var(--prompt-danger-bg);">-</td>
+        <td style="text-align: center;background-color: var(--prompt-danger-bg);">-</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">66</td>
+        <td style="text-align: center;background-color: var(--prompt-danger-bg);">-</td>
+        <td style="text-align: center;background-color: var(--prompt-danger-bg);">-</td>
+        <td style="text-align: center;background-color: var(--prompt-danger-bg);">-</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">66</td>
+        <td style="text-align: center;background-color: var(--prompt-danger-bg);">-</td>
+        <td style="text-align: center;background-color: var(--prompt-danger-bg);">-</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">selector1,selector2</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
         <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
-        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td> 
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">(E ~ E)</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">9</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">14</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+      <tr>
+        <td style="text-align: center;">(E > E)</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+    <tr>
+        <td style="text-align: center;">(E E)</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+     </tr>
+     <tr>
+        <td style="text-align: center;">(E + E)</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">12</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">3.5</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">18</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">4</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">10.1</td>
+        <td style="text-align: center;background-color: var(--prompt-tip-bg);">1</td>
      </tr>
     </tbody>
   </table>
