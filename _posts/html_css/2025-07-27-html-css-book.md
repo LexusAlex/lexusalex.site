@@ -1,5 +1,5 @@
 ---
-title: Html и Сss. Все есть тег.
+title: Html и Сss.
 description: >-
   Современные техники и лучшие практики в html и css
 author: alex
