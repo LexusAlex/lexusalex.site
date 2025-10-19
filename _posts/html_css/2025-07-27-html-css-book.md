@@ -16,6 +16,8 @@ image:
 1. Элементы
    1. [Про блочные и строчные элементы](https://lexusalex.site/posts/html-css-block-and-inline-elements/){:target="_blank"}
    2. [Типы html элементов](https://lexusalex.site/posts/html-css-types-of-elements/){:target="_blank"}
+2. Структура документа
+   1. [Заголовки. Outline](https://lexusalex.site/posts/html-css-document-structure-outline/){:target="_blank"}
 
 ## Сss
 
