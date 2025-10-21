@@ -28,12 +28,12 @@ webfonts: https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Sour
 # Libraries
 
 bootstrap:
-  css: https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css
-  js: https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
+  css: https://unpkg.com/bootstrap@5.3.8/dist/css/bootstrap.min.css
+  js: https://unpkg.com/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js
 
 toc:
-  css: https://unpkg.com/tocbot@4.32.2/dist/tocbot.css
-  js: https://unpkg.com/tocbot@4.32.2/dist/tocbot.min.js
+  css: https://unpkg.com/tocbot@4.36.4/dist/tocbot.css
+  js: https://unpkg.com/tocbot@4.36.4/dist/tocbot.min.js
 
 fontawesome:
   css: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css
@@ -42,14 +42,14 @@ search:
   js: https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.2/simple-jekyll-search.min.js
 
 mermaid:
-  js: https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js
+  js: https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.12.0/mermaid.min.js
 
 dayjs:
   js:
-    common: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/dayjs.min.js
-    locale: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/locale/ru.min.js
-    relativeTime: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/plugin/relativeTime.min.js
-    localizedFormat: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.11/plugin/localizedFormat.min.js
+    common: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.18/dayjs.min.js
+    locale: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.18/locale/ru.min.js
+    relativeTime: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.18/plugin/relativeTime.min.js
+    localizedFormat: https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.18/plugin/localizedFormat.min.js
 
 glightbox:
   css: https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.0/css/glightbox.css
