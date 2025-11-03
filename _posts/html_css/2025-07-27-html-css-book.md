@@ -23,7 +23,9 @@ image:
 
 ## Сss
 
-1. Селекторы
+1. Про спецификации
+   1. [Спецификации в css](https://lexusalex.site/posts/html-css-css-specifications/){:target="_blank"}
+2. Селекторы
    1. [Типы отношений элементов в CSS](https://lexusalex.site/posts/html-css-types-of-element-relationships/){:target="_blank"}  
    2. [Базовые селекторы](https://lexusalex.site/posts/html-css-selectors/){:target="_blank"}
    3. Псевдоклассы
