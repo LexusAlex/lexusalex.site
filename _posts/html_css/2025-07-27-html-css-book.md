@@ -20,6 +20,8 @@ image:
    1. [Заголовки. Outline](https://lexusalex.site/posts/html-css-document-structure-outline/){:target="_blank"}
 3. Базовые элементы страницы
    1. [Декларация DOCTYPE](https://lexusalex.site/posts/html-css-doctype/){:target="_blank"}
+4. Глобальные атрибуты
+   1. [class](https://lexusalex.site/posts/html-css-attribute-class/){:target="_blank"}
 
 ## Сss
 
