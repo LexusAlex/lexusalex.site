@@ -23,6 +23,7 @@ image:
    2. [Элемент html](https://lexusalex.site/posts/html-css-html-element/){:target="_blank"}
 4. Глобальные атрибуты
    1. [class](https://lexusalex.site/posts/html-css-attribute-class/){:target="_blank"}
+   2. [id](https://lexusalex.site/posts/html-css-attribute-id/){:target="_blank"} 
 
 ## Сss
 
