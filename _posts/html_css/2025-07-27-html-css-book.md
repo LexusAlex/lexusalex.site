@@ -18,12 +18,13 @@ image:
    2. [Типы html элементов](https://lexusalex.site/posts/html-css-types-of-elements/){:target="_blank"}
 2. Структура документа
    1. [Заголовки. Outline](https://lexusalex.site/posts/html-css-document-structure-outline/){:target="_blank"}
-3. Базовые элементы страницы
+3. Глобальные атрибуты
+   1. [class](https://lexusalex.site/posts/html-css-attribute-class/){:target="_blank"}
+   2. [id](https://lexusalex.site/posts/html-css-attribute-id/){:target="_blank"}
+4. Базовые элементы страницы
    1. [Декларация DOCTYPE](https://lexusalex.site/posts/html-css-doctype/){:target="_blank"}
    2. [Элемент html](https://lexusalex.site/posts/html-css-html-element/){:target="_blank"}
-4. Глобальные атрибуты
-   1. [class](https://lexusalex.site/posts/html-css-attribute-class/){:target="_blank"}
-   2. [id](https://lexusalex.site/posts/html-css-attribute-id/){:target="_blank"} 
+ 
 
 ## Сss
 
