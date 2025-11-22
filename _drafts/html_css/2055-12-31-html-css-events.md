@@ -1,4 +1,10 @@
 
+https://doka.guide/js/events/
+https://learn.javascript.ru/introduction-browser-events
+
+https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers-on-elements,-document-objects,-and-window-objects
+
+
 
 Событийная модель HTML-документа — это фундаментальный механизм, позволяющий JavaScript взаимодействовать с пользователем и реагировать на действия в браузере. Рассмотрим ключевые аспекты:
 
