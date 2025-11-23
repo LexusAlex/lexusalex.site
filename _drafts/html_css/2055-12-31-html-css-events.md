@@ -66,6 +66,8 @@ _Обработчик события_ - это функция, вызываем�
 
 Событие можно определить через атрибут `on[...]`, где имя атрибута совпадает с именем обработчика событий.
 
+Большинство элементов имеют события с приставкой `on`
+
 > Способ задания события через on считается устаревшим и не рекомендуется к использованию
 {: .prompt-info }
 
@@ -208,13 +210,215 @@ _Обработчик события_ - это функция, вызываем�
 </script>
 ````
 
+Главное тут помнить, что регистрация слушателя события происходит только в случае, если значение обработчика не равно `null`
 
-## Определение обработчика с помощью метода addEventListener
+## Определение обработчика с помощью метода addEventListener()
 
-С помощью функции `addEventListener` можно навесить сразу несколько обработчиков событий.
+С помощью функции `addEventListener` можно навесить сразу несколько обработчиков событий, в отличие от ограничения с `on...`.
 
-Регистрация слушателя события происходит только в случае, если значение обработчика не равно `null`
+Метод `addEventListener()` устанавливает функцию, которая будет вызываться когда указанное событие будет достигать цели.
 
+Метод вызывается у `DOM` элемента.
+
+> addEventListener является рекомендуемым способом регистрации события на элементе
+{: .prompt-info }
+
+В базовом использовании
+
+````html
+<div class="div">div</div>
+
+<script>
+  document.querySelector('.div').addEventListener('click', () => {console.log(123)}); // 123
+</script>
+````
+
+Можем навесить на один элемент сразу несколько обработчиков
+
+````html
+<div class="div">div</div>
+
+<script>
+  let d = document.querySelector('.div');
+  d.addEventListener('click', () => {console.log(123)}); // 123
+  d.addEventListener('click', () => {console.log(456)}); // 456
+  d.addEventListener('click', () => {console.log(789)}); // 789
+</script>
+````
+
+В данном случае они будут вызваны последовательно.
+
+Если провести аналогию с методом регистрации обработчика в атрибуте `on`, то при выполнении примера
+
+````html
+<div class="div">div</div>
+
+<script>
+  let d = document.querySelector('.div');
+  d.addEventListener('click', () => {console.log(123)}); // 123
+  console.log(d.onclick); // null
+</script>
+````
+
+Казалось бы, событие одно и тоже, но `onclick` обработчик равен `null`. Чтобы это понять рассмотрим еще пример
+
+````html
+<div class="div">div</div>
+
+<script>
+  let d = document.querySelector('.div');
+  d.addEventListener('click', () => {console.log(1)}, false); // Будет выполнен первым
+  d.onclick = (e) => {console.log(2)}; // Никогда не будет выполнен
+  d.addEventListener('click', () => {console.log(3)}, false); // Будет выполнен вторым
+  d.addEventListener('click', () => {console.log(4)}, false); // Будет выполнен третьим
+  d.onclick = null; // Удаление обработчика
+  d.onclick = (e) => {console.log(5)}; // Будет выполнен четвертым
+</script>
+````
+
+В итоге получается, что обработчик `console.log(2)` был удален и не будет выполнен, но если код переписать так
+
+````html
+<div class="div">div</div>
+
+  <script>
+    let d = document.querySelector('.div');
+    d.addEventListener('click', () => {console.log(1)}, false);
+    d.onclick = (e) => {console.log(2)};
+    d.addEventListener('click', () => {console.log(3)}, false);
+    d.addEventListener('click', () => {console.log(4)}, false);
+  </script>
+````
+
+Последовательность выполнения будет такой, какую мы ожидаем, но так лучше не делать так будет путать.
+
+````text
+1
+2
+3
+4
+````
+
+Почему так происходит. По принципу браузер выполняет обработчики событий в том порядке, в котором они были добавлены к элементу.
+
+То есть очередь выполнения будет такой `console.log(1) => console.log(2) => console.log(3) => console.log(4)`
+
+Как и в случае с `on` атрибутами, вызывается функция обработчик при наступлении события, внутрь функции передается специальный объект события, который содержит информацию о нем.
+
+````html
+<div class="div">div</div>
+
+<script>
+  let d = document.querySelector('.div');
+  d.addEventListener('click', (e) => {
+    console.log(e.target); // Элемент на котором сработало событие
+  });
+</script>
+````
+
+Так же можно вынести функционал в отдельную функцию 
+
+````html
+<div class="div">div</div>
+
+<script>
+  let d = document.querySelector('.div');
+  function target(e) {
+    console.log(e.target); // div
+  }
+  d.addEventListener('click', target);
+</script>
+````
+
+И назначить сразу несколько обработчиков в цикле
+
+````html
+<div class="div">
+  <p class="p">1</p>
+  <p class="p">2</p>
+  <p class="p">3</p>
+  <p class="p">4</p>
+  <p class="p">5</p>
+  <p class="p">6</p>
+</div>
+
+  <script>
+    let d = document.querySelectorAll('.p');
+
+    function target(e) {
+      console.log(e.target.innerHTML); // будет выведен текст элемента в зависимости на что кликнули
+    }
+    for (let i = 0; i < d.length; i++) {
+      d[i].addEventListener('click', target);
+    }
+  </script>
+````
+
+Обработчик так же можно удалить, для этого нужно воспользоваться функцией `removeEventListener` передав туда, функцию инициализации события.
+
+````html
+<div class="div">
+    div
+  </div>
+
+<script>
+  let d = document.querySelector('.div');
+
+  function target(e) {
+    console.log(e.target);
+  }
+
+  d.addEventListener('click', target);
+  d.removeEventListener('click', target); // Обработчик удален
+</script>
+````
+
+Есть так же события которые например дают знать, а сформировано ли вообще `DOM` дерево.
+
+````javascript
+document.addEventListener("DOMContentLoaded", function(e) {
+    console.log(e.target);
+});
+````
+
+Так же внутрь `addEventListener` можно передать объект и класс, что может упростить поддержку сложного кода.
+
+## Распространение события
+
+Во время возникновения события, объект события сначала погружается, достигает цели, всплывает. 
+
+То есть когда мы кликнули по кнопке, событие происходит на самом элементе, родительских элементах, то есть три фазы
+
+- **Фаза погружения (Capturing Phase)** Событие движется от `window` к целевому элементу (сверху вниз по `DOM`).
+- **Фаза цели (Target Phase)** Событие достигает целевого элемента.
+- **Фаза всплытия (Bubbling Phase)** Событие движется обратно от целевого элемента к `window` (снизу вверх).
+
+https://habr.com/ru/companies/nordclan/articles/707322/
+
+## Всплытие и погружение
+
+
+
+
+
+### **2. Поток событий (Event Flow)**
+События распространяются по документу в 3 фазы:
+1. **Фаза погружения (Capturing Phase)**  
+   Событие движется от `window` к целевому элементу (сверху вниз по DOM).
+2. **Фаза цели (Target Phase)**  
+   Событие достигает целевого элемента.
+3. **Фаза всплытия (Bubbling Phase)**  
+   Событие движется обратно от целевого элемента к `window` (снизу вверх).
+
+```html
+<div id="parent">
+  <button id="child">Click</button>
+</div>
+```
+При клике на `button`:
+1. Погружение: `window` → `document` → `<div>` → `<button>`.
+2. Цель: `<button>`.
+3. Всплытие: `<button>` → `<div>` → `document` → `window`.
 
 https://doka.guide/js/events/
 https://learn.javascript.ru/introduction-browser-events
@@ -623,24 +827,7 @@ https://html.spec.whatwg.org/multipage/webappapis.html#event-handlers-on-element
 
 
 
-### **2. Поток событий (Event Flow)**
-События распространяются по документу в 3 фазы:
-1. **Фаза погружения (Capturing Phase)**  
-   Событие движется от `window` к целевому элементу (сверху вниз по DOM).
-2. **Фаза цели (Target Phase)**  
-   Событие достигает целевого элемента.
-3. **Фаза всплытия (Bubbling Phase)**  
-   Событие движется обратно от целевого элемента к `window` (снизу вверх).
 
-```html
-<div id="parent">
-  <button id="child">Click</button>
-</div>
-```
-При клике на `button`:
-1. Погружение: `window` → `document` → `<div>` → `<button>`.
-2. Цель: `<button>`.
-3. Всплытие: `<button>` → `<div>` → `document` → `window`.
 
 ---
 
@@ -796,200 +983,3 @@ setTimeout(() => {
 
 https://html.spec.whatwg.org/multipage/indices.html#events-2
 
-onabort: null
-​
-onanimationcancel: null
-​
-onanimationend: null
-​
-onanimationiteration: null
-​
-onanimationstart: null
-​
-onauxclick: null
-​
-onbeforeinput: null
-​
-onbeforematch: null
-​
-onbeforetoggle: null
-​
-onblur: null
-​
-oncancel: null
-​
-oncanplay: null
-​
-oncanplaythrough: null
-​
-onchange: null
-​
-onclick: null
-​
-onclose: null
-​
-oncommand: null
-​
-oncontentvisibilityautostatechange: null
-​
-oncontextlost: null
-​
-oncontextmenu: null
-​
-oncontextrestored: null
-​
-oncopy: null
-​
-oncuechange: null
-​
-oncut: null
-​
-ondblclick: null
-​
-ondrag: null
-​
-ondragend: null
-​
-ondragenter: null
-​
-ondragexit: null
-​
-ondragleave: null
-​
-ondragover: null
-​
-ondragstart: null
-​
-ondrop: null
-​
-ondurationchange: null
-​
-onemptied: null
-​
-onended: null
-​
-onerror: null
-​
-onfocus: null
-​
-onformdata: null
-​
-onfullscreenchange: null
-​
-onfullscreenerror: null
-​
-ongotpointercapture: null
-​
-oninput: null
-​
-oninvalid: null
-​
-onkeydown: null
-​
-onkeypress: null
-​
-onkeyup: null
-​
-onload: null
-​
-onloadeddata: null
-​
-onloadedmetadata: null
-​
-onloadstart: null
-​
-onlostpointercapture: null
-​
-onmousedown: null
-​
-onmousemove: null
-​
-onmouseout: null
-​
-onmouseover: null
-​
-onmouseup: null
-​
-onpaste: null
-​
-onpause: null
-​
-onplay: null
-​
-onplaying: null
-​
-onpointercancel: null
-​
-onpointerdown: null
-​
-onpointerenter: null
-​
-onpointerleave: null
-​
-onpointermove: null
-​
-onpointerout: null
-​
-onpointerover: null
-​
-onpointerrawupdate: null
-​
-onpointerup: null
-​
-onprogress: null
-​
-onratechange: null
-​
-onreset: null
-​
-onresize: null
-​
-onscroll: null
-​
-onscrollend: null
-​
-onsecuritypolicyviolation: null
-​
-onseeked: null
-​
-onseeking: null
-​
-onselect: null
-​
-onselectionchange: null
-​
-onselectstart: null
-​
-onslotchange: null
-​
-onstalled: null
-​
-onsubmit: null
-​
-onsuspend: null
-​
-ontimeupdate: null
-​
-ontoggle: null
-​
-ontransitioncancel: null
-​
-ontransitionend: null
-​
-ontransitionrun: null
-​
-ontransitionstart: null
-​
-onvolumechange: null
-​
-onwaiting: null
-​
-onwebkitanimationend: null
-​
-onwebkitanimationiteration: null
-​
-onwebkitanimationstart: null
-​
-onwebkittransitionend: null
-​
-onwheel: null
