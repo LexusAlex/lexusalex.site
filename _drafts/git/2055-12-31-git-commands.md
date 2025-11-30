@@ -26,6 +26,10 @@ git restore --staged file2 # Убрать только из индекса, да
 git restore --staged --worktree file # Если файл был добавлен в индекс и изменен, команда уберет его из индекса и подзатрет все изменения в рабочей копии
 ````
 
+## git log
+
+git log --since="1.year ago" --oneline | wc -l // Кол-во коммитов за последний год
+
 ## git status
 
 git rm file
