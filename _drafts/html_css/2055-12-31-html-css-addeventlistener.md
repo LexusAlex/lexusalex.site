@@ -11,3 +11,8 @@ image:
   alt: Как добавить события на страницу с addEventListener()
 ---
 
+https://habr.com/ru/companies/timeweb/articles/940722/
+
+https://doka.guide/js/element-addeventlistener/
+
+https://learn.javascript.ru/bubbling-and-capturing
