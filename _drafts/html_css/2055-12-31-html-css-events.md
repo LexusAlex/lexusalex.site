@@ -396,36 +396,190 @@ document.addEventListener("DOMContentLoaded", function(e) {
 Событие можно представить как некий ползунок бегающий по элементам и проверяющий подписки на событие.
 При этом движение происходит по родственным узлам.
 
-Пример
+Рассмотрим пример, навесим события на все вложенные элементы
+
+````html
+<div class="div1">
+    div1
+    <div class="div2">
+      div2
+      <div class="div3">
+        div3
+        <div class="outher">
+          <button class="button">Кнопка</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let d1 = document.querySelector('.div1');
+    let d2 = document.querySelector('.div2');
+    let d3 = document.querySelector('.div3');
+    let d4 = document.querySelector('.outher');
+    let d5 = document.querySelector('.button');
+
+    function target(e) {
+      console.log(e.currentTarget);
+    }
+
+    d1.addEventListener('click', target);
+    d2.addEventListener('click', target);
+    d3.addEventListener('click', target);
+    d4.addEventListener('click', target);
+    d5.addEventListener('click', target);
+  </script>
+````
+
+Здесь вроде бы все очевидно, событие сработает на каждом элементе, но в первую очередь на самой кнопке.
+
+Порядок вывода в консоль будет таким от цели до последнего элемента:
+
+````javascript
+<button class="button">
+<div class="outher">
+<div class="div3">
+<div class="div2">
+<div class="div1">
+````
+
+Здесь важно понять еще раз, что порядок срабатывания события проходит через весь документ, по строго определенному маршруту.
+
+`window → document → <div> → <p> → <button>` кликаем по кнопке
+
+### Фаза погружения (захвата) (Capturing Phase)
+
+Событие идет сверху вглубь до элемента.
+
+`window → document → <html> → <body> → <div> → <p> → <button>`.
+
+Эта фаза редко используется и нужна, чтобы поменять порядок срабатывания события на высоком уровне.
+
+Чтобы ее включить нужно передать в метод `addEventListener` третий параметр `useCapture` = `true`. или `{capture: true}`
+
+````javascript
+element.addEventListener('click', handler, true)
+element.addEventListener('click', handler, {capture: true})
+````
+
+Вернемся к примеру выше и поменяем порядок срабатывания событий в обратную строну
+
+````html
+<div class="div1">
+  div1
+  <div class="div2">
+    div2
+    <div class="div3">
+      div3
+      <div class="outher">
+        <button class="button">Кнопка</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let d1 = document.querySelector('.div1');
+  let d2 = document.querySelector('.div2');
+  let d3 = document.querySelector('.div3');
+  let d4 = document.querySelector('.outher');
+  let d5 = document.querySelector('.button');
+
+  function target(e) {
+    console.log(e.currentTarget);
+  }
+  
+d1.addEventListener('click', target,true);
+d2.addEventListener('click', target,true);
+d3.addEventListener('click', target,true);
+d4.addEventListener('click', target,{capture: true});
+d5.addEventListener('click', target);
+</script>
+````
+
+Теперь оно будет таким:
+
+````javascript
+<div class="div1">
+<div class="div2">
+<div class="div3">
+<div class="outher">
+<button class="button">
+````
+
+То есть даже если мы кликнули по кнопке `.button` сначала оно сработает на элементе `.div1` и далее по дереву ниже.
+
+Это достигается благодаря параметру `{capture: true}`, что указывает как будут работать события на вложенных элементах.
+Режим распространения событий определяет порядок, в котором элементы получают событие.
+
+/////Для слушателей событий, зарегистрированных на цели события, событие находится в целевой фазе, а не в фазах захвата и всплытия. Слушатели событий на этапе захвата вызываются раньше слушателей событий на этапах цели и всплытия.
+
+### Фаза цели (Target Phase)
+
+Событие достигло целевого элемента и сработают все обработчики навещенные на кнопку. Например, их три.
+
+````html
+<div class="div1">
+    div1
+    <div class="div2">
+      div2
+      <div class="div3">
+        div3
+        <div class="outher">
+          <button class="button">Кнопка</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let d1 = document.querySelector('.div1');
+    let d2 = document.querySelector('.div2');
+    let d3 = document.querySelector('.div3');
+    let d4 = document.querySelector('.outher');
+    let d5 = document.querySelector('.button');
+
+    function target(e) {
+      console.log(e.currentTarget);
+    }
+    
+    d5.addEventListener('click', function () {console.log('button click 1')});
+    d5.addEventListener('click', function () {console.log('button click 2')});
+    d5.addEventListener('click', function () {console.log('button click 3')});
+  </script>
+````
+
+````text
+button click 1
+button click 2
+button click 3
+````
+
+Менять порядок срабатывания мы уже умеем, например 
+
+````javascript
+d5.addEventListener('click', function () {console.log('button click 1')});
+d5.addEventListener('click', function () {console.log('button click 2')},true);
+d5.addEventListener('click', function () {console.log('button click 3')});
+````
+
+````text
+button click 2
+button click 1
+button click 3
+````
 
 
 
 https://habr.com/ru/companies/nordclan/articles/707322/
 
-## Всплытие и погружение
+
 
 
 
 
 
 ### **2. Поток событий (Event Flow)**
-События распространяются по документу в 3 фазы:
-1. **Фаза погружения (Capturing Phase)**  
-   Событие движется от `window` к целевому элементу (сверху вниз по DOM).
-2. **Фаза цели (Target Phase)**  
-   Событие достигает целевого элемента.
-3. **Фаза всплытия (Bubbling Phase)**  
-   Событие движется обратно от целевого элемента к `window` (снизу вверх).
-
-```html
-<div id="parent">
-  <button id="child">Click</button>
-</div>
-```
-При клике на `button`:
-1. Погружение: `window` → `document` → `<div>` → `<button>`.
-2. Цель: `<button>`.
-3. Всплытие: `<button>` → `<div>` → `document` → `window`.
 
 https://doka.guide/js/events/
 https://learn.javascript.ru/introduction-browser-events

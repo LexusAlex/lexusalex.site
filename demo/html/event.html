@@ -11,7 +11,9 @@
       div2
       <div class="div3">
         div3
-        <div class="div4">div4</div>
+        <div class="outher">
+          <button class="button">Кнопка</button>
+        </div>
       </div>
     </div>
   </div>
@@ -20,20 +22,20 @@
     let d1 = document.querySelector('.div1');
     let d2 = document.querySelector('.div2');
     let d3 = document.querySelector('.div3');
-    let d4 = document.querySelector('.div4');
-    let b = document.body;
-    let h = document.documentElement;
+    let d4 = document.querySelector('.outher');
+    let d5 = document.querySelector('.button');
 
     function target(e) {
       console.log(e.currentTarget);
     }
 
-    d1.addEventListener('click', target);
-    d2.addEventListener('click', target);
-    d3.addEventListener('click', target);
-    d4.addEventListener('click', target);
-    b.addEventListener('click', target);
-    h.addEventListener('click', target);
+    //d1.addEventListener('click', target);
+    //d2.addEventListener('click', target);
+    //d3.addEventListener('click', target);
+    //d4.addEventListener('click', target);
+    d5.addEventListener('click', function () {console.log('button click 1')});
+    d5.addEventListener('click', function () {console.log('button click 2')},true);
+    d5.addEventListener('click', function () {console.log('button click 3')});
   </script>
 </body>
 </html>
