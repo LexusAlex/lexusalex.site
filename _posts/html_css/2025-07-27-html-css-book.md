@@ -24,6 +24,8 @@ image:
 4. Базовые элементы страницы
    1. [Декларация DOCTYPE](https://lexusalex.site/posts/html-css-doctype/){:target="_blank"}
    2. [Элемент html](https://lexusalex.site/posts/html-css-html-element/){:target="_blank"}
+5. События
+   1. [Событийная модель в html](https://lexusalex.site/posts/html-css-events/){:target="_blank"}
  
 
 ## Сss

@@ -5,40 +5,23 @@
   <title>Title</title>
 </head>
 <body>
-  <div class="div1">
-    div1
-    <div class="div2">
-      div2
-      <div class="div3">
-        div3
-        <div class="outher">
-          <button class="button">Кнопка</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ul class="ul"></ul>
 
   <script>
-    let d1 = document.querySelector('.div1');
-    let d2 = document.querySelector('.div2');
-    let d3 = document.querySelector('.div3');
-    let d4 = document.querySelector('.outher');
-    let d5 = document.querySelector('.button');
+    let ul = document.querySelector('ul');
 
-    function target(e) {
-      //e.stopPropagation();
-      console.log(this);
+    for (i = 0; i < 1000; i++) {
+      let li = document.createElement('li')
+      li.innerHTML = i;
+      li.setAttribute('data-id', i);
+      ul.appendChild(li);
     }
 
-    d1.addEventListener('click', target);
-    d1.addEventListener('click', target);
-    d2.addEventListener('click', target);
-    d3.addEventListener('click', target);
-    d4.addEventListener('click', target);
-    d5.addEventListener('click', target);
-    //d5.addEventListener('click', function () {console.log('button click 1')});
-    //d5.addEventListener('click', function () {console.log('button click 2')},true);
-    //d5.addEventListener('click', function () {console.log('button click 3')});
+    document.body.appendChild(ul);
+
+    ul.addEventListener('click', function (e) {
+      console.log(e.target);
+    })
   </script>
 </body>
 </html>
