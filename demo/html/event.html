@@ -26,16 +26,19 @@
     let d5 = document.querySelector('.button');
 
     function target(e) {
-      console.log(e.currentTarget);
+      //e.stopPropagation();
+      console.log(this);
     }
 
-    //d1.addEventListener('click', target);
-    //d2.addEventListener('click', target);
-    //d3.addEventListener('click', target);
-    //d4.addEventListener('click', target);
-    d5.addEventListener('click', function () {console.log('button click 1')});
-    d5.addEventListener('click', function () {console.log('button click 2')},true);
-    d5.addEventListener('click', function () {console.log('button click 3')});
+    d1.addEventListener('click', target);
+    d1.addEventListener('click', target);
+    d2.addEventListener('click', target);
+    d3.addEventListener('click', target);
+    d4.addEventListener('click', target);
+    d5.addEventListener('click', target);
+    //d5.addEventListener('click', function () {console.log('button click 1')});
+    //d5.addEventListener('click', function () {console.log('button click 2')},true);
+    //d5.addEventListener('click', function () {console.log('button click 3')});
   </script>
 </body>
 </html>
