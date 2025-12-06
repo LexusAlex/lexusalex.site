@@ -1,5 +1,6 @@
 git add _posts/ _includes/ _layouts/ _drafts demo txt.txt && git commit -m "atricle draft" && git push origin main && git push gitlab mai
 
+
   {% if page.layout == 'category' %}
   {% assign taxonomy = page.category.display_name | downcase | slugify %}
   {% assign tag = site.data.taxonomy[taxonomy] %}
