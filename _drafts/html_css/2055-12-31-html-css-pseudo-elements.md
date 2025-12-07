@@ -14,6 +14,7 @@ display: block;
 font-style: italic;
 }
 
+https://gist.github.com/dmitry-osin/c64f7d8eb9ed60cc932c4c56ac7eae22
 
 before / after
 https://github.com/Max-Starling/Notes/blob/master/CSS.md#%D0%BF%D1%81%D0%B5%D0%B2%D0%B4%D0%BE%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D1%8B-%D0%B8-%D0%BF%D1%81%D0%B5%D0%B2%D0%B4%D0%BE%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D1%8B
