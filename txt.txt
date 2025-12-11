@@ -23,3 +23,4 @@ input.text.text2#identifier
 div+h3+p+div друг за другом
 section.s>section.b>main#main>div.container вкладывание друг в друга
 ul.list>li.item*5 кол-во
+fgh
