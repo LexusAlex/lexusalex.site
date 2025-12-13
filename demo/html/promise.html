@@ -7,8 +7,14 @@
 <body>
 
 <script>
-  let promise = new Promise(function (resolve){});
-  console.log(promise);
+
+
+  let promise = new Promise((resolve, reject) => {
+    resolve('ok1');
+  });
+
+  promise.then((result) => {console.log(result)});
+  //console.log(s); // Promise { <state>: "fulfilled", <value>: "Success" }
 </script>
 </body>
 </html>
