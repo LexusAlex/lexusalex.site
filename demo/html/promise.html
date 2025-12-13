@@ -10,11 +10,11 @@
 
 
   let promise = new Promise((resolve, reject) => {
-    resolve('ok1');
+    reject(new Error('error'));
   });
 
-  promise.then((result) => {console.log(result)});
-  //console.log(s); // Promise { <state>: "fulfilled", <value>: "Success" }
+  promise.then((result) => {return result})
+         .catch((error) => {console.log(error)});
 </script>
 </body>
 </html>

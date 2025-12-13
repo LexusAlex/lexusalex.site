@@ -223,18 +223,59 @@ console.log(error); // Promise { <state>: "rejected", <reason>: Error }
 На текущий момент понятно, что первоначальное состояние `Promise` `pending`, потом идет выполнение асинхронной операции и состояние
 с помощью `resolve` становится `fulfilled`, где указывается значение или с помощью `reject` `rejected`, куда передается ошибка.
 
-Мы подошли к моменту когда нам нужно обработать полученный результат.
+Сейчас от `Promise` толку мало. Мы подошли к моменту когда нам нужно обработать полученный результат.
 
 ## then
 
+`then` - Основной метод который будет автоматически вызван когда `Promise` завершен, то есть он находит в любом состоянии кроме `pending`.
 
+````javascript
+let promise = new Promise((resolve, reject) => {
+  resolve('ok1');
+});
+
+promise.then((result) => {console.log(result)}) // ок1
+````
+
+Метод `then` принимает два аргумента, это две функции
+
+- `onFulfill` - функция вызывается когда статус `Promise` становиться `fulfilled`. В параметр этой функции передается результат выполнения операции.
+- `onReject` - функция будет вызвана когда `Promise` переходит в состояние `rejected`. В параметр передается информация об ошибке.
+
+````javascript
+let promise = new Promise((resolve, reject) => {
+  reject(new Error('error'));
+});
+
+promise.then(
+  (result) => {console.log(result)},
+  (error) => {console.log(error)} // Попадем сюда
+);
+````
+
+Если мы заинтересованы только в положительном исходе `Promise`, вторую функцию можно не передавать.
+
+Как можно заметить такой код плохо читается более эффективно использовать для этого метод `catch`.
 
 ## catch
+
+````javascript
+let promise = new Promise((resolve, reject) => {
+  reject(new Error('error'));
+});
+
+promise.then((result) => {return result})
+       .catch((error) => {console.log(error)});
+````
+
+Метод `catch` будет ловить все ошибки.
+
+
 ## finally
 
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
 
-https://doka.guide/js/promise-then/
+
 
 
 `Promise` можно вернуть из обычной функции 
