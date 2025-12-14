@@ -608,6 +608,8 @@ new Promise((resolve, reject) => {
 ````
 
 TODO Расмотреть методы
+TODO Из книжки
+Async Await
 
 ## Итог
 
