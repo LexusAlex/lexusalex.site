@@ -449,10 +449,10 @@ let promise = new Promise((resolve, reject) => {
 
 promise
   .then((result) => {
-    console.log("Успех 1:", result);
+    console.log("1:", result);
   })
   .then((result) => {
-    console.log("Успех 2:", result);
+    console.log("2:", result);
   })
   .catch((error) => {
     // Ошибка пройдет через оба .then() и будет поймана здесь
@@ -460,24 +460,155 @@ promise
   });
 ````
 
-https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
+В примере мы пройдем через все `then`, но попадем только в последний `catch`.
 
+> `catch` это сокращенный вариант then(null, () => {})
+{: .prompt-info }
 
+### Пример 5. Проверка возраста
 
+`Promise` можно вернуть из функции, например как в примере функции `checkAge` проверки возраста.
 
-`Promise` можно вернуть из обычной функции 
+Мы так же для удобства будем логировать весь процесс выполнения кода
 
 ````javascript
-function p(val)
-{
-  return new Promise(resolve => {console.log(val)});
+  function checkAge(age) {
+    return new Promise((resolve, reject) => {
+      console.log('Начало проверки');
+      setTimeout(() => {
+        if (age >= 18) {
+          // Если все хорошо, вызываем resolve с результатом
+          resolve('Доступ разрешен');
+        } else {
+          // Если ошибка, вызываем reject с причиной ошибки
+          reject(new Error('Доступ запрещен: вам еще нет 18'));
+        }
+      }, 2000); // Имитируем задержку в 2 секунды
+    });
 }
+
+checkAge(20)
+  .then(result => {
+    // .then() выполнится, если Promise перешел в состояние 'fulfilled'
+    console.log('Успех:', result);
+  })
+  .catch(error => {
+    // .catch() выполнится, если Promise перешел в состояние 'rejected'
+    console.error('Ошибка:', error);
+  })
+  .finally(() => {
+    // .finally() выполнится в любом случае, после then или catch
+    console.log('Проверка завершена.');
+  });
 ````
+
+Если успешное выполнение функции, тогда вывод консоли будет такой
+
+````text
+Начало проверки
+Успех: Доступ разрешен
+Проверка завершена.
+````
+
+Если ошибка, тогда вывод будет таким
+
+````text
+Начало проверки
+Ошибка: Error: Доступ запрещен: вам еще нет 18
+Проверка завершена.
+````
+
+Обратим внимание на блок `finally` он будет выполнен в любом случае, независимо как завершиться `Promise`
+
+### Пример 6. Возврат положительного значения на месте
+
+Иногда можно вернуть сразу вернуть значение из `Promise` не создавая его объект. Такой код занимает буквалтно одну строчку.
+
+````javascript
+Promise.resolve("ok").then((result) => {console.log(result)}); // ok
+````
+
+Помимо этого можно вернуть массив.
+
+````javascript
+Promise.resolve([66,88,100]).then((result) => {console.log(result[2])}); // 100
+````
+
+Или даже другой `Promise`.
+
+````javascript
+Promise.resolve(Promise.resolve(Promise.resolve(Promise.resolve(true)))).then((result) => {console.log(result)});  // true
+````
+
+Здесь много вложенных `Promise`, при этом не требуется вызывать `then` на каждом из них. Это называется выравниванием `Promise`.
+
+Казалось бы, но такие примеры могут сэкономить и упростить код.
+
+> Лучше не использовать длинные цепочки методов 
+{: .prompt-info }
+
+### Пример 7. Случайный результат `Promise`
+
+````javascript
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    let rand = Math.random();
+    if (rand > 0.5) {
+      console.log(rand);
+      resolve('ок');
+    } else {
+      console.log(rand);
+      reject(new Error('error'));
+    }
+  },2000)
+});
+
+promise
+  .then((success) => {console.log(success)})
+  .catch((error) => {console.log(error)});
+````
+
+Результат будет то `resolve` то `reject`, при обновлении страницы
+
+### Пример 8. Очистка finally(), которая будет сработана в любом случае
+
+Блок `.finally()` будет всегда выполнен и не важно как завершился `Promise`.
+
+````javascript
+new Promise((resolve, reject) => {
+  resolve('ok');
+}).finally(() => {console.log('Загрузка завершена')})
+  .then((r) => {console.log(r); return r;})
+  .then((r) => {console.log(r)})
+````
+
+````text
+Загрузка завершена
+ok
+ok
+````
+
+Так как `.finally()` ничего не знает о состоянии `Promise`, он будет выполнен первым, а далее уже блоки `then`.
+
+То есть у нас получается:
+
+- `.finally()` будет выполнен всегда.
+- У `.finally()` нет аргументов.
+- Результат цепочки не будет изменен, даже если что-то вернуть из `.finally()`
+- Часто используется для очистки общего результата, например скрыть спиннер загрузки
+
+Вот тут например ошибка пройдет через `finally`.
+
+````javascript
+new Promise((resolve, reject) => {
+  reject(new Error('error'));
+}).finally(() => {console.log('Загрузка завершена')})
+  .then((r) => {console.log(r); return r;})
+  .catch((e) => {console.log(e)})
+````
+
 
 ## Итог
 
-
-
-https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise
-https://learn.javascript.ru/async
-https://doka.guide/js/promise/
+- Можно вызывать зависимые друг от друга действия
+- Как правило, все асинхронные действия должны возвращать `Promise`

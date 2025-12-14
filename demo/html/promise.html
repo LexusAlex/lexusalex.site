@@ -7,21 +7,11 @@
 <body>
 <div id="container"></div>
 <script>
-  let promise = new Promise((resolve, reject) => {
+  new Promise((resolve, reject) => {
     reject(new Error('error'));
-  });
-
-  promise
-    .then((result) => {
-      console.log("Успех 1:", result);
-    })
-    .then((result) => {
-      console.log("Успех 2:", result);
-    })
-    .catch((error) => {
-      // Ошибка пройдет через оба .then() и будет поймана здесь
-      console.log(error.message); // Выведет: error
-    });
+  }).finally(() => {console.log('Загрузка завершена')})
+    .then((r) => {console.log(r); return r;})
+    .catch((e) => {console.log(e)})
 </script>
 </body>
 </html>
