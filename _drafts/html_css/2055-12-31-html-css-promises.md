@@ -5,6 +5,7 @@ description: >-
 author: alex
 date: 2055-08-24 15:00:00 +0300
 categories: [Html]
+tags: [javascript]
 image:
   path: /assets/img/posts/main/html.png
   lqip: data:image/webp;base64,UklGRpoAAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSDIAAAARL0AmbZurmr57yyIiqE8oiG0bejIYEQTgqiDA9vqnsUSI6H+oAERp2HZ65qP/VIAWAFZQOCBCAAAA8AEAnQEqEAAIAAVAfCWkAALp8sF8rgRgAP7o9FDvMCkMde9PK7euH5M1m6VWoDXf2FkP3BqV0ZYbO6NA/VFIAAAA
@@ -261,6 +262,12 @@ promise.then(
 
 ## catch
 
+`catch` используется для обработки ошибок при выполнении `Promise`, то есть ловит ошибки переданные в метод `reject`.
+
+Метод принимает параметр
+
+- `onReject` - функция которая будет вызвана когда `Promise` переходит в состояние `rejected`. В параметр передается информация об ошибке.
+
 ````javascript
 let promise = new Promise((resolve, reject) => {
   reject(new Error('error'));
@@ -272,8 +279,186 @@ promise.then((result) => {return result})
 
 Метод `catch` будет ловить все ошибки.
 
+Метод `catch` возвращает новый `Promise`.
 
 ## finally
+
+Вызывается когда `Promise` перешел в состояние `fulfilled`, или в `rejected`.
+
+`finally()` вызывается вне зависимости от того как завершился `Promise`.
+
+Обычно `finally()` подчищает, то что нужно сделать в конце операции, скрыть индикаторы, закрыть меню и т.д.
+
+## Общая схема работы
+
+Теперь когда теоретические моменты выяснены, можно разобрать общую схему как работает `Promise`.
+
+- `Promise` создан, его состояние `pending`.
+  -  Вызываем `resolve`, состояние `fulfilled`
+    - Обрабатываем данные `tnen`
+      - Возвращаем новый `Promise`
+        - `Promise` создан, его состояние `pending`.
+          - Вызываем `resolve` или `reject`
+            - Обрабатываем данные `tnen` или `catch`
+              - Возвращаем новый `Promise`
+                - `Promise` создан, его состояние `pending`.
+                  - и так по кругу
+  -  Вызываем `reject`, состояние `rejected`
+    - Обрабатываем данные `tnen` с параметром функцией `onReject` или `catch` с параметром функцией `onReject`
+      - В браузер выводится ошибка `Erorr`
+        - `Promise` создан, его состояние `pending`.
+          - Вызываем `resolve` или `reject`
+            - Обрабатываем данные `tnen` или `catch`
+              - Возвращаем новый `Promise`
+                - `Promise` создан, его состояние `pending`.
+                  - и так по кругу
+
+Как можно видеть, можно строить целые цепочки `Promise`, что дает невероятную гибкость, что позволяет создавать зависимые асинхронные операции, в примерах рассмотрим это подробнее.
+
+## Примеры
+
+Рассмотрим на примерах различные возможности `Promise`.
+
+### Пример 1. Успешное выполнение
+
+Спустя 3 секунды добавим контент в пустой `div`.
+
+````html
+<div id="container"></div>
+<script>
+  new Promise((resolve) => {
+    // Асинхронная операция
+    setTimeout(() => {
+      resolve("data");
+    }, 3000);
+  }).then((result) => {
+    document.getElementById('container').innerHTML = result;
+  });
+</script>
+````
+
+В примере мы обработали успешное выполнение `Promise`
+
+### Пример 2. Успешное выполнение и ошибка при выполнении операции
+
+Теперь представим что контейнера куда нужно добавить контент не существует, тогда будет вызван `reject`, тогда впоследствии ошибку вставим в документ 
+
+В противном случае если контейнер найден, тогда вставим контент непосредственно в документ.
+
+````html
+<div id="container"></div>
+<script>
+  new Promise((resolve,reject) => {
+    // Асинхронная операция
+    setTimeout(() => {
+      let container = document.getElementById('container1');
+      if (container !== null) {
+        resolve({'element': container, 'data': 'data'});
+      } else {
+        reject(new Error('Элемента не существует'));
+      }
+    }, 3000);
+  }).then((result) => {
+    result.element.innerHTML = result.data;
+  },(error) => { document.body.innerHTML = '<b>'+error+'</b>'});
+</script>
+````
+
+В примере мы имеем элемент которого может не существовать, мы его проверяем его наличие в дереве и принимаем решение о дальнейших действиях.
+
+Ошибки рекомендуют обрабатывать с помощью `catch`.
+
+Перепишем этот пример по-другому, добавив `catch`
+
+````html
+<div id="container"></div>
+<script>
+  new Promise((resolve, reject) => {
+    // Асинхронная операция
+    setTimeout(() => {
+      let container = document.getElementById('container1');
+      if (container !== null) {
+        resolve({'element': container, 'data': 'data'});
+      } else {
+        reject(new Error('Элемента не существует'));
+      }
+    }, 3000);
+  }).then((result) => {
+    result.element.innerHTML = result.data;
+  }).catch((error) => {
+    document.body.innerHTML = '<b>' + error + '</b>'
+  });
+</script>
+````
+
+Вот так код читается гораздо лучше. По мне это лучший вариант использования.
+
+> `catch` ловит все ошибки
+{: .prompt-info }
+
+### Пример 3. Передача результата в следующий `Promise`
+
+Теперь у нас несколько `then` и на каждом идет какое-то сложное вычисление.
+
+````html
+<div id="container"></div>
+<script>
+  let container = document.getElementById('container');
+  new Promise((resolve, reject) => {
+    resolve(1);
+  }).then((result) => { return result + 1;})
+    .then((result) => { return result + 1;})
+    .then((result) => { return result + 1;})
+    .then((result) => { return result + 1;})
+    .then((final) => {container.textContent = `Итоговый результат: ${final}`;})
+</script>
+````
+
+Как мы понимаем результат будет накапливаться, и в итоге получаем 5, как сумму всех результатов.
+
+Пример показывает, что результат можно видоизменять на каждой итерации.
+
+Перепишем пример, с эмулированием асинхронной операции.
+
+````html
+<div id="container"></div>
+<script>
+  let container = document.getElementById('container');
+  new Promise((resolve, reject) => {
+    resolve(1);
+  }).then((result) => { setTimeout(() => {container.textContent = `Итоговый результат: ${result}`; },3000);return result + 1;})
+    .then((result) => { setTimeout(() => {container.textContent = `Итоговый результат: ${result}`; },6000);return result + 1;})
+    .then((result) => { setTimeout(() => {container.textContent = `Итоговый результат: ${result}`; },9000);return result + 1;})
+    .then((result) => { setTimeout(() => {container.textContent = `Итоговый результат: ${result}`; },12000);return result;})
+    .then((final) => {container.textContent = `Итоговый результат: ${final}`;})
+</script>
+````
+
+Тут мы устанавливаем начальное значение и каждые 3 секунды увеличиваем его, добавляя, при этом в `DOM` дерево элементов.
+
+В конце пишем итоговый результат, хоть и это не обязательно.
+
+### Пример 4. Возникновение ошибки в then. О необходимости catch
+
+`catch` перехватывает ошибки которые возникают во всех элементах цепочки
+
+````javascript
+let promise = new Promise((resolve, reject) => {
+  reject(new Error('error'));
+});
+
+promise
+  .then((result) => {
+    console.log("Успех 1:", result);
+  })
+  .then((result) => {
+    console.log("Успех 2:", result);
+  })
+  .catch((error) => {
+    // Ошибка пройдет через оба .then() и будет поймана здесь
+    console.log(error.message); // Выведет: error
+  });
+````
 
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
 
