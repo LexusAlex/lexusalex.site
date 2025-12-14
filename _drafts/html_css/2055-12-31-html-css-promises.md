@@ -607,6 +607,7 @@ new Promise((resolve, reject) => {
   .catch((e) => {console.log(e)})
 ````
 
+TODO Расмотреть методы
 
 ## Итог
 
