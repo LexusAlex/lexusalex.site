@@ -607,6 +607,24 @@ new Promise((resolve, reject) => {
   .catch((e) => {console.log(e)})
 ````
 
+### Пример 9.`Promise.all` Ждем выполнения сразу нескольких промисов
+
+`Promise.all()` - Возвращает новый `Promise`, когда все переданные `Promise` в метод `all` в виде массива будут разрешены.
+
+````javascript
+function promise(type) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(type), 2000)
+    });
+  }
+  let all = Promise.all([promise(1),promise(2),promise(3)]);
+  all.then(([r1,r2,r3]) => {
+    console.log(r1);
+    console.log(r2);
+    console.log(r3);
+  })
+````
+
 TODO Расмотреть методы
 TODO Из книжки
 Async Await

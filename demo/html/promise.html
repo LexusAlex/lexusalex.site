@@ -7,11 +7,18 @@
 <body>
 <div id="container"></div>
 <script>
-  new Promise((resolve, reject) => {
-    reject(new Error('error'));
-  }).finally(() => {console.log('Загрузка завершена')})
-    .then((r) => {console.log(r); return r;})
-    .catch((e) => {console.log(e)})
+  function promise(type) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(type), 2000)
+    });
+  }
+  let all = Promise.all([promise(1),promise(2),promise(3)]);
+  all.then(([r1,r2,r3]) => {
+    console.log(r1);
+    console.log(r2);
+    console.log(r3);
+  })
+  console.log(all);
 </script>
 </body>
 </html>
