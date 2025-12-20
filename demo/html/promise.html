@@ -12,13 +12,17 @@
       setTimeout(() => resolve(type), 2000)
     });
   }
-  let all = Promise.all([promise(1),promise(2),promise(3)]);
-  all.then(([r1,r2,r3]) => {
+
+  let all = Promise.all([88, {}, promise(3)]);
+  all.then(([r1, r2, r3]) => {
     console.log(r1);
     console.log(r2);
     console.log(r3);
+    console.log(all);
+  }).catch((error) => {
+    console.log(error)
   })
-  console.log(all);
+
 </script>
 </body>
 </html>
