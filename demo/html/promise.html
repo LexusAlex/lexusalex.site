@@ -7,21 +7,30 @@
 <body>
 <div id="container"></div>
 <script>
-  function promise(type) {
+
+  function load(url, url2) {
     return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(type), 2000)
+      let image = new Image();
+      image.src = url;
+      image.addEventListener('load', () => {
+        resolve(image);
+      });
+      image.addEventListener('error', (error) => {
+        if (!url2 || image.src === url2) {
+          reject(error);
+        } else {
+          image.src = url2;
+        }
+      });
     });
   }
 
-  let all = Promise.all([88, {}, promise(3)]);
-  all.then(([r1, r2, r3]) => {
-    console.log(r1);
-    console.log(r2);
-    console.log(r3);
-    console.log(all);
+  load('https://repository-images.githubusercontent.com/133151614/520b1700-7305-11e9-9038-99237803609b', 'https://repository-images.githubusercontent.com/478183466/4335f975-f6ff-4115-bd0c-3f3a6534f783').then((i) => {
+    let container = document.getElementById('container');
+    container.appendChild(i);
   }).catch((error) => {
-    console.log(error)
-  })
+    console.error('failed');
+  });
 
 </script>
 </body>

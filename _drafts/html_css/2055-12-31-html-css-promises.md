@@ -1,5 +1,5 @@
 ---
-title: Использование Promise
+title: Использование Promise на примерах
 description: >-
   Promise базовый способ работать с отложенными вычислениями
 author: alex
@@ -302,7 +302,7 @@ promise.then((result) => {return result})
             - Обрабатываем данные `tnen` или `catch`
               - Возвращаем новый `Promise`
                 - `Promise` создан, его состояние `pending`.
-                  - и так по кругу
+                  - и так по кругу...
   -  Вызываем `reject`, состояние `rejected`
     - Обрабатываем данные `tnen` с параметром функцией `onReject` или `catch` с параметром функцией `onReject`
       - В браузер выводится ошибка `Erorr`
@@ -311,7 +311,7 @@ promise.then((result) => {return result})
             - Обрабатываем данные `tnen` или `catch`
               - Возвращаем новый `Promise`
                 - `Promise` создан, его состояние `pending`.
-                  - и так по кругу
+                  - и так по кругу...
 
 Как можно видеть, можно строить целые цепочки `Promise`, что дает невероятную гибкость, что позволяет создавать зависимые асинхронные операции, в примерах рассмотрим это подробнее.
 
@@ -607,7 +607,7 @@ new Promise((resolve, reject) => {
   .catch((e) => {console.log(e)})
 ````
 
-### Пример 9.`Promise.all` Ждем выполнения сразу нескольких промисов
+### Пример 9.`Promise.all` Ждем выполнения сразу нескольких `Promise`
 
 `Promise.all()` - Возвращает новый `Promise`, когда все переданные `Promise` в метод `all` в виде массива будут разрешены, выполнены
 
@@ -658,14 +658,296 @@ all.then(([r1, r2, r3]) => { // Этот блок игнорируется
 
 - Метод `Promise.all()` принимает массив `Promise` и возвращает новый `Promise`.
 - Новый `Promise` будет завершен, когда будут завершены все переданные `Promise`, а результатом будет массив результатов переданных `Promise`.
-- Порядок элементов массива важен, первый `Promise` будет всегда первым
+- Порядок элементов массива важен, первый `Promise` будет всегда первым.
 - Частый пример сделать из всех запросов, товаров `Promise` и ждать их выполнения с `Promise.all()`.
-- Если в одном `Promise` произошла ошибка, то `Promise` от `Promise.all()` немедленно завершается с ошибкой.
+- Если в одном `Promise` произошла ошибка, то `Promise` от `Promise.all()` немедленно завершается с ошибкой, с ошибкой отклоненного `Promise`.
 - `Promise.all()` ничего не отменяет и не следит за выполнением.
 - Если передать в массив другие типы данных, они будут возвращены новым `Promise` как есть.
+- `Promise.all()` действует по принципу все или ничего.
+
+### Пример 10.`Promise.allSettled()` Ждем выполнения сразу нескольких `Promise`, в любом случае.
+
+> `allSettled()` в отличие от all() не прерывает свое выполнение, даже если в одном из `Promise` произошла ошибка.
+{: .prompt-info }
+
+`Promise.allSettled()` принимает коллекцию - массив `Promise`, после чего возвращает новый `Promise`, с результатами всех переданных `Promise`.
+
+В примере, в переменные `r1,r2,r3` попадут объекты `Object { status: "fulfilled", value: 2 }`.
+
+````javascript
+function promise(type) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(type), 2000)
+  });
+}
+let all = Promise.allSettled([promise(1),promise(2),promise(3)]);
+all.then(([r1,r2,r3]) => {
+  console.log(r1);
+  console.log(r2);
+  console.log(r3);
+  console.log(all);
+})
+````
+
+То есть в `all` будет `Promise`, с массивом объектов.
+
+Допустим первый `Promise` был успешно разрешен, а последующие завершены с ошибкой.
+
+````javascript
+function promise(type) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => (type === 1) ? resolve(type) : reject(new Error('error')), 2000)
+  });
+}
+
+let all = Promise.allSettled([promise(1), promise(2), promise(3)]);
+all.then(([r1, r2, r3]) => {
+  console.log(r1);
+  console.log(r2);
+  console.log(r3);
+  console.log(all);
+}).catch((error) => {
+  console.log(error) // Код, которые не выполнится несмотря на ошибки
+})
+
+/* 
+Object { status: "fulfilled", value: 1 }
+Object { status: "rejected", reason: Error }
+Object { status: "rejected", reason: Error }
+ */
+````
+
+Как видим код не упал, мы даже не попали в `catch`. В результате у нас массив с объектами результатов `Promise`.
+
+Очень удобно перебирать результат на месте. Примерно так:
+
+````javascript
+function promise(type) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => (type === 1) ? resolve(type) : reject(new Error('error')), 2000)
+  });
+}
+
+let all = Promise.allSettled([promise(1), promise(2), promise(3),promise(1),promise(34)]);
+all.then((res) => {
+  res.forEach((item, num) => {
+    console.log(`${num} ${item.status}`)
+  })
+})
+
+/*
+0 fulfilled
+1 rejected
+2 rejected
+3 fulfilled
+4 rejected
+ */
+````
+
+Какие выводы можно сделать: 
+
+- `Promise.allSettled()` удобно применять в независимых запросах к `api`, когда результаты не влияют на общий результат, в зависимых запросах лучше использовать метод `Promise.all()`.
+- `Promise.allSettled()` всегда ждет завершения всех `Promise` в независимости от их результата.
+- Есть проблема, если браузер не поддерживает `Promise.allSettled()`, тогда лучше для этого использовать полифил.
+
+### Пример 11.`Promise.race()` Получаем результат `Promise` который выполниться быстрее.
+
+`Promise.race()` принимает массив `Promise`, возвращает выполненный или отклоненный `Promise`, в зависимости от того с каким результатом завершился первый из переданных `Promise` со значением или отказом. 
+
+````javascript
+let p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1)
+  }, 10000)
+});
+
+let p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(2)
+  }, 100)
+});
+
+let p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(3)
+  }, 1000)
+});
+
+Promise.race([p1,p3,p2]).then((res) => {
+  console.log(res);
+})
+````
+
+В примере мы передаем три `Promise`, самый быстрый из них `p2`, он и вернется в качестве результата.
+
+При этом даже если `Promise` завершился с ошибкой, он все равно будет возвращен, но только если он был выполнен быстрее всех.
+Здесь мы уже попадем в блок `catch`.
+
+````javascript
+let p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1)
+  }, 10000)
+});
+
+let p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    //resolve(2)
+    reject(new Error('error'));
+  }, 100)
+});
+
+let p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(3)
+  }, 1000)
+});
+
+Promise.race([p1,p3,p2]).then((res) => {
+  console.log(res); // Этот код не сработает, так как у нас p2 выполнился быстрее
+})
+  .catch((error) => {console.log(error)}) // Сработает эта строчка
+````
+
+Основные выводы:
+
+- `Promise.race()` возвращает самый быстрый `Promise` из всех переданных
+- Если передать в `Promise.race()` пустой массив, то он никогда не сработает.
+- Если в массив передать не `Promise`, все зависит в каком порядке передать, то что было раньше передано будет выполнено первым.
+- Какой первый `Promise` выполнился, то будет возвращен, результат остальных будет проигнорирован.
+
+### Пример 12.`Promise.any()` Первый успешно разрешенный `Promise`
+
+`Promise.any()` возвращает первый переданный успешный `Promise`.
+
+````javascript
+let p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1)
+  }, 10000)
+});
+
+let p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    //resolve(2)
+    reject(new Error('error'));
+  }, 100)
+});
+
+let p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(3)
+  }, 1000)
+});
 
 
-TODO Расмотреть методы
+Promise.any([p1,p3,p2]).then((res) => {
+  console.log(res);
+})
+  .catch((error) => {console.log(error)})
+````
+
+В примере выше вернется `Promise` `p3`, так как `p2` выполнился с ошибкой и нам не подходит.
+
+Все `Promise` завершаются с ошибкой
+
+````javascript
+let p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    //resolve(1)
+    reject(new Error('error'));
+  }, 10000)
+});
+
+let p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    //resolve(2)
+    reject(new Error('error'));
+  }, 100)
+});
+
+let p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    //resolve(3)
+    reject(new Error('error'));
+  }, 1000)
+});
+
+
+Promise.any([p1,p3,p2]).then((res) => {
+  console.log(res);
+})
+  .catch((error) => {console.log(error)})
+
+// AggregateError: No Promise in Promise.any was resolved
+````
+Что это нам дает:
+
+- `Promise.any()` вернет первый успешно выполненный `Promise`.
+- Если передать пустой массив, то будет сработан обработчик `catch`.
+- Если передать в массив не `Promise`, то будет возвращен первый переданных аргумент.
+
+### Промежуточный итог статических методов
+
+Выше рассмотрели некоторые статические методы, подытожим, чтобы видеть общую картину.
+
+- `Promise.resolve()` - создает успешно выполненный `Promise`.
+  - Код `let p = Promise.resolve(123).then((res) => {console.log(res)});` будет идентичен `let p1 = new Promise((resolve, reject) => {resolve(123);}).then((res) => {console.log(res)})`.
+- `Promise.reject()` - создает `Promise` завершенный с ошибкой.
+  - По сути код `let p = Promise.reject(new Error('error')).catch((error) => {console.log(error)});` идентичен коду `let p1 = new Promise((resolve, reject) => {reject(new Error('error'));}).catch((error) => {console.log(error)})`
+- `Promise.all()` - ожидает выполнение всех `Promise`.
+- `Promise.allSettled()` - ожидает выполнение всех `Promise`, при этом неважно как завершился `Promise`.
+- `Promise.any()` - первый успешно разрешенный `Promise`.
+- `Promise.race()` - `Promise` который выполниться быстрее всех.
+
+| Метод                    | Выполняется (когда...)                            | Отклоняется (когда...)                         | Значение при выполнении                                |
+|:-------------------------|:--------------------------------------------------|:-----------------------------------------------|:-------------------------------------------------------|
+| **`Promise.all`**        | Все промисы **успешно** выполнены                 | **Первый** промис отклонился                   | Массив результатов всех промисов                       |
+| **`Promise.allSettled`** | **Все** промисы завершены (успешно или с ошибкой) | **Никогда** (всегда выполняется)               | Массив объектов со статусом (`{status, value/reason}`) |
+| **`Promise.race`**       | **Первый** промис (любой) завершился              | **Первый** промис (любой) завершился с ошибкой | Значение/ошибка первого завершившегося промиса         |
+| **`Promise.any`**        | **Первый** промис **успешно** выполнился          | **Все** промисы отклонились                    | Значение первого успешно выполненного промиса          |
+
+
+### Пример 13. Загрузить изображение с помощью резервной копии
+
+Если изображение не загрузилось по какой-либо причине использовать резервный адрес загрузки изображения.
+
+````javascript
+function load(url, url2) {
+  return new Promise((resolve, reject) => {
+    let image = new Image();
+    image.src = url;
+    image.addEventListener('load', () => {
+      resolve(image);
+    });
+    image.addEventListener('error', (error) => {
+      if (!url2 || image.src === url2) {
+        reject(error);
+      } else {
+        image.src = url2;
+      }
+    });
+  });
+}
+
+load('https://repository-images.githubusercontent.com/133151614/520b1700-7305-11e9-9038-99237803609b', 'https://repository-images.githubusercontent.com/478183466/4335f975-f6ff-4115-bd0c-3f3a6534f783').then((i) => {
+  let container = document.getElementById('container');
+  container.appendChild(i);
+}).catch((error) => {
+  console.error('failed');
+});
+````
+
+Функция `load` возвращает `Promise`, где сначала пытаемся загрузить изображение с первого адреса, если это получается генерироваться событие `load` и `Promise` успешно разрешается.
+
+Если изображение не загрузилось, сработает событие `error`, где уже проверяем и пытаемся загрузить второе изображение, если это не получилось то `Promise` завершается с ошибкой.
+
+Если все ок, второе изображение загружается.
+
+В зависимости от результата, нужное изображение будет вставлено в дерево.
+
+
+
 TODO Из книжки
 Async Await
 
