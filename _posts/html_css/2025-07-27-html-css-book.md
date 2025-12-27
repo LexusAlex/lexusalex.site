@@ -30,6 +30,8 @@ image:
    2. [Элемент html](https://lexusalex.site/posts/html-css-html-element/){:target="_blank"}
 5. События
    1. [Событийная модель в html](https://lexusalex.site/posts/html-css-events/){:target="_blank"}
+6. Асинхронность
+   1. [Использование Promise на примерах](https://lexusalex.site/posts/html-css-promises/){:target="_blank"}
  
 
 ## Сss
