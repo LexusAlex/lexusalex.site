@@ -11,9 +11,12 @@ image:
   alt: Html и Сss для простых людей
 ---
 
-В книге рассматриваются многие аспекты различных технологий веб-разработки, базовыми которой являются `html` и `css`.
+В книге рассматриваются многие аспекты различных технологий веб-разработки среди них
+- `javascript`
+- `http`
+- `typescript`
 
-Также рассматривается материал по `javascript`.
+Базовыми из которых являются `html` и `css`.
 
 ## Html
 
@@ -31,8 +34,7 @@ image:
 5. События
    1. [Событийная модель в html](https://lexusalex.site/posts/html-css-events/){:target="_blank"}
 6. Асинхронность
-   1. [Использование Promise на примерах](https://lexusalex.site/posts/html-css-promises/){:target="_blank"}
- 
+   1. [Использование Promise на примерах](https://lexusalex.site/posts/html-css-javascript-promises/){:target="_blank"}
 
 ## Сss
 
