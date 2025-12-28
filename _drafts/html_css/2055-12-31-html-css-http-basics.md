@@ -1,3 +1,55 @@
+````nginx configuration
+server {
+    listen 80;
+    server_name test1.local;
+}
+server {
+    listen 80;
+    server_name test2.local;
+}
+server {
+    listen 80;
+    server_name test3.local;
+}
+````
+
+При выполнении запроса любым клиентом веб-сервер `nginx` проверяет заголовок `HOST`.
+Если его значение не соответствует ни одному хосту, то запрос идет по умолчанию для этого порта, в базовом варианте это будет первый найденный сервер.
+Можно задать директиву `default_server` для порта.
+
+Если отправить запрос без заголовка `HOST` получим контент первого хоста `test1.local`
+
+````http request
+GET http://127.0.0.1:8080/
+````
+
+Зададим `default_server` для хоста `test3.local`
+
+````nginx configuration
+server {
+    listen 80 default_server;
+    server_name test3.local;
+}
+````
+
+Получим контент `test3.local`. 
+
+Если нужно жестко обработать запросы без заголовка `HOST` укажем хост `default.conf`.
+
+````nginx configuration
+server {
+   listen 80;
+   return 444;
+}
+````
+
+При этом сервер закроет соединение с ответом `Empty reply from server`
+
+Директиве `server_name` можно задать несколько имен
+
+
+https://nginx.org/ru/docs/http/request_processing.html
+
 curl -v 127.0.0.1
 *   Trying 127.0.0.1:80...
 * Connected to 127.0.0.1 (127.0.0.1) port 80
