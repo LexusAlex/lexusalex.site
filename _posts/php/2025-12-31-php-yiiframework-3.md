@@ -19,3 +19,4 @@ image:
 - [Api](https://www.yiiframework.com/doc/api/3.0)
 - [Статус релизов](https://www.yiiframework.com/status/3.0)
 - [Официальный анонс](https://www.yiiframework.com/news/777/yii3-is-released)
+- [Анонс на хабре](https://habr.com/ru/articles/982174/)
