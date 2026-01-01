@@ -1,5 +1,6 @@
 ###
 GET http://127.0.0.1:8080/
+Host: test1.local
 ###
 GET http://127.0.0.1:8080/
 Host: test2.local
