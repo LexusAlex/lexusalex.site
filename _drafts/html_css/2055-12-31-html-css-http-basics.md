@@ -6,36 +6,6 @@ categories: [Nginx]
 ---
 
 
-## Методы запроса
-
-### GET
-read
-
-### PUT
-place, replace
-
-### POST
-add to collection
-
-### PATCH
-edit
-
-### DELETE
-delete
-
-### HEAD
-read
-
-### CONNECT
-### OPTIONS
-### TRACE
-
-Получать информацию GET,HEAD,OPTIONS
-Иденпотентные PUT,DELETE
-Неиденпотентный POST,PATCH
-
-
-
 
 ## Коды состояний ответа http
 
@@ -276,6 +246,8 @@ server {
 Директиве `server_name` можно задать несколько имен
 
 Connection
+
+Передать метод GET тело запроса, и посмотреть что будет
 
 
 https://nginx.org/ru/docs/http/request_processing.html
