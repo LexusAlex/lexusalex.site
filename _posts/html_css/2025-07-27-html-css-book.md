@@ -35,6 +35,8 @@ image:
    1. [Событийная модель в html](https://lexusalex.site/posts/html-css-events/){:target="_blank"}
 6. Асинхронность
    1. [Использование Promise на примерах](https://lexusalex.site/posts/html-css-javascript-promises/){:target="_blank"}
+7. Сетевое взаимодействие
+   1. [HTTP. База](https://lexusalex.site/posts/html-css-http-base/){:target="_blank"}
 
 ## Сss
 
