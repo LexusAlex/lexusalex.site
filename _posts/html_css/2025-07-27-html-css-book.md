@@ -37,6 +37,7 @@ image:
    1. [Использование Promise на примерах](https://lexusalex.site/posts/html-css-javascript-promises/){:target="_blank"}
 7. Сетевое взаимодействие
    1. [HTTP. База](https://lexusalex.site/posts/html-css-http-base/){:target="_blank"}
+   2. [HTTP. Методы запроса](https://lexusalex.site/posts/html-css-http-methods/){:target="_blank"}
 
 ## Сss
 

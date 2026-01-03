@@ -3,7 +3,7 @@ title: HTTP. Методы запроса
 description: >-
   Виды методов http запроса
 author: alex
-date: 2056-01-01 23:30:00 +0300
+date: 2026-01-02 23:30:00 +0300
 categories: [Html,HTTP]
 image:
   path: /assets/img/posts/main/html.png
@@ -19,7 +19,7 @@ image:
 
 Цель метода - получение информации `READ`, данные можно только извлекать.
 
-````http
+````text
 GET /index.html
 ````
 
@@ -47,7 +47,7 @@ Accept: application/json
 
 Еще немного примеров
 
-````http
+````text
 GET https://www.google.com/search?q=что+такое+http&hl=ru&num=10
 GET https://shop.example.com/catalog/laptops?brand=apple&sort=price_asc
 GET /api/users/123
@@ -276,7 +276,7 @@ Access-Control-Max-Age: 86400
 
 `PUT` создает новый ресурс или заменяет (обновляет) его данными из тела запроса `PLACE`, `REPLACE`.
 
-````http
+````text
 PUT https://api.example.com/users/123
 ````
 
@@ -508,11 +508,83 @@ DELETE /api/articles/123?force=true // Жесткое удаление с пра
 
 ## CONNECT
 
+Используется для установки туннеля между клиентом и целевым сервером.
+
+````text
+CONNECT server.example.com:80 HTTP/1.1
+Host: server.example.com:80
+Proxy-Authorization: basic aGVsbG86d29ybGQ=
+````
+
+Это больше технический метод запроса
+
+Клиент отправляет запрос прокси серверу
+
+````text
+CONNECT google.com:443 HTTP/1.1
+Host: google.com:443
+Proxy-Authorization: Basic dXNlcjpwYXNzd29yZA==
+````
+
+Далее прокси-сервер проверяет разрешено ли вообще подключаться этому пользователю и разрешены ли `CONNECT` соединения.
+
+Если соединение разрешено, тогда вернется ответ
+
+````http
+HTTP/1.1 200 Connection established
+````
+
+Если нет, тогда вернется ошибка например, `403 Forbidden` или `407 Proxy Authentication Required`.
+
+С этого момента прокси сервер, становиться переадресатом и передает все данные на сервер.
+
+`CONNECT` не имеет тела запроса. Тело - это весь последующий трафик, передаваемый через туннель.
+
 ## TRACE
+
+Технический метод предоставляющий механизм отладки используется для диагностических целей
+
+`TRACE` позволяет клиенту увидеть, какой именно запрос дошел до сервера.
+
+### Как это работает
+
+- Клиент отправляет запрос методом `TRACE` на сервер.
+- Запрос проходит через промежуточные узлы, каждый из них может видоизменять заголовки запроса
+- Сервер обрабатывает запрос и не выполняет никаких действий с ресурсом. Сервер формирует ответ `200 ок` с полным содержимым запроса клиента.
+
+````shell
+curl -X TRACE http://example.com/resource -H "My-Custom-Header: Hello" -H "Another-Header: World" -v
+````
+
+````http
+HTTP/1.1 200 OK
+Content-Type: message/http
+
+TRACE /resource HTTP/1.1
+Host: example.com
+User-Agent: curl/7.68.0
+Accept: */*
+My-Custom-Header: Hello
+Another-Header: World
+````
+
+Основная задача `TRACE` - отладка, что помогает ответить на вопросы
+
+- Какие заголовки добавляет мой корпоративный прокси сервер?
+- Не изменяет ли файрвол мой запрос?
+- Правильно ли мой клиент формирует запрос?
+
+> Несмотря на всю полезность `TRACE`, сегодня он считается опасным методом и почти всегда отключен на современных браузерах, угроза Cross-Site Tracing (XST)
+{: .prompt-info }
+
+> Рекомендуется всегда выключать метод `TRACE` в конфигурации веб-сервера, по умолчанию он выключен
+{: .prompt-info }
+
+## Итог
 
 Если рассматривать CRUD операции, то можно сказать что:
 
-- CREATE - POST
-- READ - GET
-- UPDATE - PUT
-- DELETE - DELETE
+- `CREATE` - `POST`
+- `READ` - `GET`
+- `UPDATE` - `PUT`
+- `DELETE` - `DELETE`
