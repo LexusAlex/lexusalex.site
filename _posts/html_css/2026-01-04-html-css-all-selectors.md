@@ -15,21 +15,30 @@ image:
 
 В данной таблице кратко перечислю селекторы `css` с их назначением. В столбце "дополнительно", будут ссылки на примеры.
 
-| Селектор        |           Назначение            |                        Описание                        |             Что попадает             | Дополнительно                       | Поддержка  | Специфичность |
-|-----------------|:-------------------------------:|:------------------------------------------------------:|:------------------------------------:|-------------------------------------|------------|:-------------:|
-| `*`             |     Универсальный селектор      |           Попадают все элементы на странице            |      `<body><div></div></body>`      | [1](#universal-1)                   | `baseline` |     0,0,0     |
-| `div`           |          Селектор тега          |             Все элементы `div` на странице             |       `<div></div><div></div>`       | [1](#tag-1)                         | `baseline` |     0,0,1     |
-| `#header`       |        Селектор по `id`         |                Элемент с указанным `id`                |      `<div id="header"></div>`       | [1](#id-1)                          | `baseline` |     1,0,0     |
-| `.title`        |       Селектор по классу        |            Все элементы с указанным классом            |    `<span class='title'></span>`     | [1](#class-1)                       | `baseline` |     0,1,0     |
-| `.red.blue`     |       Составной селектор        |    Применим для классов и атрибутов, пишется слитно    |    `<div class='red blue'></div>`    | [1](#composite-1) [2](#composite-2) | `baseline` |     0,2,0     |
-| `[lang]`        |      Элементы с атрибутом       |             Все элементы где есть атрибут              |       `<div lang="ru"></div>`        | [1](#attr-1)                        | `baselne`  |     0,1,0     |
-| `[lang="en"]`   | Элементы со значением атрибута  | Все элементы, где у атрибута есть конкретное значение  |       `<div lang="en"></div>`        | [1](#attr-2)                        | `baselne`  |     0,1,0     |
-| `[class="red"]` | Значение атрибута как подстрока | Все элементы, где есть значение атрибута в любом месте | `<div class="greenredyellow"></div>` | [1](#attr-3)                        | `baselne`  |     0,1,0     |
-|                 |                                 |                                                        |                                      |                                     |            |               |
-|                 |                                 |                                                        |                                      |                                     |            |               |
-|                 |                                 |                                                        |                                      |                                     |            |               |
-|                 |                                 |                                                        |                                      |                                     |            |               |
-|                 |                                 |                                                        |                                      |                                     |            |               |
+| Селектор          |                     Назначение                     |                               Описание                               |             Что попадает             | Дополнительно                       | Поддержка  | Специфичность |
+|-------------------|:--------------------------------------------------:|:--------------------------------------------------------------------:|:------------------------------------:|-------------------------------------|------------|:-------------:|
+| `*`               |               Универсальный селектор               |                  Попадают все элементы на странице                   |      `<body><div></div></body>`      | [1](#universal-1)                   | `baseline` |     0,0,0     |
+| `div`             |                   Селектор тега                    |                    Все элементы `div` на странице                    |       `<div></div><div></div>`       | [1](#tag-1)                         | `baseline` |     0,0,1     |
+| `#header`         |                  Селектор по `id`                  |                       Элемент с указанным `id`                       |      `<div id="header"></div>`       | [1](#id-1)                          | `baseline` |     1,0,0     |
+| `.title`          |                 Селектор по классу                 |                   Все элементы с указанным классом                   |    `<span class='title'></span>`     | [1](#class-1)                       | `baseline` |     0,1,0     |
+| `.red.blue`       |                 Составной селектор                 |           Применим для классов и атрибутов, пишется слитно           |    `<div class='red blue'></div>`    | [1](#composite-1) [2](#composite-2) | `baseline` |     0,2,0     |
+| `[lang]`          |                Элементы с атрибутом                |                    Все элементы где есть атрибут                     |       `<div lang="ru"></div>`        | [1](#attr-1)                        | `baselne`  |     0,1,0     |
+| `[lang="en"]`     |           Элементы со значением атрибута           |        Все элементы, где у атрибута есть конкретное значение         |       `<div lang="en"></div>`        | [1](#attr-2)                        | `baselne`  |     0,1,0     |
+| `[class*="red"]`  |          Значение атрибута как подстрока           |        Все элементы, где есть значение атрибута в любом месте        | `<div class="greenredyellow"></div>` | [1](#attr-3)                        | `baselne`  |     0,1,0     |
+| `[class~="red"]`  |      Значение атрибута есть в списке значений      |    Все элементы, где значение есть в списке разделенным пробелами    | `<div class="red blue black"></div>` | [1](#attr-4)                        | `baselne`  |     0,1,0     |
+| `[class^="red-"]` |      Значение атрибута начинается со значения      |      Все элементы, где значение атрибута начинается со значения      |   `<div class="red-color"></div>`    | [1](#attr-5)                        | `baselne`  |     0,1,0     |
+| `[class$="red"]`  |    Значение атрибута заканчивается со значения     |    Все элементы, где значение атрибута заканчивается со значения     |   `<div class="color-red"></div>`    | [1](#attr-6)                        | `baselne`  |     0,1,0     |
+| `[class\|="red"]` | Значение атрибута либо точно равно либо равно+тире | Все элементы, где значение атрибута либо точно равно либо равно+тире |   `<div class="red-color"></div>`    | [1](#attr-7)                        | `baselne`  |     0,1,0     |
+| `[class="red" i]` |        Значение атрибута без учета регистра        |    Все элементы, где указано значение атрибута без учета регистра    |      `<div class="RED"></div>`       | [1](#attr-8)                        | `baselne`  |     0,1,0     |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
+|                   |                                                    |                                                                      |                                      |                                     |            |               |
 
 ````css
 
@@ -271,3 +280,141 @@ div[title] {
 ![Селектор атрибута](/assets/img/posts/css/selectors/all/s9.png){: .shadow }
 
 Все элементы, кроме 6, попадают под условие.
+
+
+## attr-4
+
+Значение атрибута есть в списке разделенном пробелами
+
+````css
+[class~="red"] {
+  background-color: #8250df;
+}
+````
+
+````html
+<div class="red">1</div>
+<div class="red blue">2</div>
+<div class="blue red yellow">3</div>
+<div class="yellow-red">4</div>
+<div class="yellow-red-blue">5</div>
+<div class="yellow-rd-blue">6</div>
+<div>
+  <div>
+    <span class="REDred">7</span>
+  </div>
+</div>
+````
+
+![Селектор атрибута](/assets/img/posts/css/selectors/all/s10.png){: .shadow }
+
+Только первые три `div` попадают, так как у них есть атрибут класс с несколькими классами
+
+
+## attr-5
+
+Значение атрибута начинается со значения
+
+````css
+[class^="red"] {
+    background-color: #8250df;
+}
+````
+
+````html
+<div class="redok">1</div>
+<div class="medred blue">2</div>
+<div class="blue red yellow">3</div>
+<div class="yellow-red">4</div>
+<div class="yellow-red-blue">5</div>
+<div class="yellow-rd-blue">6</div>
+<div>
+  <div>
+    <span class="red-color">7</span>
+  </div>
+</div>
+````
+
+![Селектор атрибута](/assets/img/posts/css/selectors/all/s11.png){: .shadow }
+
+В данном случае попадет элемент 1 и 7
+
+## attr-6
+
+Значение атрибута заканчивается значением
+
+````css
+[class$="red"] {
+   background-color: #8250df;
+}
+````
+
+````html
+<div class="redok">1</div>
+<div class="medred blue">2</div>
+<div class="blue red yellow">3</div>
+<div class="yellow-red">4</div>
+<div class="yellow-red-blue">5</div>
+<div class="yellow-rd-blue">6</div>
+<div>
+  <div>
+    <span class="red-color-Rred">7</span>
+  </div>
+</div>
+````
+
+![Селектор атрибута](/assets/img/posts/css/selectors/all/s12.png){: .shadow }
+
+Тут попадет элемент 4 и 7
+
+
+## attr-7
+
+Значение атрибута либо равно, либо равно+тире
+
+````css
+[class|="red"] {
+  background-color: #8250df;
+}
+````
+
+````html
+<div class="red">1</div>
+<div class="med red blue">2</div>
+<div class="blue red yellow">3</div>
+<div class="yellow-red">4</div>
+<div class="yellow-red-blue">5</div>
+<div class="yellow-rd-blue">6</div>
+<div>
+  <div>
+    <span class="red-color">7</span>
+  </div>
+</div>
+````
+
+![Селектор атрибута](/assets/img/posts/css/selectors/all/s13.png){: .shadow }
+
+В данном случае попадает 1 и 7 элемент, в первом точное совпадение, а в 7 идет тире после названия
+
+## attr-8
+
+````css
+[class="red" i] {
+    background-color: #8250df;
+}
+````
+
+````html
+<div class="red">1</div>
+<div class="Red">2</div>
+<div class="RED">3</div>
+<div>
+  <div>
+    <span class="black">4</span>
+  </div>
+</div>
+````
+
+![Селектор атрибута](/assets/img/posts/css/selectors/all/s14.png){: .shadow }
+
+Здесь под действие селектора попадают 3 первых элемента `div`.
