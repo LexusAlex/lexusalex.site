@@ -48,5 +48,4 @@ image:
 2. Селекторы
    1. [Типы отношений элементов в CSS](https://lexusalex.site/posts/html-css-types-of-element-relationships/){:target="_blank"}  
    2. [Базовые селекторы](https://lexusalex.site/posts/html-css-selectors/){:target="_blank"}
-   3. Псевдоклассы
-   4. Псевдоэлементы
+   3. [Все css селекторы](https://lexusalex.site/posts/html-css-all-selectors/){:target="_blank"}
