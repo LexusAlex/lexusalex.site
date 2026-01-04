@@ -5,6 +5,9 @@ date: 2055-11-29 18:00:00 +0300
 categories: [Nginx]
 ---
 
+## Content-type
+
+https://developer.mozilla.org/ru/docs/Web/HTTP/Reference/Headers/Content-Type
 
 
 ## Коды состояний ответа http

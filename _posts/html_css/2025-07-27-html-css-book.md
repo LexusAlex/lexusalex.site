@@ -38,6 +38,8 @@ image:
 7. Сетевое взаимодействие
    1. [HTTP. База](https://lexusalex.site/posts/html-css-http-base/){:target="_blank"}
    2. [HTTP. Методы запроса](https://lexusalex.site/posts/html-css-http-methods/){:target="_blank"}
+   3. Веб-сервера
+      1. [Nginx. Принципы работы](https://lexusalex.site/posts/html-css-nginx-principles/){:target="_blank"}
 
 ## Сss
 
