@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тест скорости селекторов</title>
+</head>
+<body>
+<h1>Тест скорости селекторов</h1>
+<div id="container">
+  <!-- Сгенерируем много элементов -->
+</div>
+
+<script>
+  const container = document.getElementById('container');
+  // Создадим 10 000 вложенных div'ов
+  for (let i = 0; i < 100000; i++) {
+    const div = document.createElement('div');
+    // Половине дадим класс
+    if (i % 2 === 0) {
+      div.className = 'item';
+    }
+    // Внутрь каждого вложим параграф
+    const p = document.createElement('p');
+    p.textContent = `Элемент ${i}`;
+    div.appendChild(p);
+    container.appendChild(div);
+  }
+  console.log('Страница с 100 000 элементов готова к тестам.');
+</script>
+</body>
+</html>

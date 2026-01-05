@@ -4,27 +4,22 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <style>
-    a + span {
-      background-color: #fa0202;
+    ul li a {
+      color: red;
+    }
+    ul li a.list-item-link {
+      color: red;
     }
   </style>
 </head>
 <body>
-<a href="https://ya.ru">ссылка</a>
-<span>1</span>
-<span>2</span>
-<span>3</span>
-<section>
-  <span>4</span>
-  <div>
-    <a href="https://ya.ru">ссылка</a>
-    <span>5</span>
-    <section>
-      <a href="https://ya.ru">ссылка</a>
-      <span>6</span>
-      <span>7</span>
-    </section>
-  </div>
-</section>
+<div id="root">
+  <ul class="list">
+    <li class="list-item">
+      <a href="/" class="list-item-link">link</a>
+    </li>
+  </ul>
+  <a href="/">link</a>
+</div>
 </body>
 </html>
