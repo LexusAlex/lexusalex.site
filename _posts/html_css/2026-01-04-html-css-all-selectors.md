@@ -542,17 +542,17 @@ a ~ span {
 ````
 
 ````html
-<a href="">ссылка</a>
+<a href="https://ya.ru">ссылка</a>
 <span>1</span>
 <span>2</span>
 <span>3</span>
 <section>
   <span>4</span>
   <div>
-    <a href="">ссылка</a>
+    <a href="https://ya.ru">ссылка</a>
     <span>5</span>
     <section>
-      <a href="">ссылка</a>
+      <a href="https://ya.ru">ссылка</a>
       <span>6</span>
     </section>
   </div>
@@ -574,17 +574,17 @@ a + span {
 ````
 
 ````html
-<a href="">ссылка</a>
+<a href="https://ya.ru">ссылка</a>
 <span>1</span>
 <span>2</span>
 <span>3</span>
 <section>
   <span>4</span>
   <div>
-    <a href="">ссылка</a>
+    <a href="https://ya.ru">ссылка</a>
     <span>5</span>
     <section>
-      <a href="">ссылка</a>
+      <a href="https://ya.ru">ссылка</a>
       <span>6</span>
       <span>7</span>
     </section>
