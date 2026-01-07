@@ -5,6 +5,9 @@
   <title>Title</title>
   <style>
 
+    :root {
+      background-color: #1e1e1e;
+    }
 a:link {
   background-color: #8250df;
 }
@@ -15,6 +18,14 @@ a:visited {
 
 a:hover {
   background-color: #ba4d4d;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:focus-visible{
+  border: #fa0202 1px solid;
 }
 
 
@@ -30,5 +41,7 @@ a:hover {
 <p>1</p>
 <h2 id="two">Заголовок 2</h2>
 <p>1</p>
+
+<button>Кнопка</button>
 </body>
 </html>
